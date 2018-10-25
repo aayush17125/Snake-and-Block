@@ -1,6 +1,9 @@
 package application;
 
+import com.sun.prism.Image;
+
 import javafx.application.Application;
+import javafx.fxml.JavaFXBuilderFactory;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -19,13 +22,14 @@ public class Main extends Application {
 			Button LeaderBoard = new Button("Leader Board");
 			Button Exit = new Button("Exit");
 			TilePane r = new TilePane();
+			r.setId("pane");
 			r.getChildren().add(Play);
 			r.getChildren().add(LeaderBoard);
 			r.getChildren().add(Exit);
-			
+			Image image = new Image(Main.class.getResource("C:\\Users\\agupt\\OneDrive\\Pictures\\DYm1aqo.jpg"));
 //			BorderPane root = new BorderPane();
 			Scene scene = new Scene(r,2000,1000);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			scene.getStylesheets().addAll(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Snake and Blocks");
 			primaryStage.show();
