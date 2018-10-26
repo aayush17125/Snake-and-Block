@@ -1,34 +1,67 @@
 package application;
 
-import com.sun.prism.Image;
 
+import javafx.scene.text.Font;
 import javafx.application.Application;
-import javafx.fxml.JavaFXBuilderFactory;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.stage.Stage;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.TilePane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 
 
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			Text t = new Text();
+			t.setText("Block 'Em");
+			t.setFont(Font.font(80));
+			t.setFill(Color.BLACK);
+			t.setLayoutX(800.0);
+			t.setLayoutY(100.0);
 			Button Play = new Button("Start");
-			Play.setLayoutX(100.0);
-			Play.setLayoutY(200.0);
+			Play.setOnAction(new EventHandler<ActionEvent>() {				
+				@Override
+				public void handle(ActionEvent event) {
+					// TODO Auto-generated method stub
+					System.out.println("Play");
+					
+				}
+			});
 			Button LeaderBoard = new Button("Leader Board");
+			LeaderBoard.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					// TODO Auto-generated method stub
+					System.out.println("LeaderBoard");
+				}
+			});
 			Button Exit = new Button("Exit");
-			TilePane r = new TilePane();
+			Exit.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					// TODO Auto-generated method stub
+					System.out.println("Exit");
+				}
+			});
+			Play.setLayoutX(900.0);
+			Play.setLayoutY(350.0);
+			LeaderBoard.setLayoutX(875.0);
+			LeaderBoard.setLayoutY(400.0);
+			Exit.setLayoutX(900.0);
+			Exit.setLayoutY(450.0);
+			Group r = new Group();
 			r.setId("pane");
+			r.getChildren().add(t);
 			r.getChildren().add(Play);
 			r.getChildren().add(LeaderBoard);
 			r.getChildren().add(Exit);
-			Image image = new Image(Main.class.getResource("C:\\Users\\agupt\\OneDrive\\Pictures\\DYm1aqo.jpg"));
-//			BorderPane root = new BorderPane();
 			Scene scene = new Scene(r,2000,1000);
+			scene.setFill(Color.GREENYELLOW);
 			scene.getStylesheets().addAll(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Snake and Blocks");
