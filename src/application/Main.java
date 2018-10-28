@@ -11,11 +11,14 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.effect.InnerShadow;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 public class Main extends Application {
+	private static final int KEYBOARD_MOVEMENT_DELTA = 40;
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -23,8 +26,8 @@ public class Main extends Application {
 			Button LeaderBoard = new Button("Leader Board");
 			Button Exit = new Button("Exit");
 			Button ExitPlay = new Button("Quit");
-			Rectangle rec = new Rectangle(950, 600, 100, 100);
-			rec.setFill(Color.GREENYELLOW);
+			final Circle circle = new Circle(950, 900, 30, Color.CRIMSON);			
+			circle.setOpacity(0.7);
 			InnerShadow is = new InnerShadow();
 			Group r = new Group();
 			Group r2 = new Group();
@@ -48,7 +51,8 @@ public class Main extends Application {
 			Exit.setLayoutX(900.0);
 			Exit.setLayoutY(450.0);
 			r2.getChildren().add(ExitPlay);
-			r2.getChildren().add(rec);
+			r2.getChildren().add(circle);
+		    moveCircleOnKeyPress(scene2, circle);
 			r.getChildren().add(t);
 			r.getChildren().add(Play);
 			r.getChildren().add(LeaderBoard);
@@ -59,6 +63,7 @@ public class Main extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Snake and Blocks");
 			primaryStage.show();
+			
 			ExitPlay.setOnAction(new EventHandler<ActionEvent>() {
 
 				@Override
@@ -73,6 +78,7 @@ public class Main extends Application {
 					// TODO Auto-generated method stub
 					System.out.println("Play");
 					primaryStage.setScene(scene2);
+					moveCircleOnKeyPress(scene, circle);
 				}
 			});
 			
@@ -95,6 +101,17 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
+	private void moveCircleOnKeyPress(Scene scene, final Circle circle) {
+	    scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+	      @Override
+	      public void handle(KeyEvent event) {
+	        switch (event.getCode()) {
+	          case RIGHT: circle.setCenterX(circle.getCenterX() + KEYBOARD_MOVEMENT_DELTA); break;
+	         case LEFT:  circle.setCenterX(circle.getCenterX() - KEYBOARD_MOVEMENT_DELTA); break;
+	        }
+	      }
+	    });
+	  }
 	public static void main(String[] args) {
 		launch(args);
 	}

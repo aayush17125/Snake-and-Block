@@ -14,7 +14,7 @@ public class game extends Application {
   public static void main(String[] args) { launch(args); }
   @Override public void start(Stage stage) throws Exception {
 	  final Circle circle = new Circle(300, 350, 30, Color.CRIMSON);
-	    circle.setOpacity(0.7);
+	  circle.setOpacity(0.7);
     final Group group = new Group( circle);
     
     
