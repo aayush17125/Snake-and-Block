@@ -3,6 +3,9 @@ package application;
 
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.util.Duration;
+import javafx.animation.PathTransition;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -14,7 +17,12 @@ import javafx.scene.effect.InnerShadow;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.CubicCurveTo;
+import javafx.scene.shape.LineTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.VLineTo;
 import javafx.scene.text.Text;
 
 public class Main extends Application {
@@ -26,8 +34,10 @@ public class Main extends Application {
 			Button LeaderBoard = new Button("Leader Board");
 			Button Exit = new Button("Exit");
 			Button ExitPlay = new Button("Quit");
-			final Circle circle = new Circle(950, 900, 30, Color.CRIMSON);			
+			Circle circle = new Circle(950, 800, 30, Color.CRIMSON);			
 			circle.setOpacity(0.7);
+			Rectangle rect = new Rectangle(500, -100, 30, 30);
+			rect.setFill(Color.BLUE);
 			InnerShadow is = new InnerShadow();
 			Group r = new Group();
 			Group r2 = new Group();
@@ -52,7 +62,19 @@ public class Main extends Application {
 			Exit.setLayoutY(450.0);
 			r2.getChildren().add(ExitPlay);
 			r2.getChildren().add(circle);
-		    moveCircleOnKeyPress(scene2, circle);
+			r2.getChildren().add(rect);
+			Path path = new Path();
+			path.getElements().add(new MoveTo(500.0f, 0.0f));
+			path.getElements().add(new VLineTo(1500.0f));
+			PathTransition pathTransition = new PathTransition();
+			pathTransition.setDuration(new Duration(3000));
+			pathTransition.setPath(path);
+			pathTransition.setNode(rect);
+			pathTransition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+			pathTransition.setCycleCount(Timeline.INDEFINITE);
+			pathTransition.setAutoReverse(false);
+//			pathTransition.play();
+			moveCircleOnKeyPress(scene2, circle);
 			r.getChildren().add(t);
 			r.getChildren().add(Play);
 			r.getChildren().add(LeaderBoard);
@@ -79,6 +101,7 @@ public class Main extends Application {
 					System.out.println("Play");
 					primaryStage.setScene(scene2);
 					moveCircleOnKeyPress(scene, circle);
+					pathTransition.play();
 				}
 			});
 			
