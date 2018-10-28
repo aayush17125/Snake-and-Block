@@ -12,8 +12,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-
 
 public class Main extends Application {
 	@Override
@@ -23,6 +23,8 @@ public class Main extends Application {
 			Button LeaderBoard = new Button("Leader Board");
 			Button Exit = new Button("Exit");
 			Button ExitPlay = new Button("Quit");
+			Rectangle rec = new Rectangle(950, 600, 100, 100);
+			rec.setFill(Color.GREENYELLOW);
 			InnerShadow is = new InnerShadow();
 			Group r = new Group();
 			Group r2 = new Group();
@@ -46,6 +48,7 @@ public class Main extends Application {
 			Exit.setLayoutX(900.0);
 			Exit.setLayoutY(450.0);
 			r2.getChildren().add(ExitPlay);
+			r2.getChildren().add(rec);
 			r.getChildren().add(t);
 			r.getChildren().add(Play);
 			r.getChildren().add(LeaderBoard);
@@ -85,6 +88,7 @@ public class Main extends Application {
 				public void handle(ActionEvent event) {
 					// TODO Auto-generated method stub
 					System.out.println("Exit");
+					primaryStage.close();
 				}
 			});
 		} catch(Exception e) {
