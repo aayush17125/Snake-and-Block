@@ -3,14 +3,18 @@ package view;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import model.CustomRectangle;
 import model.SpaceRunnerButton;
 
 public class ViewManager {
-	private static final int HEIGHT = 769;
+	private static final int HEIGHT = 720;
 	private static final int WIDTH = 1024;
 	private static final int START_X = 100;
 	private static final int START_Y = 150;
@@ -26,6 +30,12 @@ public class ViewManager {
 		mainStage.setScene(mainScene);
 		createButtons();
 		createlogo();
+		initialiseButtonListeners();
+		CustomRectangle ss=new CustomRectangle();
+		ss.setLayoutX(310);
+		ss.setLayoutY(210);
+	
+		mainPane.getChildren().add(ss);
 	}
 	
 	public Stage getMainStage()
@@ -41,11 +51,13 @@ public class ViewManager {
 		createCreditButton();
 		createExitButton();
 	}
+	
+	
 	private void createlogo()
 	{
 		ImageView logo=new ImageView("view/resources/snake-vs-block.png");
 		logo.setLayoutX(400);
-		logo.setLayoutY(50);
+		logo.setLayoutY(-100);
 		mainPane.getChildren().add(logo);
 		
 		
@@ -83,4 +95,22 @@ public class ViewManager {
 		addMenuButton(helpbutton);
 	}
 	
-}
+	private void initialiseButtonListeners() {
+		menuButtons.get(4).setOnMouseReleased(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent event) {
+				// TODO Auto-generated method stub
+				if(event.getButton().equals(MouseButton.PRIMARY))
+				{
+					mainStage.close();
+				}
+			}
+			
+		});
+		
+	
+	}
+	}
+	
+
