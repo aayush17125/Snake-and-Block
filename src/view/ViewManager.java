@@ -32,18 +32,19 @@ public class ViewManager {
 	private AnchorPane mainPane;
 	private Scene mainScene;
 	private Stage mainStage;
-	Path path = new Path();	
-	PathTransition pathTransition = new PathTransition();
-	ArrayList<SpaceRunnerButton> menuButtons;
-	ArrayList<Circle> snakeBody;
-	Circle circle = new Circle(WIDTH/2, HEIGHT-100, 10, Color.CRIMSON);
-	Rectangle rect = new Rectangle(500, -100, 30, 30);
-	Group r = new Group();
-	Group r2 = new Group();
-	Scene scene2 = new Scene(r2,WIDTH,HEIGHT);
+	private Path path = new Path();
+	private PathTransition pathTransition = new PathTransition();
+	private ArrayList<SpaceRunnerButton> menuButtons;
+	private ArrayList<Rectangle> obstacleWall ;
+	private Circle circle = new Circle(WIDTH/2, HEIGHT-100, 10, Color.CRIMSON);
+	private Rectangle rect = new Rectangle(500, -100, 30, 30);
+	private Group r = new Group();
+	private Group r2 = new Group();
+	private Scene scene2 = new Scene(r2,WIDTH,HEIGHT);
 	private static final int KEYBOARD_MOVEMENT_DELTA = 30;
 	public ViewManager()
 	{	menuButtons=new ArrayList<SpaceRunnerButton>();
+		obstacleWall = new ArrayList<Rectangle>();
 		mainPane=new AnchorPane();
 		mainScene=new Scene(mainPane,WIDTH,HEIGHT);
 		mainStage =new Stage();
@@ -59,10 +60,10 @@ public class ViewManager {
 		rect.setFill(Color.BLUE);
 		r2.getChildren().add(rect);
 		mainPane.getChildren().add(ss);
-		pathSet();
+		pathSet(rect);
 		scene2.setFill(Color.BLACK);
 	}
-	private void pathSet() {
+	private void pathSet(Rectangle rect) {
 		pathTransition.setDuration(new Duration(3000));
 		pathTransition.setPath(path);
 		pathTransition.setNode(rect);
@@ -71,6 +72,24 @@ public class ViewManager {
 		pathTransition.setAutoReverse(false);
 		path.getElements().add(new MoveTo(500.0f, 0.0f));
 		path.getElements().add(new VLineTo(1500.0f));
+	}
+	private void setObstacleTransitions(){
+
+	}
+	private void createObstacleWall(){
+		for (int i=0;i<6;i++){
+			Rectangle tempRect = new Rectangle(i*(int)(WIDTH/6),100,WIDTH/6,100);
+			tempRect.setFill(Color.color(Math.random(),Math.random(),Math.random()));
+			r2.getChildren().add(tempRect);
+			obstacleWall.add(tempRect);
+		}
+	}
+	private void createTransitionObstacle(){
+
+		for (int i=0;i<6;i++){
+			Rectangle tempRect = obstacleWall.get(i);
+
+		}
 	}
 	private void moveCircleOnKeyPress(Scene scene, final Circle circle) {
 	    scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -163,9 +182,18 @@ public class ViewManager {
 				mainStage.setScene(scene2);
 				pathTransition.play();
 				moveCircleOnKeyPress(scene2, circle);
-
+				createObstacleWall();
 			}
 		});
+
+		r2.getChildren().get(0).setOnMouseReleased(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				mainStage.setScene(mainScene);
+				pathTransition.stop();
+			}
+		});
+
 		
 		menuButtons.get(4).setOnMouseReleased(new EventHandler<MouseEvent>() {
 
