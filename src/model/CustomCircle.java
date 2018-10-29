@@ -16,22 +16,7 @@ public class CustomCircle extends Circle {
         setCenterY(height);
         setRadius(radius);
         setFill(Color.color(random(), random(), random(),0.7));
-        keylisteners(scene);
-    }
 
-    private void keylisteners(Scene scene)
-    {
-        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                switch (event.getCode())
-                {
-                    case RIGHT:setCenterX(getCenterX() + KEYBOARD_MOVEMENT_DELTA); break;
-                    case LEFT:setCenterX(getCenterX() - KEYBOARD_MOVEMENT_DELTA); break;
-                }
-            }
-        });
-    }
 
 
 

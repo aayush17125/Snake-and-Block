@@ -24,6 +24,10 @@ import javafx.stage.Stage;
 import model.CustomRectangle;
 import model.SpaceRunnerButton;
 import model.CustomCircle;
+
+import static javafx.scene.input.KeyCode.LEFT;
+import static javafx.scene.input.KeyCode.RIGHT;
+
 public class ViewManager {
 	private static final int HEIGHT = 720;
 	private static final int WIDTH = 1024;
@@ -66,8 +70,10 @@ public class ViewManager {
 		r2.getChildren().add(rect);
 		mainPane.getChildren().add(ss);
 		pathSet(rect);
-		scene2.setFill(Color.BLACK);
+		scene2.setFill(Color.WHITE);
 		createSnakeBody();
+        createSnakeBody();
+        createSnakeBody();
 	}
 	private void pathSet(Rectangle rect) {
 		pathTransition.setDuration(new Duration(3000));
@@ -126,7 +132,7 @@ public class ViewManager {
 		}
 		else {
 			q.setLayoutX(snakeBody.get(snakeBody.size()-1).getLayoutX());
-			q.setLayoutY(snakeBody.get(snakeBody.size()-1).getLayoutY()+snakeBody.size()*2*radius);
+			q.setLayoutY(snakeBody.get(snakeBody.size()-1).getLayoutY()+2*radius);
 			snakeBody.add(q);
 			r2.getChildren().add(q);
 		}
@@ -189,8 +195,23 @@ public class ViewManager {
 	}
 	
 	private void initialiseButtonListeners() {
-		menuButtons.get(0).setOnMouseReleased(new EventHandler<MouseEvent>() {
+        scene2.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if(event.getCode()==RIGHT) {
+                    for (int i = 0; i < snakeBody.size(); i++) {
+                        snakeBody.get(i).setCenterX(snakeBody.get(i).getCenterX() + KEYBOARD_MOVEMENT_DELTA);
 
+                    }
+                }
+                if(event.getCode()==LEFT){
+                    for (int i = 0; i < snakeBody.size(); i++) {
+                        snakeBody.get(i).setCenterX(snakeBody.get(i).getCenterX() - KEYBOARD_MOVEMENT_DELTA);
+                    }
+                }
+            }
+        });
+		menuButtons.get(0).setOnMouseReleased(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
 				// TODO Auto-generated method stub
