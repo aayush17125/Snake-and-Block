@@ -23,7 +23,7 @@ import javafx.scene.shape.VLineTo;
 import javafx.stage.Stage;
 import model.CustomRectangle;
 import model.SpaceRunnerButton;
-
+import model.CustomCircle;
 public class ViewManager {
 	private static final int HEIGHT = 720;
 	private static final int WIDTH = 1024;
@@ -37,12 +37,13 @@ public class ViewManager {
 	private PathTransition pathTransition = new PathTransition();
 	private ArrayList<SpaceRunnerButton> menuButtons;
 	private ArrayList<Rectangle> obstacleWall ;
-	private CustomCircle circle=new CustomCircle(WIDTH/2, HEIGHT-100, radius);
-	
 	private Rectangle rect = new Rectangle(500, -100, 30, 30);
 	private Group r = new Group();
 	private Group r2 = new Group();
 	private Scene scene2 = new Scene(r2,WIDTH,HEIGHT);
+	private ArrayList<CustomCircle> snakeBody;
+	private CustomCircle circle=new CustomCircle(WIDTH/2, HEIGHT-100, radius,scene2);
+
 	private static final int KEYBOARD_MOVEMENT_DELTA = 30;
 	public ViewManager()
 	{	menuButtons=new ArrayList<SpaceRunnerButton>();
@@ -66,7 +67,7 @@ public class ViewManager {
 		mainPane.getChildren().add(ss);
 		pathSet(rect);
 		scene2.setFill(Color.BLACK);
-		createsnakebody();
+		createSnakeBody();
 	}
 	private void pathSet(Rectangle rect) {
 		pathTransition.setDuration(new Duration(3000));
@@ -111,9 +112,9 @@ public class ViewManager {
 		createExitButton();
 		createMainMenuButton();
 	}
-	private void createsnakebody()
+	private void createSnakeBody()
 	{
-		addSnakeBody(new CustomCircle(WIDTH/2, HEIGHT-100, radius));
+		addSnakeBody(new CustomCircle(WIDTH/2, HEIGHT-100, radius,scene2));
 	}
 	private void addSnakeBody(CustomCircle q)
 	{	if(snakeBody.size()==0)
