@@ -29,6 +29,7 @@ public class ViewManager {
 	private static final int WIDTH = 1024;
 	private static final int START_X = 100;
 	private static final int START_Y = 150;
+	private static final int radius=10;
 	private AnchorPane mainPane;
 	private Scene mainScene;
 	private Stage mainStage;
@@ -65,6 +66,7 @@ public class ViewManager {
 		mainPane.getChildren().add(ss);
 		pathSet(rect);
 		scene2.setFill(Color.BLACK);
+		createsnakebody();
 	}
 	private void pathSet(Rectangle rect) {
 		pathTransition.setDuration(new Duration(3000));
@@ -94,17 +96,7 @@ public class ViewManager {
 
 		}
 	}
-	private void moveCircleOnKeyPress(Scene scene, final Circle circle) {
-	    scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-	      @Override
-	      public void handle(KeyEvent event) {
-	        switch (event.getCode()) {
-	          case RIGHT: circle.setCenterX(circle.getCenterX() + KEYBOARD_MOVEMENT_DELTA); break;
-	         case LEFT:  circle.setCenterX(circle.getCenterX() - KEYBOARD_MOVEMENT_DELTA); break;
-	        }
-	      }
-	    });
-	  }
+	
 	public Stage getMainStage()
 	{
 		return mainStage;
@@ -203,7 +195,6 @@ public class ViewManager {
 				// TODO Auto-generated method stub
 				mainStage.setScene(scene2);
 				pathTransition.play();
-				moveCircleOnKeyPress(scene2, circle);
 				createObstacleWall();
 			}
 		});
