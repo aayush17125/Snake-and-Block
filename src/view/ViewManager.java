@@ -36,7 +36,8 @@ public class ViewManager {
 	private PathTransition pathTransition = new PathTransition();
 	private ArrayList<SpaceRunnerButton> menuButtons;
 	private ArrayList<Rectangle> obstacleWall ;
-	private Circle circle = new Circle(WIDTH/2, HEIGHT-100, 10, Color.CRIMSON);
+	private CustomCircle circle=new CustomCircle(WIDTH/2, HEIGHT-100, radius);
+	
 	private Rectangle rect = new Rectangle(500, -100, 30, 30);
 	private Group r = new Group();
 	private Group r2 = new Group();
@@ -44,6 +45,8 @@ public class ViewManager {
 	private static final int KEYBOARD_MOVEMENT_DELTA = 30;
 	public ViewManager()
 	{	menuButtons=new ArrayList<SpaceRunnerButton>();
+		snakeBody=new ArrayList<CustomCircle>();
+		snakeBody.add(circle);
 		obstacleWall = new ArrayList<Rectangle>();
 		mainPane=new AnchorPane();
 		mainScene=new Scene(mainPane,WIDTH,HEIGHT);
@@ -116,7 +119,26 @@ public class ViewManager {
 		createExitButton();
 		createMainMenuButton();
 	}
-	
+	private void createsnakebody()
+	{
+		addSnakeBody(new CustomCircle(WIDTH/2, HEIGHT-100, radius));
+	}
+	private void addSnakeBody(CustomCircle q)
+	{	if(snakeBody.size()==0)
+		{
+			q.setLayoutX(WIDTH/2);
+			q.setLayoutY(HEIGHT-100+ snakeBody.size()*2*radius);
+			snakeBody.add(q);
+			r2.getChildren().add(q);
+		}
+		else {
+			q.setLayoutX(snakeBody.get(snakeBody.size()-1).getLayoutX());
+			q.setLayoutY(snakeBody.get(snakeBody.size()-1).getLayoutY()+snakeBody.size()*2*radius);
+			snakeBody.add(q);
+			r2.getChildren().add(q);
+		}
+
+	}
 	
 	private void createlogo()
 	{
