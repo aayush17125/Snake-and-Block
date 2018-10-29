@@ -74,6 +74,7 @@ public class ViewManager {
 		createSnakeBody();
         createSnakeBody();
         createSnakeBody();
+        createSnakeBody();
 	}
 	private void pathSet(Rectangle rect) {
 		pathTransition.setDuration(new Duration(3000));
