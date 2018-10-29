@@ -23,7 +23,7 @@ public class ViewManager {
 	private Stage mainStage;
 	ArrayList<SpaceRunnerButton> menuButtons;
 	public ViewManager()
-	{	menuButtons=new ArrayList<>();
+	{	menuButtons=new ArrayList<SpaceRunnerButton>();
 		mainPane=new AnchorPane();
 		mainScene=new Scene(mainPane,WIDTH,HEIGHT);
 		mainStage =new Stage();
