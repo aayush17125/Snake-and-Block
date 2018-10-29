@@ -3,6 +3,8 @@ package view;
 import java.awt.Event;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
 import javafx.util.Duration;
 import javafx.animation.PathTransition;
 import javafx.animation.Timeline;
@@ -47,7 +49,7 @@ public class ViewManager {
 	private Scene scene2 = new Scene(r2,WIDTH,HEIGHT);
 	private ArrayList<CustomCircle> snakeBody;
 	private CustomCircle circle=new CustomCircle(WIDTH/2, HEIGHT-100, radius,scene2);
-
+    private Random rand_x = new Random();
 	private static final int KEYBOARD_MOVEMENT_DELTA = 30;
 	public ViewManager()
 	{	menuButtons=new ArrayList<SpaceRunnerButton>();
@@ -70,7 +72,7 @@ public class ViewManager {
 		r2.getChildren().add(rect);
 		mainPane.getChildren().add(ss);
 		pathSet(rect);
-		scene2.setFill(Color.WHITE);
+		scene2.setFill(Color.BLACK);
 		createSnakeBody();
         createSnakeBody();
         createSnakeBody();
@@ -83,7 +85,7 @@ public class ViewManager {
 		pathTransition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
 		pathTransition.setCycleCount(Timeline.INDEFINITE);
 		pathTransition.setAutoReverse(false);
-		path.getElements().add(new MoveTo(500.0f, 0.0f));
+		path.getElements().add(new MoveTo(rand_x.nextInt(WIDTH), 0.0f));
 		path.getElements().add(new VLineTo(1500.0f));
 	}
 	private void setObstacleTransitions(){
@@ -96,6 +98,9 @@ public class ViewManager {
 			r2.getChildren().add(tempRect);
 			obstacleWall.add(tempRect);
 		}
+		Rectangle obsWall = new Rectangle(rand_x.nextInt(WIDTH), 200,5,rand_x.nextInt(HEIGHT-(int)obstacleWall.get(0).getY()) );
+        obsWall.setFill(Color.WHITE);
+        r2.getChildren().add(obsWall);
 	}
 	private void createTransitionObstacle(){
 
@@ -202,7 +207,6 @@ public class ViewManager {
                 if(event.getCode()==RIGHT) {
                     for (int i = 0; i < snakeBody.size(); i++) {
                         snakeBody.get(i).setCenterX(snakeBody.get(i).getCenterX() + KEYBOARD_MOVEMENT_DELTA);
-
                     }
                 }
                 if(event.getCode()==LEFT){
@@ -218,6 +222,7 @@ public class ViewManager {
 				// TODO Auto-generated method stub
 				mainStage.setScene(scene2);
 				pathTransition.play();
+				rect.setX(rand_x.nextInt(WIDTH));
 				createObstacleWall();
 			}
 		});
