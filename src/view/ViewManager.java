@@ -1,13 +1,9 @@
 package view;
 
-import java.awt.Event;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
-
+import javafx.animation.*;
 import javafx.util.Duration;
-import javafx.animation.PathTransition;
-import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -18,17 +14,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.MoveTo;
-import javafx.scene.shape.Path;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.VLineTo;
 import javafx.stage.Stage;
 import model.CustomRectangle;
 import model.SpaceRunnerButton;
 import model.CustomCircle;
 
-import static javafx.scene.input.KeyCode.LEFT;
-import static javafx.scene.input.KeyCode.RIGHT;
+import static javafx.scene.input.KeyCode.*;
 
 public class ViewManager {
 	private static final int HEIGHT = 720;
@@ -39,11 +31,8 @@ public class ViewManager {
 	private AnchorPane mainPane;
 	private Scene mainScene;
 	private Stage mainStage;
-	private Path path = new Path();
-	private PathTransition pathTransition = new PathTransition();
 	private ArrayList<SpaceRunnerButton> menuButtons;
 	private ArrayList<Rectangle> obstacleWall ;
-	private Rectangle rect = new Rectangle(500, -100, 30, 30);
 	private Group r = new Group();
 	private Group r2 = new Group();
 	private Scene scene2 = new Scene(r2,WIDTH,HEIGHT);
@@ -68,46 +57,27 @@ public class ViewManager {
 		ss.setLayoutY(210);
 		circle.setOpacity(0.7);
 		r2.getChildren().add(circle);
-		rect.setFill(Color.BLUE);
-		r2.getChildren().add(rect);
 		mainPane.getChildren().add(ss);
-		pathSet(rect);
 		scene2.setFill(Color.BLACK);
 		createSnakeBody();
         createSnakeBody();
         createSnakeBody();
         createSnakeBody();
 	}
-	private void pathSet(Rectangle rect) {
-		pathTransition.setDuration(new Duration(3000));
-		pathTransition.setPath(path);
-		pathTransition.setNode(rect);
-		pathTransition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
-		pathTransition.setCycleCount(Timeline.INDEFINITE);
-		pathTransition.setAutoReverse(false);
-		path.getElements().add(new MoveTo(rand_x.nextInt(WIDTH), 0.0f));
-		path.getElements().add(new VLineTo(1500.0f));
-	}
-	private void setObstacleTransitions(){
 
-	}
 	private void createObstacleWall(){
+
 		for (int i=0;i<6;i++){
-			Rectangle tempRect = new Rectangle(i*(int)(WIDTH/6),100,WIDTH/6,100);
+
+			Rectangle tempRect = new Rectangle(i*(int)(WIDTH/6),-200,WIDTH/6,100);
 			tempRect.setFill(Color.color(Math.random(),Math.random(),Math.random()));
 			r2.getChildren().add(tempRect);
 			obstacleWall.add(tempRect);
 		}
-		Rectangle obsWall = new Rectangle(rand_x.nextInt(WIDTH), 200,5,rand_x.nextInt(HEIGHT-(int)obstacleWall.get(0).getY()) );
+		Rectangle obsWall = new Rectangle(rand_x.nextInt(WIDTH), -200,5,rand_x.nextInt(HEIGHT-100-(int)obstacleWall.get(0).getY()) );
+		obstacleWall.add(obsWall);
         obsWall.setFill(Color.WHITE);
         r2.getChildren().add(obsWall);
-	}
-	private void createTransitionObstacle(){
-
-		for (int i=0;i<6;i++){
-			Rectangle tempRect = obstacleWall.get(i);
-
-		}
 	}
 	
 	public Stage getMainStage()
@@ -206,14 +176,28 @@ public class ViewManager {
             public void handle(KeyEvent event) {
                 if(event.getCode()==RIGHT) {
                     for (int i = 0; i < snakeBody.size(); i++) {
-                        snakeBody.get(i).setCenterX(snakeBody.get(i).getCenterX() + KEYBOARD_MOVEMENT_DELTA);
-                    }
+						if (snakeBody.get(i).getCenterX() < WIDTH-10) {
+							snakeBody.get(i).setCenterX(snakeBody.get(i).getCenterX() + KEYBOARD_MOVEMENT_DELTA);
+						}
+					}
                 }
                 if(event.getCode()==LEFT){
                     for (int i = 0; i < snakeBody.size(); i++) {
-                        snakeBody.get(i).setCenterX(snakeBody.get(i).getCenterX() - KEYBOARD_MOVEMENT_DELTA);
+						if (snakeBody.get(i).getCenterX() > 10) {
+							snakeBody.get(i).setCenterX(snakeBody.get(i).getCenterX() - KEYBOARD_MOVEMENT_DELTA);
+						}
                     }
                 }
+				if(event.getCode()==UP){
+					for (int i = 0; i < snakeBody.size(); i++) {
+						snakeBody.get(i).setCenterY(snakeBody.get(i).getCenterY() - KEYBOARD_MOVEMENT_DELTA);
+					}
+				}
+				if(event.getCode()==DOWN){
+					for (int i = 0; i < snakeBody.size(); i++) {
+						snakeBody.get(i).setCenterY(snakeBody.get(i).getCenterY() + KEYBOARD_MOVEMENT_DELTA);
+					}
+				}
             }
         });
 		menuButtons.get(0).setOnMouseReleased(new EventHandler<MouseEvent>() {
@@ -221,9 +205,78 @@ public class ViewManager {
 			public void handle(MouseEvent event) {
 				// TODO Auto-generated method stub
 				mainStage.setScene(scene2);
-				pathTransition.play();
-				rect.setX(rand_x.nextInt(WIDTH));
 				createObstacleWall();
+				Timeline time0 = new Timeline();
+				time0.setDelay(Duration.millis(450));
+				time0.setCycleCount(Animation.INDEFINITE);
+				KeyFrame key0 = new KeyFrame(Duration.millis(4000),e->{
+					obstacleWall.get(0).setY(-200);
+					obstacleWall.get(0).setFill(Color.color(Math.random(),Math.random(),Math.random()));
+				},new KeyValue(obstacleWall.get(0).yProperty(),HEIGHT));
+				time0.getKeyFrames().add(key0);
+				time0.play();
+
+				Timeline time1 = new Timeline();
+				time1.setDelay(Duration.millis(450));
+				time1.setCycleCount(Animation.INDEFINITE);
+				KeyFrame key1 = new KeyFrame(Duration.millis(4000),e->{
+					obstacleWall.get(1).setY(-200);
+					obstacleWall.get(1).setFill(Color.color(Math.random(),Math.random(),Math.random()));
+				},new KeyValue(obstacleWall.get(1).yProperty(),HEIGHT));
+				time1.getKeyFrames().add(key1);
+				time1.play();
+
+				Timeline time2 = new Timeline();
+				time2.setDelay(Duration.millis(450));
+				time2.setCycleCount(Animation.INDEFINITE);
+				KeyFrame key2 = new KeyFrame(Duration.millis(4000),e->{
+					obstacleWall.get(2).setY(-200);
+					obstacleWall.get(2).setFill(Color.color(Math.random(),Math.random(),Math.random()));
+				},new KeyValue(obstacleWall.get(2).yProperty(),HEIGHT));
+				time2.getKeyFrames().add(key2);
+				time2.play();
+
+				Timeline time3 = new Timeline();
+				time3.setDelay(Duration.millis(450));
+				time3.setCycleCount(Animation.INDEFINITE);
+				KeyFrame key3 = new KeyFrame(Duration.millis(4000),e->{
+					obstacleWall.get(3).setY(-200);
+					obstacleWall.get(3).setFill(Color.color(Math.random(),Math.random(),Math.random()));
+				},new KeyValue(obstacleWall.get(3).yProperty(),HEIGHT));
+				time3.getKeyFrames().add(key3);
+				time3.play();
+
+				Timeline time4 = new Timeline();
+				time4.setDelay(Duration.millis(450));
+				time4.setCycleCount(Animation.INDEFINITE);
+				KeyFrame key4 = new KeyFrame(Duration.millis(4000),e->{
+					obstacleWall.get(4).setY(-200);
+					obstacleWall.get(4).setFill(Color.color(Math.random(),Math.random(),Math.random()));
+				},new KeyValue(obstacleWall.get(4).yProperty(),HEIGHT));
+				time4.getKeyFrames().add(key4);
+				time4.play();
+
+				Timeline time5 = new Timeline();
+				time5.setDelay(Duration.millis(450));
+				time5.setCycleCount(Animation.INDEFINITE);
+				KeyFrame key5 = new KeyFrame(Duration.millis(4000),e->{
+					obstacleWall.get(5).setY(-200);
+					obstacleWall.get(5).setFill(Color.color(Math.random(),Math.random(),Math.random()));
+				},new KeyValue(obstacleWall.get(5).yProperty(),HEIGHT));
+				time5.getKeyFrames().add(key5);
+				time5.play();
+
+				Timeline time6 = new Timeline();
+				time6.setCycleCount(Animation.INDEFINITE);
+				KeyFrame key6 = new KeyFrame(Duration.millis(4000),e->{
+					obstacleWall.get(6).setY(-200);
+					obstacleWall.get(6).setHeight(rand_x.nextInt(HEIGHT-400));
+					obstacleWall.get(6).setX(rand_x.nextInt(WIDTH));
+				},new KeyValue(obstacleWall.get(6).yProperty(),HEIGHT));
+				time6.getKeyFrames().add(key6);
+				time6.play();
+
+
 			}
 		});
 
@@ -231,7 +284,6 @@ public class ViewManager {
 			@Override
 			public void handle(MouseEvent event) {
 				mainStage.setScene(mainScene);
-				pathTransition.stop();
 			}
 		});
 
@@ -246,7 +298,6 @@ public class ViewManager {
 					mainStage.close();
 				}
 			}
-			
 		});
 		
 	
