@@ -17,6 +17,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import model.CustomRectangle;
+import model.CusRectangle;
 import model.SpaceRunnerButton;
 import model.CustomCircle;
 
@@ -64,6 +65,16 @@ public class ViewManager {
         createSnakeBody();
         createSnakeBody();
 		createObstacleWall();
+		CusRectangle ui=new CusRectangle(1,19,30);
+		CusRectangle ub=new CusRectangle(2,20,20);
+		CusRectangle uc =new CusRectangle(3,30,30);
+		ui.setLayoutX(310);
+		ui.setLayoutY(210);
+		ub.setLayoutX(330);
+		ub.setLayoutY(210);
+		uc.setLayoutX(350);
+		uc.setLayoutY(210);
+		r2.getChildren().addAll(ui,ub,uc);
 	}
 
 	private void createObstacleWall(){
