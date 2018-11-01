@@ -63,6 +63,7 @@ public class ViewManager {
         createSnakeBody();
         createSnakeBody();
         createSnakeBody();
+		createObstacleWall();
 	}
 
 	private void createObstacleWall(){
@@ -188,16 +189,16 @@ public class ViewManager {
 						}
                     }
                 }
-				if(event.getCode()==UP){
-					for (int i = 0; i < snakeBody.size(); i++) {
-						snakeBody.get(i).setCenterY(snakeBody.get(i).getCenterY() - KEYBOARD_MOVEMENT_DELTA);
-					}
-				}
-				if(event.getCode()==DOWN){
-					for (int i = 0; i < snakeBody.size(); i++) {
-						snakeBody.get(i).setCenterY(snakeBody.get(i).getCenterY() + KEYBOARD_MOVEMENT_DELTA);
-					}
-				}
+//				if(event.getCode()==UP){
+//					for (int i = 0; i < snakeBody.size(); i++) {
+//						snakeBody.get(i).setCenterY(snakeBody.get(i).getCenterY() - KEYBOARD_MOVEMENT_DELTA);
+//					}
+//				}
+//				if(event.getCode()==DOWN){
+//					for (int i = 0; i < snakeBody.size(); i++) {
+//						snakeBody.get(i).setCenterY(snakeBody.get(i).getCenterY() + KEYBOARD_MOVEMENT_DELTA);
+//					}
+//				}
             }
         });
 		menuButtons.get(0).setOnMouseReleased(new EventHandler<MouseEvent>() {
@@ -205,7 +206,6 @@ public class ViewManager {
 			public void handle(MouseEvent event) {
 				// TODO Auto-generated method stub
 				mainStage.setScene(scene2);
-				createObstacleWall();
 				Timeline time0 = new Timeline();
 				time0.setDelay(Duration.millis(450));
 				time0.setCycleCount(Animation.INDEFINITE);
