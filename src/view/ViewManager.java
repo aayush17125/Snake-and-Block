@@ -1,8 +1,11 @@
 package view;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
 import javafx.animation.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -40,11 +43,13 @@ public class ViewManager {
 	private ArrayList<CustomCircle> snakeBody;
 	private CustomCircle circle=new CustomCircle(WIDTH/2, HEIGHT-100, radius,scene2);
     private Random rand_x = new Random();
+    private ArrayList <CusRectangle> powerList;
 	private static final int KEYBOARD_MOVEMENT_DELTA = 30;
 	public ViewManager()
 	{	menuButtons=new ArrayList<SpaceRunnerButton>();
 		snakeBody=new ArrayList<CustomCircle>();
 		snakeBody.add(circle);
+		powerList = new ArrayList<CusRectangle>();
 		obstacleWall = new ArrayList<Rectangle>();
 		mainPane=new AnchorPane();
 		mainScene=new Scene(mainPane,WIDTH,HEIGHT);
@@ -68,12 +73,15 @@ public class ViewManager {
 		CusRectangle ui=new CusRectangle(1,19,30);
 		CusRectangle ub=new CusRectangle(2,20,20);
 		CusRectangle uc =new CusRectangle(3,30,30);
-		ui.setLayoutX(310);
-		ui.setLayoutY(210);
-		ub.setLayoutX(330);
-		ub.setLayoutY(210);
-		uc.setLayoutX(350);
-		uc.setLayoutY(210);
+		ui.setLayoutX(rand_x.nextInt(WIDTH));
+		ui.setLayoutY(0);
+		ub.setLayoutX(rand_x.nextInt(WIDTH));
+		ub.setLayoutY(0);
+		uc.setLayoutX(rand_x.nextInt(WIDTH));
+		uc.setLayoutY(0);
+		powerList.add(ui);
+		powerList.add(ub);
+		powerList.add(uc);
 		r2.getChildren().addAll(ui,ub,uc);
 	}
 
@@ -91,7 +99,13 @@ public class ViewManager {
         obsWall.setFill(Color.WHITE);
         r2.getChildren().add(obsWall);
 	}
-	
+
+	public void playMusic(){
+		URL res = getClass().getResource("Song.mp3");
+		MediaPlayer mediaPlayer = new MediaPlayer(new Media(res.toString()));
+		mediaPlayer.setCycleCount(mediaPlayer.INDEFINITE);
+		mediaPlayer.play();
+	}
 	public Stage getMainStage()
 	{
 		return mainStage;
@@ -217,6 +231,7 @@ public class ViewManager {
 			public void handle(MouseEvent event) {
 				// TODO Auto-generated method stub
 				mainStage.setScene(scene2);
+				playMusic();
 				Timeline time0 = new Timeline();
 				time0.setDelay(Duration.millis(450));
 				time0.setCycleCount(Animation.INDEFINITE);
@@ -288,6 +303,35 @@ public class ViewManager {
 				time6.play();
 
 
+				Timeline time7 = new Timeline();
+				time7.setDelay(Duration.millis(450));
+				time7.setCycleCount(Animation.INDEFINITE);
+				KeyFrame key7 = new KeyFrame(Duration.millis(3000),e->{
+					powerList.get(0).setY(0);
+					powerList.get(0).setLayoutX(rand_x.nextInt(WIDTH));
+				},new KeyValue(powerList.get(0).yProperty(),HEIGHT));
+				time7.getKeyFrames().add(key7);
+				time7.play();
+
+				Timeline time8 = new Timeline();
+				time8.setDelay(Duration.millis(450));
+				time8.setCycleCount(Animation.INDEFINITE);
+				KeyFrame key8 = new KeyFrame(Duration.millis(3000),e->{
+					powerList.get(1).setY(0);
+					powerList.get(1).setLayoutX(rand_x.nextInt(WIDTH));
+				},new KeyValue(powerList.get(1).yProperty(),HEIGHT));
+				time8.getKeyFrames().add(key8);
+				time8.play();
+
+				Timeline time9 = new Timeline();
+				time9.setDelay(Duration.millis(450));
+				time9.setCycleCount(Animation.INDEFINITE);
+				KeyFrame key9 = new KeyFrame(Duration.millis(3000),e->{
+					powerList.get(2).setY(0);
+					powerList.get(2).setLayoutX(rand_x.nextInt(WIDTH));
+				},new KeyValue(powerList.get(2).yProperty(),HEIGHT));
+				time9.getKeyFrames().add(key9);
+				time9.play();
 			}
 		});
 

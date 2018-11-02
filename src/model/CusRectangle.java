@@ -20,7 +20,7 @@ public class CusRectangle extends Rectangle {
 //
 //    }
     public CusRectangle(int q,double x,double y)
-
+//        Rectangle a = new Rectangle(1,2);
     {   super(x,y);
 //        setFill(Color.BROWN);
         if(q==1)
