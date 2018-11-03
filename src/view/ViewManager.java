@@ -35,6 +35,7 @@ public class ViewManager {
 	private static final int START_Y = 150;
 	private static final int radius=10;
 	private AnchorPane mainPane;
+	private AnchorPane pausePane=new AnchorPane();
 	private Scene mainScene;
 	private Stage mainStage;
 	private ArrayList<SpaceRunnerButton> menuButtons;
@@ -47,6 +48,7 @@ public class ViewManager {
     private Random rand_x = new Random();
 	private MediaPlayer mediaPlayer;
     private ArrayList <CusRectangle> powerList;
+    private ArrayList<SpaceRunnerButton> pauseList=new ArrayList<SpaceRunnerButton>();
 	private static final int KEYBOARD_MOVEMENT_DELTA = 30;
 	public ViewManager()
 	{	menuButtons=new ArrayList<SpaceRunnerButton>();
@@ -86,6 +88,10 @@ public class ViewManager {
 		powerList.add(ub);
 		powerList.add(uc);
 		r2.getChildren().addAll(ui,ub,uc);
+		SpaceRunnerButton ethteeh=new SpaceRunnerButton("PAUSE");
+		ethteeh.setLayoutX(200);
+		ethteeh.setLayoutY(0);
+		r2.getChildren().add(ethteeh);
 	}
 
 	private void createObstacleWall(){
@@ -101,6 +107,12 @@ public class ViewManager {
 		obstacleWall.add(obsWall);
         obsWall.setFill(Color.WHITE);
         r2.getChildren().add(obsWall);
+	}
+	private void createPauseMenu()
+	{
+		addPauseButton(new SpaceRunnerButton("SAVE"));
+		addPauseButton(new SpaceRunnerButton("PLAY"));
+		addPauseButton(new SpaceRunnerButton("EXIT"));
 	}
 
 	public void playMusic(){
@@ -122,6 +134,7 @@ public class ViewManager {
 		createCreditButton();
 		createExitButton();
 		createMainMenuButton();
+		createPauseMenu();
 	}
 	private void createSnakeBody()
 	{
@@ -159,6 +172,13 @@ public class ViewManager {
 		button.setLayoutY(START_Y+ menuButtons.size()*100);
 		menuButtons.add(button);
 		mainPane.getChildren().add(button);
+	}
+	private void addPauseButton(SpaceRunnerButton button)
+	{
+		button.setLayoutX(START_X);
+		button.setLayoutY(START_Y+ pauseList.size()*100);
+		pauseList.add(button);
+		pausePane.getChildren().add(button);
 	}
 	private void addMainMenuButton(SpaceRunnerButton button)
 	{
