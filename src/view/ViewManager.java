@@ -329,7 +329,7 @@ public class ViewManager {
 				Timeline time7 = new Timeline();
 				time7.setDelay(Duration.millis(450));
 				time7.setCycleCount(Animation.INDEFINITE);
-				KeyFrame key7 = new KeyFrame(Duration.millis(3000),e->{
+				KeyFrame key7 = new KeyFrame(Duration.millis(3100),e->{
 					powerList.get(0).setY(0);
 					powerList.get(0).setLayoutX(rand_x.nextInt(WIDTH));
 				},new KeyValue(powerList.get(0).yProperty(),HEIGHT));
@@ -339,7 +339,7 @@ public class ViewManager {
 				Timeline time8 = new Timeline();
 				time8.setDelay(Duration.millis(450));
 				time8.setCycleCount(Animation.INDEFINITE);
-				KeyFrame key8 = new KeyFrame(Duration.millis(3000),e->{
+				KeyFrame key8 = new KeyFrame(Duration.millis(3100),e->{
 					powerList.get(1).setY(0);
 					powerList.get(1).setLayoutX(rand_x.nextInt(WIDTH));
 				},new KeyValue(powerList.get(1).yProperty(),HEIGHT));
@@ -349,7 +349,7 @@ public class ViewManager {
 				Timeline time9 = new Timeline();
 				time9.setDelay(Duration.millis(450));
 				time9.setCycleCount(Animation.INDEFINITE);
-				KeyFrame key9 = new KeyFrame(Duration.millis(3000),e->{
+				KeyFrame key9 = new KeyFrame(Duration.millis(3100),e->{
 					powerList.get(2).setY(0);
 					powerList.get(2).setLayoutX(rand_x.nextInt(WIDTH));
 				},new KeyValue(powerList.get(2).yProperty(),HEIGHT));
