@@ -3,6 +3,8 @@ package view;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
+
 import javafx.animation.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -43,6 +45,7 @@ public class ViewManager {
 	private ArrayList<CustomCircle> snakeBody;
 	private CustomCircle circle=new CustomCircle(WIDTH/2, HEIGHT-100, radius,scene2);
     private Random rand_x = new Random();
+	private MediaPlayer mediaPlayer;
     private ArrayList <CusRectangle> powerList;
 	private static final int KEYBOARD_MOVEMENT_DELTA = 30;
 	public ViewManager()
@@ -102,7 +105,7 @@ public class ViewManager {
 
 	public void playMusic(){
 		URL res = getClass().getResource("Song.mp3");
-		MediaPlayer mediaPlayer = new MediaPlayer(new Media(res.toString()));
+		mediaPlayer = new MediaPlayer(new Media(res.toString()));
 		mediaPlayer.setCycleCount(mediaPlayer.INDEFINITE);
 		mediaPlayer.play();
 	}
@@ -202,7 +205,7 @@ public class ViewManager {
             public void handle(KeyEvent event) {
                 if(event.getCode()==RIGHT) {
                     for (int i = 0; i < snakeBody.size(); i++) {
-						if (snakeBody.get(i).getCenterX() < WIDTH-10) {
+                    	if (snakeBody.get(i).getCenterX() < WIDTH-10) {
 							snakeBody.get(i).setCenterX(snakeBody.get(i).getCenterX() + KEYBOARD_MOVEMENT_DELTA);
 						}
 					}
@@ -339,6 +342,7 @@ public class ViewManager {
 			@Override
 			public void handle(MouseEvent event) {
 				mainStage.setScene(mainScene);
+				mediaPlayer.stop();
 			}
 		});
 
