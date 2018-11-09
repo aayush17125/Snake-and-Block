@@ -36,6 +36,7 @@ public class ViewManager {
 	private static final int radius=10;
 	private AnchorPane mainPane;
 	private AnchorPane pausePane=new AnchorPane();
+	private Scene pauseScene=new Scene(pausePane,WIDTH,HEIGHT);
 	private Scene mainScene;
 	private Stage mainStage;
 	private ArrayList<SpaceRunnerButton> menuButtons;
@@ -61,6 +62,7 @@ public class ViewManager {
 	private Timeline time8;
 	private Timeline time9;
 	private boolean paused;
+	private SpaceRunnerButton pauseButton=new SpaceRunnerButton("PAUSE");;
 	public ViewManager()
 	{	menuButtons=new ArrayList<SpaceRunnerButton>();
 		snakeBody=new ArrayList<CustomCircle>();
@@ -110,10 +112,10 @@ public class ViewManager {
 		powerList.add(ub);
 		powerList.add(uc);
 		r2.getChildren().addAll(ui,ub,uc);
-		SpaceRunnerButton ethteeh=new SpaceRunnerButton("PAUSE");
-		ethteeh.setLayoutX(200);
-		ethteeh.setLayoutY(0);
-		r2.getChildren().add(ethteeh);
+//		pauseButton=new SpaceRunnerButton("PAUSE");
+		pauseButton.setLayoutX(200);
+		pauseButton.setLayoutY(0);
+		r2.getChildren().add(pauseButton);
 	}
 
 	private void createObstacleWall(){
@@ -285,7 +287,13 @@ public class ViewManager {
                 }
             }
         });
+		pauseButton.setOnMouseReleased(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				mainStage.setScene(pauseScene);
 
+			}
+		});
 		menuButtons.get(0).setOnMouseReleased(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
@@ -382,6 +390,24 @@ public class ViewManager {
 			public void handle(MouseEvent event) {
 				mainStage.setScene(mainScene);
 				mediaPlayer.stop();
+			}
+		});
+		pauseList.get(1).setOnMouseReleased(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				mainStage.setScene(scene2);
+			}
+		});
+		pauseList.get(2).setOnMouseReleased(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				mainStage.close();
+			}
+		});
+		pauseList.get(0).setOnMouseReleased(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				System.out.println("save");
 			}
 		});
 		
