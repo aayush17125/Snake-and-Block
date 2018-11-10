@@ -256,16 +256,16 @@ public class ViewManager {
 
 	}
 	private void stopMovement(){
-		time0.stop();
-		time1.stop();
-		time2.stop();
-		time3.stop();
-		time4.stop();
-		time5.stop();
-		time6.stop();
-		time7.stop();
-		time8.stop();
-		time9.stop();
+		time0.pause();
+		time1.pause();
+		time2.pause();
+		time3.pause();
+		time4.pause();
+		time5.pause();
+		time6.pause();
+		time7.pause();
+		time8.pause();
+		time9.pause();
 	}
 	private void initialiseButtonListeners() {
         scene2.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -291,7 +291,9 @@ public class ViewManager {
 			@Override
 			public void handle(MouseEvent event) {
 				mainStage.setScene(pauseScene);
-
+				stopMovement();
+				mediaPlayer.stop();
+				paused = true;
 			}
 		});
 		menuButtons.get(0).setOnMouseReleased(new EventHandler<MouseEvent>() {
@@ -396,6 +398,14 @@ public class ViewManager {
 			@Override
 			public void handle(MouseEvent event) {
 				mainStage.setScene(scene2);
+				mediaPlayer.play();
+				System.out.print(123);
+				if (paused){
+					paused = false;
+					startMovement();
+				}
+
+
 			}
 		});
 		pauseList.get(2).setOnMouseReleased(new EventHandler<MouseEvent>() {
