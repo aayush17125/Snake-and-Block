@@ -2,30 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3c21eb0e-3ab4-429e-9684-398ca2cd3887" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/application/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/application/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/application/game$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/application/game$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/application/game$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/application/game$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/application/game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/application/game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/application/playScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/application/playScreen.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/model/CusRectangle.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/model/CusRectangle.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/model/CustomCircle.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/model/CustomCircle.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/model/CustomRectangle.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/model/CustomRectangle.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/model/SpaceRunnerButton$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/model/SpaceRunnerButton$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/model/SpaceRunnerButton$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/model/SpaceRunnerButton$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/model/SpaceRunnerButton$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/model/SpaceRunnerButton$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/model/SpaceRunnerButton$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/model/SpaceRunnerButton$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/model/SpaceRunnerButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/model/SpaceRunnerButton.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/view/ViewManager$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/view/ViewManager$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/view/ViewManager$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/view/ViewManager$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/view/ViewManager$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/view/ViewManager$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/view/ViewManager$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/view/ViewManager$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/view/ViewManager$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/view/ViewManager$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/view/ViewManager$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/view/ViewManager$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/view/ViewManager$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/view/ViewManager$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/view/ViewManager$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/view/ViewManager$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/view/ViewManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/view/ViewManager.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/ViewManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ViewManager.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -67,12 +44,12 @@
     <session id="-12426641">
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="189" />
+          <entry key="java" value="222" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="189" />
+          <entry key="JAVA" value="222" />
         </counts>
       </usages-collector>
     </session>
@@ -82,8 +59,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/view/ViewManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="267" column="22" selection-start-line="267" selection-start-column="22" selection-end-line="267" selection-end-column="22" />
+            <state relative-caret-position="226">
+              <caret line="280" column="28" lean-forward="true" selection-start-line="280" selection-start-column="28" selection-end-line="280" selection-end-column="28" />
               <folding>
                 <element signature="e#12876#12877#0" expanded="true" />
                 <element signature="e#12904#12905#0" expanded="true" />
@@ -132,6 +109,9 @@
       <find>save</find>
       <find>addPause</find>
     </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -200,7 +180,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541848347682" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541849500266" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -317,7 +297,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.32874617" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -349,8 +329,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/view/ViewManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="267" column="22" selection-start-line="267" selection-start-column="22" selection-end-line="267" selection-end-column="22" />
+        <state relative-caret-position="226">
+          <caret line="280" column="28" lean-forward="true" selection-start-line="280" selection-start-column="28" selection-end-line="280" selection-end-column="28" />
           <folding>
             <element signature="e#12876#12877#0" expanded="true" />
             <element signature="e#12904#12905#0" expanded="true" />

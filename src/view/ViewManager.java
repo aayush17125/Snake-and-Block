@@ -50,7 +50,7 @@ public class ViewManager {
 	private MediaPlayer mediaPlayer;
     private ArrayList <CusRectangle> powerList;
     private ArrayList<SpaceRunnerButton> pauseList=new ArrayList<SpaceRunnerButton>();
-	private static final int KEYBOARD_MOVEMENT_DELTA = 30;
+	private static final int KEYBOARD_MOVEMENT_DELTA = 12;
 	private Timeline time0;
 	private Timeline time1;
 	private Timeline time2;
@@ -95,6 +95,10 @@ public class ViewManager {
 		mainPane.getChildren().add(ss);
 		scene2.setFill(Color.BLACK);
 		createSnakeBody();
+        createSnakeBody();
+        createSnakeBody();
+        createSnakeBody();
+        createSnakeBody();
         createSnakeBody();
         createSnakeBody();
         createSnakeBody();
@@ -162,13 +166,13 @@ public class ViewManager {
 	}
 	private void createSnakeBody()
 	{
-		addSnakeBody(new CustomCircle(WIDTH/2, HEIGHT-100, radius,scene2));
+		addSnakeBody(new CustomCircle(WIDTH/2, HEIGHT-200, radius,scene2));
 	}
 	private void addSnakeBody(CustomCircle q)
 	{	if(snakeBody.size()==0)
 		{
 			q.setLayoutX(WIDTH/2);
-			q.setLayoutY(HEIGHT-100+ snakeBody.size()*2*radius);
+			q.setLayoutY(HEIGHT-200+ snakeBody.size()*2*radius);
 			snakeBody.add(q);
 			r2.getChildren().add(q);
 		}
@@ -292,7 +296,7 @@ public class ViewManager {
 			public void handle(MouseEvent event) {
 				mainStage.setScene(pauseScene);
 				stopMovement();
-				mediaPlayer.stop();
+				mediaPlayer.pause();
 				paused = true;
 			}
 		});
