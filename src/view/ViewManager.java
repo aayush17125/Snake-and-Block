@@ -6,6 +6,9 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import javafx.animation.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.geometry.Bounds;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
@@ -300,6 +303,16 @@ public class ViewManager {
 				paused = true;
 			}
 		});
+		snakeBody.get(0).boundsInParentProperty().addListener(new ChangeListener<Bounds>() {
+			int i =0;
+			@Override
+			public void changed(ObservableValue<? extends Bounds> observable, Bounds oldValue, Bounds newValue) {
+				if ((snakeBody.get(0).intersects(obstacleWall.get(0).getLayoutBounds())) || (snakeBody.get(0).intersects(obstacleWall.get(1).getLayoutBounds())) || (snakeBody.get(0).intersects(obstacleWall.get(2).getLayoutBounds())) || (snakeBody.get(0).intersects(obstacleWall.get(3).getLayoutBounds())) || (snakeBody.get(0).intersects(obstacleWall.get(4).getLayoutBounds())) || (snakeBody.get(0).intersects(obstacleWall.get(5).getLayoutBounds()))) {
+					System.out.println("Collision detected "+i);
+					i++;
+				}
+			}
+		});
 		menuButtons.get(0).setOnMouseReleased(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
@@ -388,6 +401,11 @@ public class ViewManager {
 				},new KeyValue(powerList.get(2).yProperty(),HEIGHT));
 				time9.getKeyFrames().add(key9);
 				startMovement();
+//				while(true) {
+//					if ((snakeBody.get(0).intersects(obstacleWall.get(0).getLayoutBounds())) || (snakeBody.get(0).intersects(obstacleWall.get(1).getLayoutBounds())) || (snakeBody.get(0).intersects(obstacleWall.get(2).getLayoutBounds())) || (snakeBody.get(0).intersects(obstacleWall.get(3).getLayoutBounds())) || (snakeBody.get(0).intersects(obstacleWall.get(4).getLayoutBounds())) || (snakeBody.get(0).intersects(obstacleWall.get(5).getLayoutBounds()))) {
+//						stopMovement();
+//					}
+//				}
 			}
 		});
 
