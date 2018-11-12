@@ -18,7 +18,11 @@ public class CustomRectangle extends SubScene {
 		BackgroundImage image=new BackgroundImage(new Image(PANEL_PATH,600,400,false,true),BackgroundRepeat.NO_REPEAT,BackgroundRepeat.NO_REPEAT,BackgroundPosition.DEFAULT,null);
 		AnchorPane root2=(AnchorPane) this.getRoot();
 		root2.setBackground(new Background(image));
-		// TODO Auto-generated constructor stub
+		
+	}
+	public AnchorPane getPane()
+	{
+		return (AnchorPane) this.getRoot();
 	}
 
 
