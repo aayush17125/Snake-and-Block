@@ -1,8 +1,9 @@
 package backend;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public  abstract class Leaderboard {
+public  abstract class Leaderboard implements Serializable {
 
 	private ArrayList<String> data;
 	

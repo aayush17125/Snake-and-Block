@@ -1,6 +1,8 @@
 package backend;
 
-public class Credits {
+import java.io.Serializable;
+
+public class Credits implements Serializable {
 	private String out;
 	public Credits() {
 		// TODO Auto-generated constructor stub
