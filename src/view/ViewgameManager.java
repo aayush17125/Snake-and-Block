@@ -10,6 +10,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.CustomCircle;
+import model.SmallInfoLabel;
 
 import java.util.Random;
 
@@ -25,12 +26,20 @@ public class ViewgameManager {
 	private boolean LeftKeyPressed;
 	private boolean RightKeyPressed;
 	private AnimationTimer	 gameTimer;
-	Image img1 = new Image("model/resources/bolt_gold.png");
-	Image img2 = new Image("model/resources/fruit.png");
-	Image img3 = new Image("model/resources/shield_gold.png");
+	private Image img1 = new Image("model/resources/bolt_gold.png");
+	private Image img2 = new Image("model/resources/fruit.png");
+	private Image img3 = new Image("model/resources/shield_gold.png");
+	private SmallInfoLabel pointsLabel;
+	private int points;
+	private int snakeLength;
+	private ImageView star;
+	private final static String StarString="view/resources/star_gold.png";
 	private ImageView[]	power;
 	private ImageView[] fruit;
 	private ImageView[] shield;
+	private final static int STAR_RADIUS=12;
+
+
 	Random randno;
 	public ViewgameManager() {
 		// TODO Auto-generated constructor stub
@@ -61,6 +70,16 @@ public class ViewgameManager {
 		});
 	}
 	private void createGameElements() {
+		star=new ImageView(StarString);
+		setNewPosition(star);
+		gamePane.getChildren().add(star);
+		pointsLabel=new SmallInfoLabel("POINTS:00");
+		pointsLabel.setLayoutX(460);
+		pointsLabel.setLayoutY(20);
+		gamePane.getChildren().add(pointsLabel);
+
+
+
 		power = new ImageView[3];
 		for (int i = 0; i < power.length; i++) {
 			power[i] = new ImageView(img1);
@@ -83,7 +102,9 @@ public class ViewgameManager {
 		}
 	}
 	private void moveGameElements()
-	{
+	{	star.setLayoutY(star.getLayoutY()+5);
+
+
 		for (int i=0;i<power.length;i++)
 		{
 			power[i].setLayoutY(power[i].getLayoutY()+7);
@@ -101,7 +122,11 @@ public class ViewgameManager {
 		}
 	}
 	private void elementvalid()
-	{
+
+	{	if(star.getLayoutY()>120){
+		setNewPosition(star);
+	}
+
 		for (int i=0;i<power.length;i++)
 		{
 			if (power[i].getLayoutY()>900)
@@ -144,7 +169,7 @@ public class ViewgameManager {
 		this.menuStage=menuStage;
 		this.menuStage.hide();
 		createSnake(s);
-		createGameElements();
+		createGameElements(	);
 
 		createGameLoop();
 		gameStage.show();
@@ -170,6 +195,43 @@ public class ViewgameManager {
 	}
 	private void moveSnake()
 	{ //to be added
+	}
+	private void checkIfElementsCollided()
+	{
+		if(snake_radius+STAR_RADIUS>calculateDistance(snake0.getLayoutX()+49,star.getLayoutX()+15,star.getLayoutY()+37,snake0.getLayoutY()+15)){
+			setNewPosition(star);
+			points++;
+			String textToset="POINTS : ";
+			if (points<	10)
+			{
+				textToset=textToset+"0";
+
+
+			}
+			pointsLabel.setText(textToset+points);
+
+		}
+		for ()
+		{
+			meteor k saath same :
+			changeLength();
+			setNewPosition();
+		}
+	}
+	private void changeLength()
+	{
+//		gamePane.getChildren().remove(snakearray ka last daalna h yha pl0x);
+		snakeLength--;
+		if (snakeLength<0)
+		{
+			gameStage.close();
+			gameTimer.stop();
+			menuStage.show();
+
+		}
+	}
+	private double calculateDistance(double x1,double x2,double y1,double y2){
+		return Math.sqrt( Math.pow(x1-x2,2)+Math.pow(y1-y2,2));
 	}
 
 }
