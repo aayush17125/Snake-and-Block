@@ -13,6 +13,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Text;
 
+import java.util.Random;
+
 public class numberRectangle extends Rectangle {
     private int num=0;
 
@@ -39,12 +41,15 @@ public class numberRectangle extends Rectangle {
         setFill(new ImagePattern(textToImage(Integer.toString(num))));
     }
 
-    private static Image textToImage(String text) {
+    private Image textToImage(String text) {
+        Random rand_x = new Random();
         Label label = new Label(text);
         label.setMinSize(125, 125);
         label.setMaxSize(125, 125);
         label.setPrefSize(125, 125);
-        label.setStyle("-fx-background-color: white; -fx-text-fill:black;");
+        int nextInt = rand_x.nextInt(0xffffff + 1);
+        String colorCode = String.format("#%06x", nextInt);
+        label.setStyle("-fx-background-color: "+ colorCode+"; -fx-text-fill:#000000;");
         label.setWrapText(true);
         Scene scene = new Scene(new Group(label));
         WritableImage img = new WritableImage(125, 125) ;
