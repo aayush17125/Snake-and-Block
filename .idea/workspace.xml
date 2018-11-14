@@ -2,10 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a005f4e4-1d20-4cd0-8ac9-d70e365a8d16" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/model/SmallInfoLabel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/resources/scorelabel.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/resources/star_gold.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/model/numberRectangle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/application/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/application/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/application/game$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/application/game$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/application/game$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/application/game$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/application/game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/application/game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/application/playScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/application/playScreen.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/model/CusRectangle.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/model/CusRectangle.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/model/CustomCircle.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/model/CustomCircle.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/model/CustomRectangle.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/model/CustomRectangle.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/model/SpaceRunnerButton$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/model/SpaceRunnerButton$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/model/SpaceRunnerButton$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/model/SpaceRunnerButton$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/model/SpaceRunnerButton$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/model/SpaceRunnerButton$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/model/SpaceRunnerButton$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/model/SpaceRunnerButton$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/model/SpaceRunnerButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/model/SpaceRunnerButton.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/view/ViewManager$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/view/ViewManager$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/view/ViewManager$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/view/ViewManager$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/view/ViewManager$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/view/ViewManager$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/view/ViewManager$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/view/ViewManager$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/view/ViewManager$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/view/ViewManager$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/view/ViewManager$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/view/ViewManager$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/view/ViewManager$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/view/ViewManager$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/view/ViewManager$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/view/ViewManager$8.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AP_Game/view/ViewManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AP_Game/view/ViewManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/ViewManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ViewManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/ViewgameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ViewgameManager.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -19,58 +40,44 @@
     <session id="-1255133683">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
+          <entry key="project.closed" value="3" />
+          <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.18" value="1" />
           <entry key="project.open.time.8" value="1" />
-          <entry key="project.opened" value="2" />
+          <entry key="project.opened" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="4" />
+          <entry key="java" value="7" />
           <entry key="png" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Image" value="3" />
-          <entry key="JAVA" value="4" />
+          <entry key="JAVA" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="2415" />
+          <entry key="java" value="2945" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="2415" />
+          <entry key="JAVA" value="2945" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/view/ViewgameManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="218" column="9" lean-forward="true" selection-start-line="218" selection-start-column="9" selection-end-line="218" selection-end-column="9" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/SmallInfoLabel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="186">
-              <caret line="18" selection-start-line="18" selection-end-line="18" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="3180">
+              <caret line="212" column="9" lean-forward="true" selection-start-line="212" selection-start-column="9" selection-end-line="212" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -78,32 +85,22 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/view/ViewManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="161">
-              <caret line="192" column="53" lean-forward="true" selection-start-line="192" selection-start-column="38" selection-end-line="192" selection-end-column="53" />
+            <state relative-caret-position="60">
+              <caret line="100" column="33" selection-start-line="100" selection-start-column="33" selection-end-line="100" selection-end-column="33" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/resources/bolt_gold.png">
-          <provider selected="true" editor-type-id="images" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/resources/fruit.png">
-          <provider selected="true" editor-type-id="images" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/resources/shield_gold.png">
-          <provider selected="true" editor-type-id="images" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/CusRectangle.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/model/numberRectangle.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="13" selection-end-column="62" />
+            <state relative-caret-position="244">
+              <caret line="24" column="23" lean-forward="true" selection-start-line="24" selection-start-column="23" selection-end-line="24" selection-end-column="23" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#121#122#0" expanded="true" />
+                <element signature="e#147#148#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -120,6 +117,9 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>resources/</find>
+      <find>small</find>
+      <find>pointslabel</find>
+      <find>obstacleWall</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -130,6 +130,8 @@
       <list>
         <option value="$PROJECT_DIR$/src/model/SmallInfoLabel.java" />
         <option value="$PROJECT_DIR$/src/view/ViewgameManager.java" />
+        <option value="$PROJECT_DIR$/src/view/ViewManager.java" />
+        <option value="$PROJECT_DIR$/src/model/numberRectangle.java" />
       </list>
     </option>
   </component>
@@ -159,14 +161,13 @@
               <item name="AP_Game" type="b2602c69:ProjectViewProjectNode" />
               <item name="AP_Game" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="AP_Game" type="b2602c69:ProjectViewProjectNode" />
               <item name="AP_Game" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="model" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="AP_Game" type="b2602c69:ProjectViewProjectNode" />
@@ -185,12 +186,12 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542118834015" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542200484886" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -209,6 +210,26 @@
       </list>
     </option>
   </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="application.Main" />
+      <module name="AP_Game" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="application.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -225,16 +246,17 @@
   <component name="ToolWindowManager">
     <frame x="0" y="25" width="1366" height="696" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25378788" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25757575" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" weight="0.32685512" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32685512" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -272,17 +294,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/ViewManager.java">
+    <entry file="file://$PROJECT_DIR$/src/application/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="192" column="53" lean-forward="true" selection-start-line="192" selection-start-column="38" selection-end-line="192" selection-end-column="53" />
+        <state relative-caret-position="255">
+          <caret line="21" column="4" lean-forward="true" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/SmallInfoLabel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
+        <state relative-caret-position="315">
+          <caret line="30" column="5" lean-forward="true" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -291,10 +313,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/view/ViewgameManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="218" column="9" lean-forward="true" selection-start-line="218" selection-start-column="9" selection-end-line="218" selection-end-column="9" />
+        <state relative-caret-position="3180">
+          <caret line="212" column="9" lean-forward="true" selection-start-line="212" selection-start-column="9" selection-end-line="212" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/ViewManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="100" column="33" selection-start-line="100" selection-start-column="33" selection-end-line="100" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/numberRectangle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="24" column="23" lean-forward="true" selection-start-line="24" selection-start-column="23" selection-end-line="24" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#121#122#0" expanded="true" />
+            <element signature="e#147#148#0" expanded="true" />
           </folding>
         </state>
       </provider>

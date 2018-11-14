@@ -24,10 +24,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import model.CustomRectangle;
-import model.CusRectangle;
-import model.SpaceRunnerButton;
-import model.CustomCircle;
+import model.*;
 
 import static javafx.scene.input.KeyCode.*;
 
@@ -37,6 +34,8 @@ public class ViewManager {
 	private static final int START_X = 100;
 	private static final int START_Y = 150;
 	private static final int radius=10;
+	private SmallInfoLabel pointsLabel;
+	private int points;
 	private AnchorPane mainPane;
 	private AnchorPane pausePane=new AnchorPane();
 	private Scene pauseScene=new Scene(pausePane,WIDTH,HEIGHT);
@@ -74,6 +73,10 @@ public class ViewManager {
 		obstacleWall = new ArrayList<Rectangle>();
 		mainPane=new AnchorPane();
 		mainScene=new Scene(mainPane,WIDTH,HEIGHT);
+		pointsLabel=new SmallInfoLabel("POINTS:00");
+		pointsLabel.setLayoutX(900);
+		pointsLabel.setLayoutY(0);
+		r2.getChildren().add(pointsLabel);
 		time0 = new Timeline();
 		time1 = new Timeline();
 		time2 = new Timeline();
