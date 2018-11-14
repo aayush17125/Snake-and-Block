@@ -132,8 +132,8 @@ public class ViewManager {
 
 		for (int i=0;i<6;i++){
 
-			Rectangle tempRect = new Rectangle(i*(int)(WIDTH/6),-200,WIDTH/6,100);
-			tempRect.setFill(Color.color(Math.random(),Math.random(),Math.random()));
+			numberRectangle tempRect = new numberRectangle(i*(int)(WIDTH/6),-200,WIDTH/6,100,1);
+//			tempRect.setFill(Color.color(Math.random(),Math.random(),Math.random()));
 			r2.getChildren().add(tempRect);
 			obstacleWall.add(tempRect);
 		}
