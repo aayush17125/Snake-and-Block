@@ -17,7 +17,7 @@ import java.util.Random;
 
 public class numberRectangle extends Rectangle {
     private int num=0;
-
+    private boolean done;
 
     public numberRectangle(float x, float y, float width, float height, int number)
     {
@@ -26,6 +26,7 @@ public class numberRectangle extends Rectangle {
         setStroke(Color.BLACK);
         setStrokeType(StrokeType.INSIDE);
         setNum(number);
+        done=false;
 
 
         setFill(new ImagePattern(textToImage(Integer.toString(number))));
@@ -39,6 +40,20 @@ public class numberRectangle extends Rectangle {
     {
         num=number;
         setFill(new ImagePattern(textToImage(Integer.toString(num))));
+    }
+    public void hit()
+    {
+        done=true;
+    }
+    public void refresh()
+    {
+        done=false;
+        setVisible(true);
+
+    }
+    public boolean ishit()
+    {
+        return done;
     }
 
     private Image textToImage(String text) {
