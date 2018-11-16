@@ -51,7 +51,7 @@ public class numberRectangle extends Rectangle {
         setVisible(true);
 
     }
-    public boolean ishit()
+    public boolean isHit()
     {
         return done;
     }

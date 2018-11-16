@@ -48,7 +48,7 @@ public class ViewManager {
 	private Group r2 = new Group();
 	private Scene scene2 = new Scene(r2,WIDTH,HEIGHT);
 	private ArrayList<CustomCircle> snakeBody;
-	private CustomCircle circle=new CustomCircle(WIDTH/2, HEIGHT-100, radius,scene2);
+	private CustomCircle circle=new CustomCircle(WIDTH/2, HEIGHT-200, radius,scene2);
     private Random rand_x = new Random();
 	private MediaPlayer mediaPlayer;
     private ArrayList <CusRectangle> powerList;
@@ -96,11 +96,10 @@ public class ViewManager {
 		CustomRectangle ss=new CustomRectangle();
 		ss.setLayoutX(310);
 		ss.setLayoutY(210);
-		circle.setOpacity(0.7);
-		r2.getChildren().add(circle);
+		circle.setOpacity(0.7);//
+		r2.getChildren().add(circle);//
 		mainPane.getChildren().add(ss);
 		scene2.setFill(Color.BLACK);
-		
 		createObstacleWall();
 		CusRectangle ui=new CusRectangle(1,19,30);
 		CusRectangle ub=new CusRectangle(2,20,20);
@@ -294,21 +293,34 @@ public class ViewManager {
 	}
 	private void removeSnakeBody(Rectangle rectangle)
 	{
-		if(snakeBody.size()>1) {
-			for (int i = 0; i < ((numberRectangle) rectangle).getNum(); i++)
-			{	if(!((numberRectangle) rectangle).ishit()){
-//				CustomCircle temp=snakeBody.get(snakeBody.size()-1);
-				r2.getChildren().remove(r2.getChildren().size()-1);
-				snakeBody.remove(snakeBody.size()-1);
-
-				((numberRectangle) rectangle).hit();
-				rectangle.setVisible(false);
+		if(snakeBody.size()>1 && !((numberRectangle) rectangle).isHit()) {
+			rectangle.setVisible(false);
+			((numberRectangle) rectangle).hit();
+			System.out.println(((numberRectangle) rectangle).getNum()); 
+			for (int i = 0; i < ((numberRectangle) rectangle).getNum(); i++){
+				if (snakeBody.size()==0) {
+					System.out.println("Game Over");
+					stopMovement();
+					break;
 				}
+//				CustomCircle temp=snakeBody.get(snakeBody.size()-1);
+//				r2.getChildren().remove(r2.getChildren().size()-1);
+//				snakeBody.remove(snakeBody.size()-1);
+				removeLastSnake();
+				
 			}
 		}
 
 	}
-
+	private void removeLastSnake() {
+		for (int i=0;i<r2.getChildren().size();i++) {
+			if (r2.getChildren().get(i)==snakeBody.get(snakeBody.size()-1)) {
+				r2.getChildren().remove(i);
+				snakeBody.remove(snakeBody.size()-1);
+				break;
+			}
+		}
+	}
 	private void initialiseButtonListeners() {
 		scene2.setOnMouseMoved(new EventHandler<MouseEvent>() {
 			@Override
@@ -349,13 +361,17 @@ public class ViewManager {
 		gameTimer=new AnimationTimer() {
 			@Override
 			public void handle(long now) {
-				int temp=obstacleWall.size();
-				for (int i=0;i<temp;i++)
+//				int temp=obstacleWall.size();
+				for (int i=0;i<6;i++)
 				{
-					if (snakeBody.get(0).intersects(obstacleWall.get(i).getLayoutBounds()))
-					{
-						removeSnakeBody(obstacleWall.get(i));
-						 temp=obstacleWall.size();
+					try {
+						if (snakeBody.get(0).intersects(obstacleWall.get(i).getLayoutBounds()))
+						{
+							removeSnakeBody(obstacleWall.get(i));
+	//						 temp=obstacleWall.size();
+						}
+					}catch (Exception e) {
+						stop();
 					}
 				}
 
