@@ -15,6 +15,7 @@ import javafx.util.Duration;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
@@ -65,9 +66,14 @@ public class ViewManager {
 	private Timeline time8;
 	private Timeline time9;
 	private boolean paused;
+	private CustomRectangle ss;
+	private TableView leaderboard = new TableView();
+	private InfoLabel Help_label=new InfoLabel("1.Use mouse to control the snake\n2.Get through all the obstacles\n3.You can save the game also");
+	private InfoLabel Credit_Label=new InfoLabel("Akhil Jarodia(2017130)\nAayush Gupta(2017125)");
 	private SpaceRunnerButton pauseButton=new SpaceRunnerButton("PAUSE");;
 	public ViewManager()
-	{	menuButtons=new ArrayList<SpaceRunnerButton>();
+	{
+		menuButtons=new ArrayList<SpaceRunnerButton>();
 		snakeBody=new ArrayList<CustomCircle>();
 		snakeBody.add(circle);
 		powerList = new ArrayList<CusRectangle>();
@@ -77,6 +83,7 @@ public class ViewManager {
 		pointsLabel=new SmallInfoLabel("POINTS:00");
 		pointsLabel.setLayoutX(900);
 		pointsLabel.setLayoutY(0);
+		
 		time0 = new Timeline();
 		time1 = new Timeline();
 		time2 = new Timeline();
@@ -93,9 +100,10 @@ public class ViewManager {
 		createButtons();
 		createlogo();
 		initialiseButtonListeners();
-		CustomRectangle ss=new CustomRectangle();
+		ss=new CustomRectangle();
 		ss.setLayoutX(310);
 		ss.setLayoutY(210);
+		ss.getPane().getChildren().addAll(leaderboard,Help_label,Credit_Label);
 		circle.setOpacity(0.7);//
 		r2.getChildren().add(circle);//
 		mainPane.getChildren().add(ss);
@@ -128,6 +136,7 @@ public class ViewManager {
         createSnakeBody();
         createSnakeBody();
         createSnakeBody();
+        
 	}
 
 	private void createObstacleWall(){
@@ -468,6 +477,26 @@ public class ViewManager {
 				startMovement();
 			}
 		});
+	menuButtons.get(1).setOnMouseReleased(new EventHandler<MouseEvent>() {
+		@Override
+		public void handle(MouseEvent event) {
+			ss.topper(1);
+		}
+	});
+	menuButtons.get(2).setOnMouseReleased(new EventHandler<MouseEvent>() {
+		@Override
+		public void handle(MouseEvent event) {
+			ss.topper(2);
+		}
+	});
+
+	menuButtons.get(3).setOnMouseReleased(new EventHandler<MouseEvent>() {
+		@Override
+		public void handle(MouseEvent event) {
+			ss.topper(3);
+		}
+	});
+
 
 		r2.getChildren().get(0).setOnMouseReleased(new EventHandler<MouseEvent>() {
 			@Override

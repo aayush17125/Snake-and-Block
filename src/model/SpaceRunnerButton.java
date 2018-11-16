@@ -41,7 +41,7 @@ public class SpaceRunnerButton extends Button{
 	{
 		setStyle(Butpress);
 		setPrefHeight(45);
-		setLayoutY(getLayoutY()+4);
+//		setLayoutY(getLayoutY()+4);
 		
 	}
 	
@@ -49,7 +49,7 @@ public class SpaceRunnerButton extends Button{
 	{
 		setStyle(but);
 		setPrefHeight(49);
-		setLayoutY(getLayoutY()-4);
+//		setLayoutY(getLayoutY()-4);
 		
 	}
 
