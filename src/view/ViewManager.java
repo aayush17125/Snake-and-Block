@@ -135,7 +135,6 @@ public class ViewManager {
 		for (int i=0;i<6;i++){
 
 			numberRectangle tempRect = new numberRectangle(i*(int)(WIDTH/6),-200,WIDTH/6,100,1);
-//			tempRect.setFill(Color.color(Math.random(),Math.random(),Math.random()));
 			r2.getChildren().add(tempRect);
 			obstacleWall.add(tempRect);
 		}
@@ -307,7 +306,8 @@ public class ViewManager {
 //				r2.getChildren().remove(r2.getChildren().size()-1);
 //				snakeBody.remove(snakeBody.size()-1);
 				removeLastSnake();
-				
+				points++;
+				pointsLabel.setText("POINTS:0"+Integer.toString(points));
 			}
 		}
 
@@ -330,25 +330,7 @@ public class ViewManager {
 				}
 			}
 		});
-//        scene2.setOnKeyPressed(new EventHandler<KeyEvent>() {
-//            @Override
-//            public void handle(KeyEvent event) {
-//                if(event.getCode()==RIGHT) {
-//                    for (int i = 0; i < snakeBody.size(); i++) {
-//                    	if (snakeBody.get(i).getCenterX() < WIDTH-10) {
-//							snakeBody.get(i).setCenterX(snakeBody.get(i).getCenterX() + KEYBOARD_MOVEMENT_DELTA);
-//						}
-//					}
-//                }
-//                if(event.getCode()==LEFT){
-//                    for (int i = 0; i < snakeBody.size(); i++) {
-//						if (snakeBody.get(i).getCenterX() > 10) {
-//							snakeBody.get(i).setCenterX(snakeBody.get(i).getCenterX() - KEYBOARD_MOVEMENT_DELTA);
-//						}
-//                    }
-//                }
-//            }
-//        });
+
 		pauseButton.setOnMouseReleased(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
@@ -390,7 +372,6 @@ public class ViewManager {
 				time0.setCycleCount(Animation.INDEFINITE);
 				KeyFrame key0 = new KeyFrame(Duration.millis(4000),e->{
 					obstacleWall.get(0).setY(-200);
-					
 					numberRectangle temp = (numberRectangle) obstacleWall.get(0);
 					temp.setNum(rand_x.nextInt(20));
 					temp.refresh();
@@ -401,7 +382,6 @@ public class ViewManager {
 				time1.setCycleCount(Animation.INDEFINITE);
 				KeyFrame key1 = new KeyFrame(Duration.millis(4000),e->{
 					obstacleWall.get(1).setY(-200);
-					
 					numberRectangle temp = (numberRectangle) obstacleWall.get(1);
 					temp.setNum(rand_x.nextInt(20));
 					temp.refresh();
