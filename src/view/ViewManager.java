@@ -100,14 +100,7 @@ public class ViewManager {
 		r2.getChildren().add(circle);
 		mainPane.getChildren().add(ss);
 		scene2.setFill(Color.BLACK);
-		createSnakeBody();
-        createSnakeBody();
-        createSnakeBody();
-        createSnakeBody();
-        createSnakeBody();
-        createSnakeBody();
-        createSnakeBody();
-        createSnakeBody();
+		
 		createObstacleWall();
 		CusRectangle ui=new CusRectangle(1,19,30);
 		CusRectangle ub=new CusRectangle(2,20,20);
@@ -128,6 +121,14 @@ public class ViewManager {
 		r2.getChildren().add(pauseButton);
 		r2.getChildren().add(pointsLabel);
 		points = 0;
+		createSnakeBody();
+        createSnakeBody();
+        createSnakeBody();
+        createSnakeBody();
+        createSnakeBody();
+        createSnakeBody();
+        createSnakeBody();
+        createSnakeBody();
 	}
 
 	private void createObstacleWall(){
@@ -296,9 +297,9 @@ public class ViewManager {
 		if(snakeBody.size()>1) {
 			for (int i = 0; i < ((numberRectangle) rectangle).getNum(); i++)
 			{	if(!((numberRectangle) rectangle).ishit()){
-				CustomCircle temp=snakeBody.get(snakeBody.size()-1);
-				r2.getChildren().remove(temp);
-				snakeBody.remove(temp);
+//				CustomCircle temp=snakeBody.get(snakeBody.size()-1);
+				r2.getChildren().remove(r2.getChildren().size()-1);
+				snakeBody.remove(snakeBody.size()-1);
 
 				((numberRectangle) rectangle).hit();
 				rectangle.setVisible(false);
