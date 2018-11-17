@@ -334,8 +334,17 @@ public class ViewManager {
 		scene2.setOnMouseMoved(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				for (int i = 0; i < snakeBody.size(); i++) {
-					snakeBody.get(i).setCenterX(event.getX());
+				ArrayList<Double> prev = new ArrayList<Double>();
+				try {
+					snakeBody.get(0).setCenterX(event.getX());
+					for (int i=0;i<snakeBody.size()-1;i++) {
+						prev.add(snakeBody.get(i).getCenterX());
+					}
+					for (int i=1;i<snakeBody.size();i++) {
+						snakeBody.get(i).setCenterX(prev.get(i-1));
+					}
+				}catch (Exception e) {
+					// TODO: handle exception
 				}
 			}
 		});
@@ -352,14 +361,11 @@ public class ViewManager {
 		gameTimer=new AnimationTimer() {
 			@Override
 			public void handle(long now) {
-//				int temp=obstacleWall.size();
 				for (int i=0;i<6;i++)
 				{
 					try {
-						if (snakeBody.get(0).intersects(obstacleWall.get(i).getLayoutBounds()))
-						{
+						if (snakeBody.get(0).intersects(obstacleWall.get(i).getLayoutBounds())){
 							removeSnakeBody(obstacleWall.get(i));
-	//						 temp=obstacleWall.size();
 						}
 					}catch (Exception e) {
 						stop();

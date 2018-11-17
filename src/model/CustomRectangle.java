@@ -22,7 +22,7 @@ public class CustomRectangle extends SubScene {
 	}
 	public void topper(int i)
 	{
-		this.getPane().getChildren().remove(index);
+//		this.getPane().getChildren().remove(index);
 	}
 
 }
