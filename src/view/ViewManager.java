@@ -81,9 +81,9 @@ public class ViewManager {
 		mainPane=new AnchorPane();
 		mainScene=new Scene(mainPane,WIDTH,HEIGHT);
 		pointsLabel=new SmallInfoLabel("POINTS:00");
-		pointsLabel.setLayoutX(900);
+		pointsLabel.setLayoutX(850);
 		pointsLabel.setLayoutY(0);
-		
+		leaderboard.setStyle("-fx-background-color:transparent");
 		time0 = new Timeline();
 		time1 = new Timeline();
 		time2 = new Timeline();

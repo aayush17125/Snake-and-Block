@@ -19,7 +19,7 @@ public class SmallInfoLabel extends Label {
 
     public SmallInfoLabel(String text)
     {
-        setPrefWidth(130);
+        setPrefWidth(200);
         setPrefHeight(50);
         BackgroundImage backgroundimage=new BackgroundImage(new Image("view/resources/scorelabel.png",130,50,false,true), BackgroundRepeat.NO_REPEAT,BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,null);
         setBackground(new Background(backgroundimage));
