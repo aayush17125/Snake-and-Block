@@ -104,6 +104,10 @@ public class ViewManager {
 		ss.setLayoutX(310);
 		ss.setLayoutY(210);
 		ss.getPane().getChildren().addAll(leaderboard,Help_label,Credit_Label);
+		leaderboard.setVisible(false);
+		Help_label.setVisible(false);
+		Credit_Label.setVisible(false);
+		leaderboard.setPrefWidth(600);
 		circle.setOpacity(0.7);//
 		r2.getChildren().add(circle);//
 		mainPane.getChildren().add(ss);

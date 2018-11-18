@@ -4,23 +4,7 @@
     <list default="true" id="a005f4e4-1d20-4cd0-8ac9-d70e365a8d16" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/.classpath" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/bin/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/application/game$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/application/game$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/model/CustomRectangle.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/model/CustomRectangle.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/model/SpaceRunnerButton$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/model/SpaceRunnerButton$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/model/SpaceRunnerButton$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/model/SpaceRunnerButton$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/model/SpaceRunnerButton$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/model/SpaceRunnerButton$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/model/SpaceRunnerButton$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/model/SpaceRunnerButton$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/view/ViewManager$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/view/ViewManager$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/view/ViewManager$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/view/ViewManager$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/view/ViewManager$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/view/ViewManager$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/view/ViewManager$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/view/ViewManager$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/view/ViewManager$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/view/ViewManager$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/view/ViewManager$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/view/ViewManager$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/view/ViewManager$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/view/ViewManager$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/view/ViewManager$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/view/ViewManager$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/view/ViewManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/view/ViewManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/CustomRectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/CustomRectangle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/ViewManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ViewManager.java" afterDir="false" />
     </list>
@@ -41,9 +25,10 @@
           <entry key="project.open.time.14" value="1" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.16" value="1" />
+          <entry key="project.open.time.17" value="1" />
           <entry key="project.open.time.18" value="1" />
           <entry key="project.open.time.8" value="1" />
-          <entry key="project.opened" value="7" />
+          <entry key="project.opened" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -60,12 +45,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="3651" />
+          <entry key="java" value="3653" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="3651" />
+          <entry key="JAVA" value="3653" />
         </counts>
       </usages-collector>
     </session>
@@ -79,35 +64,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/view/ViewManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="495" column="7" selection-start-line="495" selection-start-column="7" selection-end-line="495" selection-end-column="7" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#14318#14319#0" expanded="true" />
-                <element signature="e#14339#14340#0" expanded="true" />
-                <element signature="e#14469#14470#0" expanded="true" />
-                <element signature="e#14490#14491#0" expanded="true" />
-                <element signature="e#14621#14622#0" expanded="true" />
-                <element signature="e#14642#14643#0" expanded="true" />
-                <element signature="e#14775#14776#0" expanded="true" />
-                <element signature="e#14798#14799#0" expanded="true" />
-                <element signature="e#15443#15444#0" expanded="true" />
-                <element signature="e#15471#15472#0" expanded="true" />
-                <element signature="e#15603#15604#0" expanded="true" />
-                <element signature="e#15640#15641#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="120">
+              <caret line="99" column="10" selection-start-line="99" selection-start-column="10" selection-end-line="99" selection-end-column="10" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/CustomRectangle.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="19" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
+            <state relative-caret-position="600">
+              <caret line="40" column="1" selection-start-line="40" selection-start-column="1" selection-end-line="40" selection-end-column="1" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#795#796#0" expanded="true" />
+                <element signature="e#836#837#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -145,8 +120,8 @@
         <option value="$PROJECT_DIR$/src/model/SmallInfoLabel.java" />
         <option value="$PROJECT_DIR$/src/view/ViewgameManager.java" />
         <option value="$PROJECT_DIR$/src/model/numberRectangle.java" />
-        <option value="$PROJECT_DIR$/src/model/CustomRectangle.java" />
         <option value="$PROJECT_DIR$/src/view/ViewManager.java" />
+        <option value="$PROJECT_DIR$/src/model/CustomRectangle.java" />
       </list>
     </option>
   </component>
@@ -201,8 +176,8 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -263,8 +238,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="25" width="1366" height="696" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27348486" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2780303" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -330,9 +306,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="79">
           <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -340,38 +313,25 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="8" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/CustomRectangle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="40" column="1" selection-start-line="40" selection-start-column="1" selection-end-line="40" selection-end-column="1" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#795#796#0" expanded="true" />
+            <element signature="e#836#837#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/view/ViewManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="495" column="7" selection-start-line="495" selection-start-column="7" selection-end-line="495" selection-end-column="7" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#14318#14319#0" expanded="true" />
-            <element signature="e#14339#14340#0" expanded="true" />
-            <element signature="e#14469#14470#0" expanded="true" />
-            <element signature="e#14490#14491#0" expanded="true" />
-            <element signature="e#14621#14622#0" expanded="true" />
-            <element signature="e#14642#14643#0" expanded="true" />
-            <element signature="e#14775#14776#0" expanded="true" />
-            <element signature="e#14798#14799#0" expanded="true" />
-            <element signature="e#15443#15444#0" expanded="true" />
-            <element signature="e#15471#15472#0" expanded="true" />
-            <element signature="e#15603#15604#0" expanded="true" />
-            <element signature="e#15640#15641#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/CustomRectangle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="19" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
+        <state relative-caret-position="120">
+          <caret line="99" column="10" selection-start-line="99" selection-start-column="10" selection-end-line="99" selection-end-column="10" />
         </state>
       </provider>
     </entry>
