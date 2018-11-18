@@ -109,9 +109,9 @@ public class ViewManager {
 		mainPane.getChildren().add(ss);
 		scene2.setFill(Color.BLACK);
 		createObstacleWall();
-		CusRectangle ui=new CusRectangle(1,19,30);
-		CusRectangle ub=new CusRectangle(2,20,20);
-		CusRectangle uc =new CusRectangle(3,30,30);
+		CusRectangle ui= new CusRectangle(1,19,30);
+		CusRectangle ub=new CusRectangle(2,30,30);
+		CusRectangle uc =new CusRectangle(3,30,36);
 		ui.setLayoutX(rand_x.nextInt(WIDTH));
 		ui.setLayoutY(0);
 		ub.setLayoutX(rand_x.nextInt(WIDTH));
@@ -135,7 +135,7 @@ public class ViewManager {
         createSnakeBody();
         createSnakeBody();
         createSnakeBody();
-        createSnakeBody();
+        createSnakeBody();	
         
 	}
 
@@ -301,7 +301,7 @@ public class ViewManager {
 	}
 	private void removeSnakeBody(Rectangle rectangle)
 	{
-		if(snakeBody.size()>1 && !((numberRectangle) rectangle).isHit()) {
+		if(snakeBody.size()>0 && !((numberRectangle) rectangle).isHit()) {
 			rectangle.setVisible(false);
 			((numberRectangle) rectangle).hit();
 			System.out.println(((numberRectangle) rectangle).getNum()); 
@@ -358,17 +358,41 @@ public class ViewManager {
 				paused = true;
 			}
 		});
+		
 		gameTimer=new AnimationTimer() {
 			@Override
 			public void handle(long now) {
-				for (int i=0;i<6;i++)
-				{
+				for (int i=0;i<6;i++){
 					try {
 						if (snakeBody.get(0).intersects(obstacleWall.get(i).getLayoutBounds())){
 							removeSnakeBody(obstacleWall.get(i));
 						}
 					}catch (Exception e) {
 						stop();
+					}
+				}
+				for (int i=0;i<powerList.size();i++) {
+					try {
+						if (snakeBody.get(0).intersects(powerList.get(i).getLayoutBounds())) {
+							System.out.println("coll"); 	
+							if (powerList.get(i).getType()==1) {
+								System.out.println("type1");
+							}
+							else if (powerList.get(i).getType()==2) {
+								for (int j=0;j<rand_x.nextInt(15);j++) {
+									System.out.println("ype2");
+									powerList.get(i).setVisible(false);
+									createSnakeBody();
+								}
+							}
+							else if (powerList.get(i).getType()==3) {
+								System.out.println("type3");	
+							}
+							
+						}
+					}catch (Exception e) {
+						// TODO: handle exception
+						System.out.println(e.getStackTrace());
 					}
 				}
 
@@ -516,7 +540,7 @@ public class ViewManager {
 			@Override
 			public void handle(MouseEvent event) {
 				mainStage.setScene(scene2);
-				mediaPlayer.play();
+//				mediaPlayer.play();
 				System.out.print(123);
 				if (paused){
 					paused = false;

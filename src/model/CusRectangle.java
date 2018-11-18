@@ -12,6 +12,7 @@ public class CusRectangle extends Rectangle {
     Image img1 = new Image("model/resources/bolt_gold.png");
     Image img2 = new Image("model/resources/fruit.png");
     Image img3 = new Image("model/resources/shield_gold.png");
+    private int type=0;
 //    public CusRectangle(String x)
 //    {
 //    setFill(Color.BROWN);
@@ -19,6 +20,7 @@ public class CusRectangle extends Rectangle {
 //        st.getChildren().addAll(a,this);
 //
 //    }
+    
     public CusRectangle(int q,double x,double y)
 //        Rectangle a = new Rectangle(1,2);
     {   super(x,y);
@@ -26,14 +28,17 @@ public class CusRectangle extends Rectangle {
         if(q==1)
         {
             setFill(new ImagePattern(img1));
+            type = 1;
         }
         else if(q==2)
         {
             setFill(new ImagePattern(img2));
+            type=2;
         }
         else if (q==3)
         {
             setFill(new ImagePattern(img3));
+            type=3;
         }
     }
 //    public StackPane lay1()
@@ -41,5 +46,13 @@ public class CusRectangle extends Rectangle {
 //        st.getLayoutY(getLayoutY());
 //        return lay1;
 //    }
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
 
 }
