@@ -306,11 +306,12 @@ public class ViewManager {
 	private void removeSnakeBody(Rectangle rectangle)
 	{
 		if(snakeBody.size()>0 && !((numberRectangle) rectangle).isHit()) {
-			rectangle.setVisible(false);
 			((numberRectangle) rectangle).hit();
+			
+			rectangle.setVisible(false);
 			System.out.println(((numberRectangle) rectangle).getNum()); 
 			for (int i = 0; i < ((numberRectangle) rectangle).getNum(); i++){
-				if (snakeBody.size()==0) {
+				if (snakeBody.size()==0 || snakeBody.size()<0) {
 					System.out.println("Game Over");
 					stopMovement();
 					break;
@@ -321,7 +322,11 @@ public class ViewManager {
 				removeLastSnake();
 				points++;
 				pointsLabel.setText("POINTS:0"+Integer.toString(points));
+				
 			}
+//			for (int j=0;j<obstacleWall.size();j++) {
+//				((numberRectangle) obstacleWall.get(j)).hit();
+//			}
 		}
 
 	}
@@ -384,8 +389,9 @@ public class ViewManager {
 				}
 				for (int i=0;i<powerList.size();i++) {
 					try {
-						if (snakeBody.get(0).intersects(powerList.get(i).getBoundsInParent())) {
-							System.out.println("coll"); 	
+						if (snakeBody.get(0).intersects(powerList.get(i).getBoundsInParent()) && (!(powerList.get(i).isHit()))) {
+							System.out.println("coll");
+							powerList.get(i).hit();
 							if (powerList.get(i).getType()==1) {
 								System.out.println("type1");
 							}
@@ -500,7 +506,7 @@ public class ViewManager {
 				time7.setCycleCount(Animation.INDEFINITE);
 				KeyFrame key7 = new KeyFrame(Duration.millis(3100),e->{
 					powerList.get(0).setY(0);
-					powerList.get(0).setVisible(true);
+					powerList.get(0).refresh();
 					powerList.get(0).setLayoutX(rand_x.nextInt(WIDTH));
 				},new KeyValue(powerList.get(0).yProperty(),HEIGHT));
 				time7.getKeyFrames().add(key7);
@@ -509,7 +515,7 @@ public class ViewManager {
 				time8.setCycleCount(Animation.INDEFINITE);
 				KeyFrame key8 = new KeyFrame(Duration.millis(3100),e->{
 					powerList.get(1).setY(0);
-					powerList.get(1).setVisible(true);
+					powerList.get(1).refresh();
 					powerList.get(1).setLayoutX(rand_x.nextInt(WIDTH));
 				},new KeyValue(powerList.get(1).yProperty(),HEIGHT));
 				time8.getKeyFrames().add(key8);
@@ -518,7 +524,7 @@ public class ViewManager {
 				time9.setCycleCount(Animation.INDEFINITE);
 				KeyFrame key9 = new KeyFrame(Duration.millis(3100),e->{
 					powerList.get(2).setY(0);
-					powerList.get(2).setVisible(true);
+					powerList.get(2).refresh();
 					powerList.get(2).setLayoutX(rand_x.nextInt(WIDTH));
 				},new KeyValue(powerList.get(2).yProperty(),HEIGHT));
 				time9.getKeyFrames().add(key9);

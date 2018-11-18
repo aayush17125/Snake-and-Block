@@ -9,6 +9,21 @@ import javafx.scene.text.Text;
 
 public class CusRectangle extends Rectangle {
     private StackPane st = new StackPane();
+    boolean done= false;
+	 public void hit()
+	    {
+	        done=true;
+	    }
+	    public void refresh()
+	    {
+	        done=false;
+	        setVisible(true);
+
+	    }
+	    public boolean isHit()
+	    {
+	        return done;
+	    }
     Image img1 = new Image("model/resources/bolt_gold.png");
     Image img2 = new Image("model/resources/fruit.png");
     Image img3 = new Image("model/resources/shield_gold.png");

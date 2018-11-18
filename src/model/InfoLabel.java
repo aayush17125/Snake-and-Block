@@ -10,8 +10,9 @@ import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 
 public class InfoLabel extends Label{
-String path="src/model/resources/kenvector_future.ttf";
-String imagepath="src/model/resources/yellow_button13.png";
+	String path="src/model/resources/kenvector_future.ttf";
+	String imagepath="src/model/resources/yellow_button13.png";
+	
 	public InfoLabel(String text) {
 		// TODO Auto-generated constructor stub
 	setPrefWidth(600);
