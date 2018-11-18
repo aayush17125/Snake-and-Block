@@ -1,0 +1,10 @@
+.idea/
+.project
+.classpath
+.settings/
+AP_Game.iml
+bin/
+build.fxbuild
+out/
+snake.iml
+~$*
