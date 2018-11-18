@@ -38,4 +38,4 @@ public class CustomRectangle extends SubScene {
 		}
 	}
 
-}	
+}
