@@ -555,7 +555,15 @@ public class ViewManager {
 								System.out.println("type3");	
 							}
 							else if (powerList.get(i).getType()==4) {
-								System.out.println("type4");	
+								System.out.println("type4");
+								for (int j=0;j<6;j++) {
+									numberRectangle rect = (numberRectangle) obstacleWall.get(j);
+									rect.hit();
+									rect.setVisible(false);
+									points += rect.getNum();
+									pointsLabel.setText("POINTS:"+Integer.toString(points));
+								}
+								
 							}
 							
 						}
