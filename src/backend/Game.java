@@ -22,10 +22,5 @@ private int score;
 	public void deductScore(){
 		score=score-1;
 	}
-	public void collided(){
-
-	}
-	{
-		
-	}
+	
 }

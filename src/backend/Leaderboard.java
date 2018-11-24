@@ -3,7 +3,7 @@ package backend;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public  abstract class Leaderboard implements Serializable {
+public  abstract class Leaderboard  {
 
 	private ArrayList<String> data;
 	
@@ -11,9 +11,9 @@ public  abstract class Leaderboard implements Serializable {
 	{
 		data=new ArrayList<String>();
 	}
-	public void addScore(String name,int score)
+	public void addScore(int score)
 	{
-		data.add(name+"_"+Integer.toString(score));
+		data.add(Integer.toString(score));
 		if(data.size()>10)
 		{
 			data.remove(0);
