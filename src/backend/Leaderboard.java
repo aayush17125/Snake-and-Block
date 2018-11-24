@@ -3,11 +3,11 @@ package backend;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public  abstract class Leaderboard  {
+public class Leaderboard  {
 
 	private ArrayList<String> data;
 	
-	Leaderboard()
+	public Leaderboard()
 	{
 		data=new ArrayList<String>();
 	}

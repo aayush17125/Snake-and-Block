@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import backend.Leaderboard;
 import javafx.animation.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -67,6 +68,7 @@ public class ViewManager {
 	private Timeline time7;
 	private Timeline time8;
 	private Timeline time9;
+	private Timeline time10;
 	private boolean paused;
 	private boolean firstTime;
 	private CustomRectangle ss;
@@ -98,6 +100,7 @@ public class ViewManager {
 		time7 = new Timeline();
 		time8 = new Timeline();
 		time9 = new Timeline();
+		time10 = new Timeline();
 		mainStage =new Stage();
 		mainStage.setScene(mainScene);
 		paused = true;
@@ -285,7 +288,7 @@ public class ViewManager {
 		time7.play();
 		time8.play();
 		time9.play();
-
+		time10.play();
 	}
 	private void pauseMovement(){
 		time0.pause();
@@ -298,6 +301,7 @@ public class ViewManager {
 		time7.pause();
 		time8.pause();
 		time9.pause();
+		time10.pause();
 	}
 	private void stopMovement(){
 		time0.stop();
@@ -310,6 +314,7 @@ public class ViewManager {
 		time7.stop();
 		time8.stop();
 		time9.stop();
+		time10.stop();
 	}
 	private void removeSnakeBody(Rectangle rectangle)
 	{
@@ -326,22 +331,17 @@ public class ViewManager {
 					alert.setHeaderText("Game Over");
 					alert.setContentText("Score :"+points);
 					alert.show();
+					Leaderboard l = new Leaderboard();
+					l.addScore(points);
 					stopMovement();
 					mediaPlayer.stop();
 					mainStage.setScene(mainScene);
 					break;
 				}
-//				CustomCircle temp=snakeBody.get(snakeBody.size()-1);
-//				r2.getChildren().remove(r2.getChildren().size()-1);
-//				snakeBody.remove(snakeBody.size()-1);
 				removeLastSnake();
 				points++;
-				pointsLabel.setText("POINTS:0"+Integer.toString(points));
-				
+				pointsLabel.setText("POINTS:0"+Integer.toString(points));			
 			}
-//			for (int j=0;j<obstacleWall.size();j++) {
-//				((numberRectangle) obstacleWall.get(j)).hit();
-//			}
 		}
 
 	}
@@ -484,6 +484,16 @@ public class ViewManager {
 		},new KeyValue(powerList.get(2).yProperty(),HEIGHT));
 		time9.getKeyFrames().add(key9);
 		startMovement();
+		
+		time10.setDelay(Duration.millis(450));
+		time10.setCycleCount(Animation.INDEFINITE);
+		KeyFrame key10 = new KeyFrame(Duration.millis(3100),e->{
+			powerList.get(3).setY(0);
+			powerList.get(3).refresh();
+			powerList.get(3).setLayoutX(rand_x.nextInt(WIDTH));
+		},new KeyValue(powerList.get(3).yProperty(),HEIGHT));
+		time10.getKeyFrames().add(key10);
+		startMovement();
 	}
 	private void initialiseButtonListeners() {
 		scene2.setOnMouseMoved(new EventHandler<MouseEvent>() {
@@ -543,6 +553,9 @@ public class ViewManager {
 							}
 							else if (powerList.get(i).getType()==3) {
 								System.out.println("type3");	
+							}
+							else if (powerList.get(i).getType()==4) {
+								System.out.println("type4");	
 							}
 							
 						}
