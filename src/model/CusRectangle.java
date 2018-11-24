@@ -27,6 +27,7 @@ public class CusRectangle extends Rectangle {
     Image img1 = new Image("model/resources/bolt_gold.png");
     Image img2 = new Image("model/resources/fruit.png");
     Image img3 = new Image("model/resources/shield_gold.png");
+    Image img4 = new Image("model/resources/nuke.png");
     private int type=0;
 //    public CusRectangle(String x)
 //    {
@@ -54,6 +55,12 @@ public class CusRectangle extends Rectangle {
         {
             setFill(new ImagePattern(img3));
             type=3;
+        }
+        else if(q==4)
+        {
+        	setFill(new ImagePattern(img4));
+        	type=4;
+        
         }
     }
 //    public StackPane lay1()
