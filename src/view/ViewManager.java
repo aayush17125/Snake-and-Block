@@ -166,9 +166,9 @@ public class ViewManager {
 		{
 			leaderboard.getItems().remove(l.getScore().get(i));
 		}
-		for(int i=0;i<l.getScore().size();i++)
+		for(String x:l.getScore())
 		{
-			leaderboard.getItems().add(Integer.toString(i+1)+". "+l.getScore().get(i));
+			leaderboard.getItems().add(x);
 		}
 	}
 
@@ -187,6 +187,18 @@ public class ViewManager {
 	}
 	private void createPauseMenu()
 	{
+//		ImageView logo=new ImageView("view/resources/kitkat.jpg");
+//	ImageView logo3=new ImageView("view/resources/kitkat.jpg");
+	ImageView logo2=new ImageView("view/resources/maxresdefault.jpg");
+//	logo.setLayoutX(0);
+//	logo.setLayoutY(600);
+//	logo.setFitHeight(100);
+//	logo.setFitWidth(1000);
+//	logo3.setLayoutX(0);
+//	logo3.setLayoutY(0);
+//	logo3.setFitHeight(100);
+//	logo3.setFitWidth(1000);
+	pausePane.getChildren().addAll(logo2);
 		addPauseButton(new SpaceRunnerButton("SAVE"));
 		addPauseButton(new SpaceRunnerButton("PLAY"));
 		addPauseButton(new SpaceRunnerButton("EXIT"));
@@ -656,7 +668,7 @@ public class ViewManager {
 		pauseList.get(2).setOnMouseReleased(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				mainStage.close();
+				mainStage.setScene(mainScene);
 			}
 		});
 		pauseList.get(0).setOnMouseReleased(new EventHandler<MouseEvent>() {
