@@ -71,6 +71,7 @@ public class ViewManager {
 	private ListView leaderboard = new ListView();
 	private InfoLabel Help_label=new InfoLabel("1.Use mouse to control the snake\n2.Get through all the obstacles\n3.You can save the game also");
 	private InfoLabel Credit_Label=new InfoLabel("Akhil Jarodia(2017130)\nAayush Gupta(2017125)");
+	private InfoLabel Main_Label=new InfoLabel("----------->\nHey there\nPress the play button to play\n<--------");
 	private SpaceRunnerButton pauseButton=new SpaceRunnerButton("PAUSE");;
 	Leaderboard l = new Leaderboard();
 	public ViewManager()
@@ -106,7 +107,7 @@ public class ViewManager {
 		ss=new CustomRectangle();
 		ss.setLayoutX(310);
 		ss.setLayoutY(210);
-		ss.getPane().getChildren().addAll(leaderboard,Help_label,Credit_Label);
+		ss.getPane().getChildren().addAll(leaderboard,Help_label,Credit_Label,Main_Label);
 		leaderboard.setVisible(false);
 		Help_label.setVisible(false);
 		Credit_Label.setVisible(false);
