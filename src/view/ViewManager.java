@@ -2,14 +2,10 @@ package view;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
-
 import backend.Leaderboard;
 import javafx.animation.*;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.geometry.Bounds;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
@@ -17,22 +13,16 @@ import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import model.*;
-
-import static javafx.scene.input.KeyCode.*;
 
 public class ViewManager {
 	private static final int HEIGHT = 720;
@@ -74,6 +64,10 @@ public class ViewManager {
 	private boolean paused;
 	private boolean firstTime;
 	private CustomRectangle ss;
+	CusRectangle ui;
+	CusRectangle ud;
+	CusRectangle ub;
+	CusRectangle uc;
 	private ListView leaderboard = new ListView();
 	private InfoLabel Help_label=new InfoLabel("1.Use mouse to control the snake\n2.Get through all the obstacles\n3.You can save the game also");
 	private InfoLabel Credit_Label=new InfoLabel("Akhil Jarodia(2017130)\nAayush Gupta(2017125)");
@@ -92,8 +86,6 @@ public class ViewManager {
 		pointsLabel=new SmallInfoLabel("POINTS:00");
 		pointsLabel.setLayoutX(850);
 		pointsLabel.setLayoutY(0);
-		
-		
 		time0 = new Timeline();
 		time1 = new Timeline();
 		time2 = new Timeline();
@@ -125,10 +117,10 @@ public class ViewManager {
 		mainPane.getChildren().add(ss);
 		scene2.setFill(Color.BLACK);
 		createObstacleWall();
-		CusRectangle ui= new CusRectangle(1,19,30);
-		CusRectangle ub=new CusRectangle(2,30,30);
-		CusRectangle uc =new CusRectangle(3,30,36);
-		CusRectangle ud=new CusRectangle(4,60,66);
+		ui= new CusRectangle(1,19,30);
+		ub=new CusRectangle(2,30,30);
+		uc =new CusRectangle(3,30,36);
+		ud=new CusRectangle(4,60,66);
 		ui.setLayoutX(rand_x.nextInt(WIDTH));
 		ui.setLayoutY(0);
 		ub.setLayoutX(rand_x.nextInt(WIDTH));
@@ -207,7 +199,7 @@ public class ViewManager {
 	public void playMusic(){
 		URL res = getClass().getResource("Song.mp3");
 		mediaPlayer = new MediaPlayer(new Media(res.toString()));
-		mediaPlayer.setCycleCount(mediaPlayer.INDEFINITE);
+		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 		mediaPlayer.play();
 	}
 	public Stage getMainStage()
@@ -392,8 +384,39 @@ public class ViewManager {
 		}
 	}
 	private void restart() {
-		paused = false;
-		mainStage.setScene(scene2);
+		snakeBody.add(circle);
+		initialiseButtonListeners();
+		circle.setOpacity(0.7);//
+		r2.getChildren().add(circle);//
+		scene2.setFill(Color.BLACK);
+		powerList.get(0).setLayoutX(rand_x.nextInt(WIDTH));
+		powerList.get(0).setLayoutY(0);
+		powerList.get(1).setLayoutX(rand_x.nextInt(WIDTH));
+		powerList.get(1).setLayoutY(0);
+		powerList.get(2).setLayoutX(rand_x.nextInt(WIDTH));
+		powerList.get(2).setLayoutY(0);
+		powerList.get(3).setLayoutX(50);
+		powerList.get(3).setLayoutY(40);
+		points = 0;
+		int[] num = new int[7];
+		int q=0;
+		for (int i=0;i<r2.getChildren().size();i++) {
+			for (int j=0;j<obstacleWall.size();j++) {
+				try {
+					if (r2.getChildren().get(i)==(obstacleWall.get(j))) {
+						num[q] = i;
+						q++;
+					}
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+			}
+		}
+		for (int i=0;i<7;i++) {
+			r2.getChildren().remove(num[i]-i);
+		}
+		obstacleWall = new ArrayList<Rectangle>();
+		createObstacleWall();
 		createSnakeBody();
         createSnakeBody();
         createSnakeBody();
@@ -401,8 +424,126 @@ public class ViewManager {
         createSnakeBody();
         createSnakeBody();
         createSnakeBody();
-        createSnakeBody();	
+        createSnakeBody();
+        l.addScore(6);	
+        refreshLeaderboard();
+		paused = true;
+		mainStage.setScene(scene2);
 		playMusic();
+		time0.setDelay(Duration.millis(450));
+		time0.setCycleCount(Animation.INDEFINITE);
+		KeyFrame key0 = new KeyFrame(Duration.millis(4000),e->{
+			obstacleWall.get(0).setY(-200);
+			numberRectangle temp = (numberRectangle) obstacleWall.get(0);
+			temp.setNum(randomNum());
+			temp.refresh();
+		},new KeyValue(obstacleWall.get(0).yProperty(),HEIGHT));
+		time0.getKeyFrames().add(key0);
+
+		time1.setDelay(Duration.millis(450));
+		time1.setCycleCount(Animation.INDEFINITE);
+		KeyFrame key1 = new KeyFrame(Duration.millis(4000),e->{
+			obstacleWall.get(1).setY(-200);
+			numberRectangle temp = (numberRectangle) obstacleWall.get(1);
+			temp.setNum(randomNum());
+			temp.refresh();
+		},new KeyValue(obstacleWall.get(1).yProperty(),HEIGHT));
+		time1.getKeyFrames().add(key1);
+
+		time2.setDelay(Duration.millis(450));
+		time2.setCycleCount(Animation.INDEFINITE);
+		KeyFrame key2 = new KeyFrame(Duration.millis(4000),e->{
+			obstacleWall.get(2).setY(-200);
+			
+			numberRectangle temp = (numberRectangle) obstacleWall.get(2);
+			temp.setNum(randomNum());
+			temp.refresh();
+		},new KeyValue(obstacleWall.get(2).yProperty(),HEIGHT));
+		time2.getKeyFrames().add(key2);
+
+		time3.setDelay(Duration.millis(450));
+		time3.setCycleCount(Animation.INDEFINITE);
+		KeyFrame key3 = new KeyFrame(Duration.millis(4000),e->{
+			obstacleWall.get(3).setY(-200);
+//			((numberRectangle)obstacleWall.get(3)).refresh();
+			numberRectangle temp = (numberRectangle) obstacleWall.get(3);
+			temp.setNum(randomNum());
+			temp.refresh();
+		},new KeyValue(obstacleWall.get(3).yProperty(),HEIGHT));
+		time3.getKeyFrames().add(key3);
+
+		time4.setDelay(Duration.millis(450));
+		time4.setCycleCount(Animation.INDEFINITE);
+		KeyFrame key4 = new KeyFrame(Duration.millis(4000),e->{
+			obstacleWall.get(4).setY(-200);
+//			((numberRectangle)obstacleWall.get(4)).refresh();
+			numberRectangle temp = (numberRectangle) obstacleWall.get(4);
+			temp.setNum(randomNum());
+			temp.refresh();
+		},new KeyValue(obstacleWall.get(4).yProperty(),HEIGHT));
+		time4.getKeyFrames().add(key4);
+
+		time5.setDelay(Duration.millis(450));
+		time5.setCycleCount(Animation.INDEFINITE);
+		KeyFrame key5 = new KeyFrame(Duration.millis(4000),e->{
+			obstacleWall.get(5).setY(-200);
+			
+			numberRectangle temp = (numberRectangle) obstacleWall.get(5);
+			temp.setNum(randomNum());
+			temp.refresh();
+		},new KeyValue(obstacleWall.get(5).yProperty(),HEIGHT));
+		time5.getKeyFrames().add(key5);
+
+		time6.setCycleCount(Animation.INDEFINITE);
+		KeyFrame key6 = new KeyFrame(Duration.millis(4000),e->{
+			obstacleWall.get(6).setY(-200);
+//			((numberRectangle)obstacleWall.get(6)).refresh();
+			int h = rand_x.nextInt(HEIGHT-300);
+			while (h<200) {
+				h = rand_x.nextInt(HEIGHT-300);
+			}
+			obstacleWall.get(6).setHeight(h);
+			obstacleWall.get(6).setX(rand_x.nextInt(WIDTH));
+		},new KeyValue(obstacleWall.get(6).yProperty(),HEIGHT));
+		time6.getKeyFrames().add(key6);
+
+
+		time7.setDelay(Duration.millis(450));
+		time7.setCycleCount(Animation.INDEFINITE);
+		KeyFrame key7 = new KeyFrame(Duration.millis(3100),e->{
+			powerList.get(0).setY(0);
+			powerList.get(0).refresh();
+			powerList.get(0).setLayoutX(rand_x.nextInt(WIDTH));
+		},new KeyValue(powerList.get(0).yProperty(),HEIGHT));
+		time7.getKeyFrames().add(key7);
+
+		time8.setDelay(Duration.millis(450));
+		time8.setCycleCount(Animation.INDEFINITE);
+		KeyFrame key8 = new KeyFrame(Duration.millis(3100),e->{
+			powerList.get(1).setY(0);
+			powerList.get(1).refresh();
+			powerList.get(1).setLayoutX(rand_x.nextInt(WIDTH));
+		},new KeyValue(powerList.get(1).yProperty(),HEIGHT));
+		time8.getKeyFrames().add(key8);
+
+		time9.setDelay(Duration.millis(450));
+		time9.setCycleCount(Animation.INDEFINITE);
+		KeyFrame key9 = new KeyFrame(Duration.millis(3100),e->{
+			powerList.get(2).setY(0);
+			powerList.get(2).refresh();
+			powerList.get(2).setLayoutX(rand_x.nextInt(WIDTH));
+		},new KeyValue(powerList.get(2).yProperty(),HEIGHT));
+		time9.getKeyFrames().add(key9);
+		startMovement();
+		
+		time10.setDelay(Duration.millis(450));
+		time10.setCycleCount(Animation.INDEFINITE);
+		KeyFrame key10 = new KeyFrame(Duration.millis(3100),e->{
+			powerList.get(3).setY(0);
+			powerList.get(3).refresh();
+			powerList.get(3).setLayoutX(rand_x.nextInt(WIDTH));
+		},new KeyValue(powerList.get(3).yProperty(),HEIGHT));
+		time10.getKeyFrames().add(key10);
 		startMovement();
 	}
 	private void start() {
@@ -660,6 +801,7 @@ public class ViewManager {
 				if (paused){
 					paused = false;
 					startMovement();
+					mediaPlayer.play();
 				}
 
 
