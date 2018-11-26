@@ -19,6 +19,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
@@ -72,10 +74,11 @@ public class ViewManager {
 	private boolean paused;
 	private boolean firstTime;
 	private CustomRectangle ss;
-	private TableView leaderboard = new TableView();
+	private ListView leaderboard = new ListView();
 	private InfoLabel Help_label=new InfoLabel("1.Use mouse to control the snake\n2.Get through all the obstacles\n3.You can save the game also");
 	private InfoLabel Credit_Label=new InfoLabel("Akhil Jarodia(2017130)\nAayush Gupta(2017125)");
 	private SpaceRunnerButton pauseButton=new SpaceRunnerButton("PAUSE");;
+	Leaderboard l = new Leaderboard();
 	public ViewManager()
 	{
 		menuButtons=new ArrayList<SpaceRunnerButton>();
@@ -89,7 +92,8 @@ public class ViewManager {
 		pointsLabel=new SmallInfoLabel("POINTS:00");
 		pointsLabel.setLayoutX(850);
 		pointsLabel.setLayoutY(0);
-		leaderboard.setStyle("-fx-background-color:transparent");
+		
+		
 		time0 = new Timeline();
 		time1 = new Timeline();
 		time2 = new Timeline();
@@ -115,6 +119,7 @@ public class ViewManager {
 		Help_label.setVisible(false);
 		Credit_Label.setVisible(false);
 		leaderboard.setPrefWidth(600);
+		leaderboard.setPrefHeight(400);
 		circle.setOpacity(0.7);//
 		r2.getChildren().add(circle);//
 		mainPane.getChildren().add(ss);
@@ -150,8 +155,21 @@ public class ViewManager {
         createSnakeBody();
         createSnakeBody();
         createSnakeBody();
-        createSnakeBody();	
-        
+        createSnakeBody();l.addScore(5);	
+        refreshLeaderboard();
+	}
+
+	private void refreshLeaderboard() {
+		// TODO Auto-generated method stub
+//		leaderboard=new ListView();
+		for(int i=0;i<l.getScore().size();i++)
+		{
+			leaderboard.getItems().remove(l.getScore().get(i));
+		}
+		for(int i=0;i<l.getScore().size();i++)
+		{
+			leaderboard.getItems().add(Integer.toString(i+1)+". "+l.getScore().get(i));
+		}
 	}
 
 	private void createObstacleWall(){
@@ -331,8 +349,8 @@ public class ViewManager {
 					alert.setHeaderText("Game Over");
 					alert.setContentText("Score :"+points);
 					alert.show();
-					Leaderboard l = new Leaderboard();
-					l.addScore(points);
+					
+					l.addScore(points);refreshLeaderboard();
 					stopMovement();
 					mediaPlayer.stop();
 					mainStage.setScene(mainScene);
