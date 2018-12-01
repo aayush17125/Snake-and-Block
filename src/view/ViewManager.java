@@ -680,6 +680,24 @@ public class ViewManager {
 		time10.getKeyFrames().add(key10);
 		startMovement();
 	}
+	private int shouldMove()
+	{
+		double dist=Math.sqrt((Math.pow(obstacleWall.get(6).getX()-snakeBody.get(0).getCenterX(), 2))+(Math.pow(obstacleWall.get(6).getY()-snakeBody.get(0).getCenterY(), 2)));
+		System.out.println(dist+" hello");
+		if(dist<100 )
+		{
+			if(obstacleWall.get(6).getX()>snakeBody.get(0).getCenterX())
+			{
+				return 1;
+			}
+			else
+			{
+				return 2;
+			}
+		}
+		
+		return 0;
+	}
 	private void start() {
 		paused = false;
 		mainStage.setScene(scene2);
@@ -829,14 +847,27 @@ public class ViewManager {
 			@Override
 			public void handle(MouseEvent event) {
 				ArrayList<Double> prev = new ArrayList<Double>();
-				try {
+				try {if(shouldMove()==0) {
 					snakeBody.get(0).setCenterX(event.getX());
-					for (int i=0;i<snakeBody.size()-1;i++) {
-						prev.add(snakeBody.get(i).getCenterX());
+					
+				}
+				else
+				{
+					if(shouldMove()==1 && event.getX()-snakeBody.get(0).getCenterX()<0)
+					{
+						snakeBody.get(0).setCenterX(event.getX());
 					}
-					for (int i=1;i<snakeBody.size();i++) {
-						snakeBody.get(i).setCenterX(prev.get(i-1));
+					else if(shouldMove()==2 && event.getX()-snakeBody.get(0).getCenterX()>0)
+					{
+						snakeBody.get(0).setCenterX(event.getX());
 					}
+				}
+				for (int i=0;i<snakeBody.size()-1;i++) {
+					prev.add(snakeBody.get(i).getCenterX());
+				}
+				for (int i=1;i<snakeBody.size();i++) {
+					snakeBody.get(i).setCenterX(prev.get(i-1));
+				}
 				}catch (Exception e) {
 					// TODO: handle exception
 				}
@@ -865,7 +896,7 @@ public class ViewManager {
 					}
 				}
 				if (snakeBody.get(0).intersects(obstacleWall.get(6).getBoundsInParent())) {
-					System.out.println("HN BSDK");
+//					System.out.println("HN BSDK");
 				}
 				for (int i=0;i<powerList.size();i++) {
 					try {
