@@ -1,6 +1,5 @@
 package model;
 
-import java.util.Random;
 
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -8,15 +7,11 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 
 public class CusRectangle extends Circle {
-    private StackPane st = new StackPane();
     boolean done= false;
     
 	 public void hit()
@@ -39,21 +34,12 @@ public class CusRectangle extends Circle {
     Image img4 = new Image("model/resources/nuke.png");
     private int type=0;
 	private int point=7;
-//    public CusRectangle(String x)
-//    {
-//    setFill(Color.BROWN);
-//        Text a=new Text(x);
-//        st.getChildren().addAll(a,this);
-//
-//    }
-    
+
     public CusRectangle(int q,double x,double y)
-//        Rectangle a = new Rectangle(1,2);
     {  
     	this.setCenterX(x);
     	this.setCenterY(y);
     	this.setRadius(20);
-//        setFill(Color.BROWN);
         if(q==1)
         {
             setFill(new ImagePattern(img1));
@@ -76,12 +62,6 @@ public class CusRectangle extends Circle {
         
         }
     }
-//    public StackPane lay1()
-//    {   st.setLayoutX(getLayoutX());
-//        st.getLayoutY(getLayoutY());
-//        return lay1;
-//    }
-
 	public int getType() {
 		return type;
 	}
@@ -98,11 +78,6 @@ public class CusRectangle extends Circle {
 	    	point = t;
 	    	setFill(new ImagePattern(textToImage(Integer.toString(point))));
 	    }
-	  public void setImage()
-	  {if(type==2) {
-		  setFill(new ImagePattern(textToImage(Integer.toString(point))));
-		 
-	  }}
 	  private Image textToImage(String text) {
 	      
 	        Label label = new Label(text);

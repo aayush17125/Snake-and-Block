@@ -195,8 +195,7 @@ public class ViewManager {
 		int t = rand_x.nextInt(110);
 		if (t<70) {
 			block = new CusRectangle(2,30,30);
-			block.setImage();
-			block.setLength(rand_x.nextInt(randomNum(15)));
+			block.setLength(randomNum(10));
 		}
 		else if (t<=85) {
 			block = new CusRectangle(1,19,30);
@@ -214,8 +213,7 @@ public class ViewManager {
 		int t = rand_x.nextInt(110);
 		if (t<70) {
 			block.setType(2);
-			block.setImage();
-			block.setLength(rand_x.nextInt(randomNum(15)));
+			block.setLength(randomNum(10));
 		}
 		else if (t<=85) {
 			block.setType(1);
@@ -247,7 +245,7 @@ public class ViewManager {
 	{
 		ImageView logo2=new ImageView("view/resources/maxresdefault.jpg");
 		pausePane.getChildren().addAll(logo2);
-		addPauseButton(new SpaceRunnerButton("SAVE"));
+		addPauseButton(new SpaceRunnerButton("RESTART"));
 		addPauseButton(new SpaceRunnerButton("PLAY"));
 		addPauseButton(new SpaceRunnerButton("EXIT"));
 	}
@@ -446,7 +444,7 @@ public class ViewManager {
 	}
 	private int randomNum(int q) {
 		int t = rand_x.nextInt(q);
-		while(t<3) {
+		while(t<=3) {
 			t = rand_x.nextInt(q);
 		}
 		return t;
@@ -623,7 +621,6 @@ public class ViewManager {
 		time5.setCycleCount(Animation.INDEFINITE);
 		KeyFrame key5 = new KeyFrame(Duration.millis(4000),e->{
 			obstacleWall.get(5).setY(-200);
-			
 			numberRectangle temp = (numberRectangle) obstacleWall.get(5);
 			temp.setNum(randomNum(20));
 			temp.refresh();
@@ -641,7 +638,6 @@ public class ViewManager {
 			obstacleWall.get(6).setX(rand_x.nextInt(WIDTH));
 		},new KeyValue(obstacleWall.get(6).yProperty(),HEIGHT));
 		time6.getKeyFrames().add(key6);
-
 
 		time7.setDelay(Duration.millis(450));
 		time7.setCycleCount(Animation.INDEFINITE);
@@ -868,6 +864,9 @@ public class ViewManager {
 						stop();
 					}
 				}
+				if (snakeBody.get(0).intersects(obstacleWall.get(6).getBoundsInParent())) {
+					System.out.println("HN BSDK");
+				}
 				for (int i=0;i<powerList.size();i++) {
 					try {
 						if (snakeBody.get(0).intersects(powerList.get(i).getBoundsInParent()) && (!(powerList.get(i).isHit()))) {
@@ -985,7 +984,9 @@ public class ViewManager {
 		pauseList.get(0).setOnMouseReleased(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				System.out.println("save");
+				mainStage.setScene(mainScene);
+				stopMovement();
+				restart();
 			}
 		});
 		
