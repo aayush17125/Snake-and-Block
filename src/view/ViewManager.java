@@ -193,7 +193,7 @@ public class ViewManager {
 			block =new CusRectangle(3,30,36);
 		}
 		else {
-			block=new CusRectangle(4,60,66);
+			block=new CusRectangle(4,30,36);
 		}
 		return block;
 		
@@ -218,7 +218,7 @@ public class ViewManager {
 		else {
 			block.setType(4);
 			block.setFill(new ImagePattern(img4));
-			block.resize(60, 66);
+			block.resize(30, 36);
 		}
 	}
 	private void createObstacleWall(){
