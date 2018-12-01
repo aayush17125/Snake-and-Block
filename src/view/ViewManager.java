@@ -332,8 +332,7 @@ public class ViewManager {
 		time9.stop();
 		time10.stop();
 	}
-	private void removeSnakeBody(Rectangle rectangle)
-	{
+	private void removeSnakeBody(Rectangle rectangle){
 		if(snakeBody.size()>0 && !((numberRectangle) rectangle).isHit()) {
 			((numberRectangle) rectangle).hit();			
 			rectangle.setVisible(false);
@@ -731,21 +730,27 @@ public class ViewManager {
 						if (snakeBody.get(0).intersects(powerList.get(i).getBoundsInParent()) && (!(powerList.get(i).isHit()))) {
 							System.out.println("coll");
 							powerList.get(i).hit();
+							powerList.get(i).setVisible(false);
 							if (powerList.get(i).getType()==1) {
-								System.out.println("type1");
-							}
-							else if (powerList.get(i).getType()==2) {
-								for (int j=0;j<rand_x.nextInt(10);j++) {
-									System.out.println("Type2");
-									powerList.get(i).setVisible(false);
-									createSnakeBody();
+								for (int j=0;j<powerList.size();j++) {
+									if (powerList.get(j).getType()==2) {
+										powerList.get(j).setVisible(false);
+										for (int k=0;k<rand_x.nextInt(15);k++) {
+											createSnakeBody();
+										}
+									}
 								}
 							}
+							else if (powerList.get(i).getType()==2) {
+								for (int j=0;j<rand_x.nextInt(15);j++) {
+									createSnakeBody();
+								}
+								powerList.get(i).setVisible(false);
+							}
 							else if (powerList.get(i).getType()==3) {
-								System.out.println("type3");	
+								System.out.println("BHENCHOD MERI FUNCTIONALITY TERA BAAP DAALEGA :'( ");
 							}
 							else if (powerList.get(i).getType()==4) {
-								System.out.println("type4");
 								for (int j=0;j<6;j++) {
 									numberRectangle rect = (numberRectangle) obstacleWall.get(j);
 									rect.hit();
