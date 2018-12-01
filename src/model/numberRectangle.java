@@ -11,6 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 import java.util.Random;
@@ -62,6 +63,7 @@ public class numberRectangle extends Rectangle {
         label.setMinSize(125, 125);
         label.setMaxSize(125, 125);
         label.setPrefSize(125, 125);
+        label.setFont(new Font(30)); 
         int nextInt = rand_x.nextInt(0xffffff + 1);
         String colorCode = String.format("#%06x", nextInt);
         label.setStyle("-fx-background-color: "+ colorCode+"; -fx-text-fill:#000000;");

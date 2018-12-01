@@ -73,25 +73,27 @@ public class ViewManager {
 	private boolean paused;
 	private boolean firstTime;
 	private CustomRectangle ss;
-	CusRectangle ui;
-	CusRectangle ud;
-	CusRectangle ub;
-	CusRectangle uc;
-	Image img1;
-    Image img2;
-    Image img3;
-    Image img4;
+	private CusRectangle ui;
+	private CusRectangle ud;
+	private CusRectangle ub;
+	private CusRectangle uc;
+	private Image img1;
+	private Image img2;
+	private Image img3;
+	private Image img4;
 	private ListView leaderboard = new ListView();
 	private InfoLabel Help_label=new InfoLabel("1.Use mouse to control the snake\n2.Get through all the obstacles\n3.You can save the game also");
 	private InfoLabel Credit_Label=new InfoLabel("Akhil Jarodia(2017130)\nAayush Gupta(2017125)");
 	private InfoLabel Main_Label=new InfoLabel("----------->\nHey there\nPress the play button to play\n<--------");
-	private SpaceRunnerButton pauseButton=new SpaceRunnerButton("PAUSE");;
-	Leaderboard l = new Leaderboard();
+	private SpaceRunnerButton pauseButton=new SpaceRunnerButton("PAUSE");
+	private Leaderboard l = new Leaderboard();
+	private SpaceRunnerButton resumeMain=new SpaceRunnerButton("RESUME");
 	public ViewManager()
 	{
 		menuButtons=new ArrayList<SpaceRunnerButton>();
 		snakeBody=new ArrayList<CustomCircle>();
 		snakeBody.add(circle);
+		circle.setRadius(radius+5);
 		firstTime = false;
 		powerList = new ArrayList<CusRectangle>();
 		obstacleWall = new ArrayList<Rectangle>();
@@ -165,8 +167,12 @@ public class ViewManager {
         createSnakeBody();
         createSnakeBody();
         createSnakeBody();
-        createSnakeBody();l.addScore(5);	
+        createSnakeBody();	
         refreshLeaderboard();
+        this.mainPane.getChildren().add(resumeMain);
+        resumeMain.setLayoutX(WIDTH-300);
+        this.snakeBody.get(0).setImage();
+        
 	}
 
 	private void refreshLeaderboard() {
@@ -186,6 +192,7 @@ public class ViewManager {
 		int t = rand_x.nextInt(110);
 		if (t<70) {
 			block = new CusRectangle(2,30,30);
+			block.setImage();
 		}
 		else if (t<=85) {
 			block = new CusRectangle(1,19,30);
@@ -286,10 +293,11 @@ public class ViewManager {
 	}
 	private void createSnakeBody()
 	{
-		addSnakeBody(new CustomCircle(WIDTH/2, HEIGHT-200, radius,scene2));
+		addSnakeBody(new CustomCircle(WIDTH/2, HEIGHT-200, radius+5,scene2));
 	}
 	private void addSnakeBody(CustomCircle q)
-	{	if(snakeBody.size()==0)
+	{	
+		if(snakeBody.size()==0)
 		{
 			q.setLayoutX(WIDTH/2);
 			q.setLayoutY(HEIGHT-200+ snakeBody.size()*2*radius);
@@ -297,6 +305,7 @@ public class ViewManager {
 			r2.getChildren().add(q);
 		}
 		else {
+			snakeBody.get(0).incLength();
 			q.setLayoutX(snakeBody.get(snakeBody.size()-1).getLayoutX());
 			q.setLayoutY(snakeBody.get(snakeBody.size()-1).getLayoutY()+2*radius);
 			snakeBody.add(q);
@@ -407,7 +416,8 @@ public class ViewManager {
 	}
 	private void removeSnakeBody(Rectangle rectangle){
 		if(snakeBody.size()>0 && !((numberRectangle) rectangle).isHit()) {
-			((numberRectangle) rectangle).hit();			
+			((numberRectangle) rectangle).hit();	
+			
 			rectangle.setVisible(false);
 			for (int i = 0; i < ((numberRectangle) rectangle).getNum(); i++){
 				if (snakeBody.size()==1 || snakeBody.size()<=0) {
@@ -424,6 +434,7 @@ public class ViewManager {
 					mainStage.setScene(mainScene);
 					break;
 				}
+				
 				removeLastSnake();
 				points++;
 				pointsLabel.setText("POINTS:0"+Integer.toString(points));			
@@ -440,6 +451,7 @@ public class ViewManager {
 	private void removeLastSnake() {
 		for (int i=0;i<r2.getChildren().size();i++) {
 			if (r2.getChildren().get(i)==snakeBody.get(snakeBody.size()-1)) {
+				snakeBody.get(0).decLength(1);
 				r2.getChildren().remove(i);
 				snakeBody.remove(snakeBody.size()-1);
 				break;
