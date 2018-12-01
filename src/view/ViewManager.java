@@ -54,6 +54,7 @@ public class ViewManager {
     private Random rand_x = new Random();
 	private MediaPlayer mediaPlayer;
 	private MediaPlayer bomb;
+	private MediaPlayer coin;
 	private MediaPlayer current;
     private ArrayList <CusRectangle> powerList;
     private ArrayList<SpaceRunnerButton> pauseList=new ArrayList<SpaceRunnerButton>();
@@ -249,11 +250,18 @@ public class ViewManager {
 		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 		mediaPlayer.play();
 	}
+	
 	public void playBomb() {
 		URL rest = getClass().getResource("Bomb.mp3");
 		bomb = new MediaPlayer(new Media(rest.toString()));
 		bomb.setCycleCount(1);
 		bomb.play();
+	}
+	public void playCoin() {
+		URL rest = getClass().getResource("Coin.mp3");
+		coin = new MediaPlayer(new Media(rest.toString()));
+		coin.setCycleCount(1);
+		coin.play();
 	}
 	public void playCurrent() {
 		URL rest = getClass().getResource("Current.mp3");
@@ -864,6 +872,7 @@ public class ViewManager {
 								}
 							}
 							else if (powerList.get(i).getType()==2) {
+								playCoin();
 								for (int j=0;j<rand_x.nextInt(15);j++) {
 									createSnakeBody();
 								}
