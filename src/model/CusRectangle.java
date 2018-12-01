@@ -22,7 +22,6 @@ public class CusRectangle extends Circle {
 	 public void hit()
 	    {
 	        done=true;
-	        point--;
 	    }
 	    public void refresh()
 	    {
@@ -90,14 +89,13 @@ public class CusRectangle extends Circle {
 	public void setType(int type) {
 		this.type = type;
 	}
-	 public void decLength()
+	 public int getLength()
 	    {
-	    	point--;
-	    	setFill(new ImagePattern(textToImage(Integer.toString(point))));
-	    }
-	    public void incLength()
+		 return this.point;
+    	}
+	    public void setLength(int t)
 	    {
-	    	point++;
+	    	point = t;
 	    	setFill(new ImagePattern(textToImage(Integer.toString(point))));
 	    }
 	  public void setImage()
