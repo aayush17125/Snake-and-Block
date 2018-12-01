@@ -10,11 +10,12 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
-public class CusRectangle extends Rectangle {
+public class CusRectangle extends Circle {
     private StackPane st = new StackPane();
     boolean done= false;
     
@@ -49,7 +50,10 @@ public class CusRectangle extends Rectangle {
     
     public CusRectangle(int q,double x,double y)
 //        Rectangle a = new Rectangle(1,2);
-    {   super(x,y);
+    {  
+    	this.setCenterX(x);
+    	this.setCenterY(y);
+    	this.setRadius(20);
 //        setFill(Color.BROWN);
         if(q==1)
         {

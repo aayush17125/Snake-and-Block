@@ -644,40 +644,40 @@ public class ViewManager {
 		time7.setCycleCount(Animation.INDEFINITE);
 		KeyFrame key7 = new KeyFrame(Duration.millis(3100),e->{
 			respawnPower(powerList.get(0));
-			powerList.get(0).setY(0);
+			powerList.get(0).setLayoutY(0);
 			powerList.get(0).refresh();
 			powerList.get(0).setLayoutX(rand_x.nextInt(WIDTH));
-		},new KeyValue(powerList.get(0).yProperty(),HEIGHT));
+		},new KeyValue(powerList.get(0).layoutYProperty(),HEIGHT));
 		time7.getKeyFrames().add(key7);
 
 		time8.setDelay(Duration.millis(450));
 		time8.setCycleCount(Animation.INDEFINITE);
 		KeyFrame key8 = new KeyFrame(Duration.millis(3100),e->{
 			respawnPower(powerList.get(1));
-			powerList.get(1).setY(0);
+			powerList.get(1).setLayoutY(0);;
 			powerList.get(1).refresh();
 			powerList.get(1).setLayoutX(rand_x.nextInt(WIDTH));
-		},new KeyValue(powerList.get(1).yProperty(),HEIGHT));
+		},new KeyValue(powerList.get(1).layoutYProperty(),HEIGHT));
 		time8.getKeyFrames().add(key8);
 
 		time9.setDelay(Duration.millis(450));
 		time9.setCycleCount(Animation.INDEFINITE);
 		KeyFrame key9 = new KeyFrame(Duration.millis(3100),e->{
 			respawnPower(powerList.get(2));
-			powerList.get(2).setY(0);
+			powerList.get(2).setLayoutY(0);
 			powerList.get(2).refresh();
 			powerList.get(2).setLayoutX(rand_x.nextInt(WIDTH));
-		},new KeyValue(powerList.get(2).yProperty(),HEIGHT));
+		},new KeyValue(powerList.get(2).layoutYProperty(),HEIGHT));
 		time9.getKeyFrames().add(key9);
 		
 		time10.setDelay(Duration.millis(450));
 		time10.setCycleCount(Animation.INDEFINITE);
 		KeyFrame key10 = new KeyFrame(Duration.millis(3100),e->{
 			respawnPower(powerList.get(3));
-			powerList.get(3).setY(0);
+			powerList.get(3).setLayoutY(0);
 			powerList.get(3).refresh();
 			powerList.get(3).setLayoutX(rand_x.nextInt(WIDTH));
-		},new KeyValue(powerList.get(3).yProperty(),HEIGHT));
+		},new KeyValue(powerList.get(3).layoutYProperty(),HEIGHT));
 		time10.getKeyFrames().add(key10);
 		startMovement();
 	}
@@ -787,30 +787,30 @@ public class ViewManager {
 		time7.setCycleCount(Animation.INDEFINITE);
 		KeyFrame key7 = new KeyFrame(Duration.millis(3100),e->{
 			respawnPower(powerList.get(0));
-			powerList.get(0).setY(0);
+			powerList.get(0).setLayoutY(0);
 			powerList.get(0).refresh();
 			powerList.get(0).setLayoutX(rand_x.nextInt(WIDTH));
-		},new KeyValue(powerList.get(0).yProperty(),HEIGHT));
+		},new KeyValue(powerList.get(0).layoutYProperty(),HEIGHT));
 		time7.getKeyFrames().add(key7);
 
 		time8.setDelay(Duration.millis(450));
 		time8.setCycleCount(Animation.INDEFINITE);
 		KeyFrame key8 = new KeyFrame(Duration.millis(3100),e->{
 			respawnPower(powerList.get(1));
-			powerList.get(1).setY(0);
+			powerList.get(1).setLayoutY(0);
 			powerList.get(1).refresh();
 			powerList.get(1).setLayoutX(rand_x.nextInt(WIDTH));
-		},new KeyValue(powerList.get(1).yProperty(),HEIGHT));
+		},new KeyValue(powerList.get(1).layoutYProperty(),HEIGHT));
 		time8.getKeyFrames().add(key8);
 
 		time9.setDelay(Duration.millis(450));
 		time9.setCycleCount(Animation.INDEFINITE);
 		KeyFrame key9 = new KeyFrame(Duration.millis(3100),e->{
 			respawnPower(powerList.get(2));
-			powerList.get(2).setY(0);
+			powerList.get(2).setLayoutY(0);
 			powerList.get(2).refresh();
 			powerList.get(2).setLayoutX(rand_x.nextInt(WIDTH));
-		},new KeyValue(powerList.get(2).yProperty(),HEIGHT));
+		},new KeyValue(powerList.get(2).layoutYProperty(),HEIGHT));
 		time9.getKeyFrames().add(key9);
 		startMovement();
 		
@@ -818,10 +818,10 @@ public class ViewManager {
 		time10.setCycleCount(Animation.INDEFINITE);
 		KeyFrame key10 = new KeyFrame(Duration.millis(3100),e->{
 			respawnPower(powerList.get(3));
-			powerList.get(3).setY(0);
+			powerList.get(3).setLayoutY(0);
 			powerList.get(3).refresh();
 			powerList.get(3).setLayoutX(rand_x.nextInt(WIDTH));
-		},new KeyValue(powerList.get(3).yProperty(),HEIGHT));
+		},new KeyValue(powerList.get(3).layoutYProperty(),HEIGHT));
 		time10.getKeyFrames().add(key10);
 		startMovement();
 	}
