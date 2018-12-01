@@ -20,11 +20,14 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
@@ -193,6 +196,7 @@ public class ViewManager {
 		if (t<70) {
 			block = new CusRectangle(2,30,30);
 			block.setImage();
+			block.setLength(rand_x.nextInt(randomNum(15)));
 		}
 		else if (t<=85) {
 			block = new CusRectangle(1,19,30);
@@ -842,7 +846,6 @@ public class ViewManager {
 				}
 			}
 		});
-
 		pauseButton.setOnMouseReleased(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
