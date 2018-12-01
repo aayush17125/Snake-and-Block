@@ -18,11 +18,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
@@ -74,6 +76,10 @@ public class ViewManager {
 	CusRectangle ud;
 	CusRectangle ub;
 	CusRectangle uc;
+	Image img1;
+    Image img2;
+    Image img3;
+    Image img4;
 	private ListView leaderboard = new ListView();
 	private InfoLabel Help_label=new InfoLabel("1.Use mouse to control the snake\n2.Get through all the obstacles\n3.You can save the game also");
 	private InfoLabel Credit_Label=new InfoLabel("Akhil Jarodia(2017130)\nAayush Gupta(2017125)");
@@ -93,6 +99,10 @@ public class ViewManager {
 		pointsLabel=new SmallInfoLabel("POINTS:00");
 		pointsLabel.setLayoutX(850);
 		pointsLabel.setLayoutY(0);
+		img1 = new Image("model/resources/bolt_gold.png");
+		img2 = new Image("model/resources/fruit.png");
+	    img3 = new Image("model/resources/shield_gold.png");
+	    img4 = new Image("model/resources/nuke.png");
 		time0 = new Timeline();
 		time1 = new Timeline();
 		time2 = new Timeline();
@@ -124,10 +134,10 @@ public class ViewManager {
 		mainPane.getChildren().add(ss);
 		scene2.setFill(Color.BLACK);
 		createObstacleWall();
-		ui= new CusRectangle(1,19,30);
-		ub=new CusRectangle(2,30,30);
-		uc =new CusRectangle(3,30,36);
-		ud=new CusRectangle(4,60,66);
+		ui= powerGenerator();
+		ub=powerGenerator();
+		uc =powerGenerator();
+		ud=powerGenerator();
 		ui.setLayoutX(rand_x.nextInt(WIDTH));
 		ui.setLayoutY(0);
 		ub.setLayoutX(rand_x.nextInt(WIDTH));
@@ -170,7 +180,47 @@ public class ViewManager {
 			leaderboard.getItems().add(x);
 		}
 	}
-
+	private CusRectangle powerGenerator() {
+		CusRectangle block= new CusRectangle(1, 0, 0);
+		int t = rand_x.nextInt(110);
+		if (t<70) {
+			block = new CusRectangle(2,30,30);
+		}
+		else if (t<=85) {
+			block = new CusRectangle(1,19,30);
+		}
+		else if (t<=95) {
+			block =new CusRectangle(3,30,36);
+		}
+		else {
+			block=new CusRectangle(4,60,66);
+		}
+		return block;
+		
+	}
+	private void respawnPower(CusRectangle block) {
+		int t = rand_x.nextInt(110);
+		if (t<70) {
+			block.setType(2);
+			block.setFill(new ImagePattern(img2));
+			block.resize(19, 30);
+		}
+		else if (t<=85) {
+			block.setType(1);
+			block.setFill(new ImagePattern(img1));
+			block.resize(30, 30);
+		}
+		else if (t<=95) {
+			block.setType(3);
+			block.setFill(new ImagePattern(img3));
+			block.resize(30, 36);
+		}
+		else {
+			block.setType(4);
+			block.setFill(new ImagePattern(img4));
+			block.resize(60, 66);
+		}
+	}
 	private void createObstacleWall(){
 
 		for (int i=0;i<6;i++){
@@ -437,10 +487,10 @@ public class ViewManager {
 		circle.setOpacity(0.7);//
 		r2.getChildren().add(circle);//
 		obstacleWall = new ArrayList<Rectangle>();
-		ui= new CusRectangle(1,19,30);
-		ub=new CusRectangle(2,30,30);
-		uc =new CusRectangle(3,30,36);
-		ud=new CusRectangle(4,60,66);
+		ui= powerGenerator();
+		ub=powerGenerator();
+		uc =powerGenerator();
+		ud=powerGenerator();
 	    ui.setLayoutX(rand_x.nextInt(WIDTH));
 		ui.setLayoutY(0);
 		ub.setLayoutX(rand_x.nextInt(WIDTH));
@@ -573,6 +623,7 @@ public class ViewManager {
 		time7.setDelay(Duration.millis(450));
 		time7.setCycleCount(Animation.INDEFINITE);
 		KeyFrame key7 = new KeyFrame(Duration.millis(3100),e->{
+			respawnPower(powerList.get(0));
 			powerList.get(0).setY(0);
 			powerList.get(0).refresh();
 			powerList.get(0).setLayoutX(rand_x.nextInt(WIDTH));
@@ -582,6 +633,7 @@ public class ViewManager {
 		time8.setDelay(Duration.millis(450));
 		time8.setCycleCount(Animation.INDEFINITE);
 		KeyFrame key8 = new KeyFrame(Duration.millis(3100),e->{
+			respawnPower(powerList.get(1));
 			powerList.get(1).setY(0);
 			powerList.get(1).refresh();
 			powerList.get(1).setLayoutX(rand_x.nextInt(WIDTH));
@@ -591,6 +643,7 @@ public class ViewManager {
 		time9.setDelay(Duration.millis(450));
 		time9.setCycleCount(Animation.INDEFINITE);
 		KeyFrame key9 = new KeyFrame(Duration.millis(3100),e->{
+			respawnPower(powerList.get(2));
 			powerList.get(2).setY(0);
 			powerList.get(2).refresh();
 			powerList.get(2).setLayoutX(rand_x.nextInt(WIDTH));
@@ -600,6 +653,7 @@ public class ViewManager {
 		time10.setDelay(Duration.millis(450));
 		time10.setCycleCount(Animation.INDEFINITE);
 		KeyFrame key10 = new KeyFrame(Duration.millis(3100),e->{
+			respawnPower(powerList.get(3));
 			powerList.get(3).setY(0);
 			powerList.get(3).refresh();
 			powerList.get(3).setLayoutX(rand_x.nextInt(WIDTH));
@@ -712,6 +766,7 @@ public class ViewManager {
 		time7.setDelay(Duration.millis(450));
 		time7.setCycleCount(Animation.INDEFINITE);
 		KeyFrame key7 = new KeyFrame(Duration.millis(3100),e->{
+			respawnPower(powerList.get(0));
 			powerList.get(0).setY(0);
 			powerList.get(0).refresh();
 			powerList.get(0).setLayoutX(rand_x.nextInt(WIDTH));
@@ -721,6 +776,7 @@ public class ViewManager {
 		time8.setDelay(Duration.millis(450));
 		time8.setCycleCount(Animation.INDEFINITE);
 		KeyFrame key8 = new KeyFrame(Duration.millis(3100),e->{
+			respawnPower(powerList.get(1));
 			powerList.get(1).setY(0);
 			powerList.get(1).refresh();
 			powerList.get(1).setLayoutX(rand_x.nextInt(WIDTH));
@@ -730,6 +786,7 @@ public class ViewManager {
 		time9.setDelay(Duration.millis(450));
 		time9.setCycleCount(Animation.INDEFINITE);
 		KeyFrame key9 = new KeyFrame(Duration.millis(3100),e->{
+			respawnPower(powerList.get(2));
 			powerList.get(2).setY(0);
 			powerList.get(2).refresh();
 			powerList.get(2).setLayoutX(rand_x.nextInt(WIDTH));
@@ -740,6 +797,7 @@ public class ViewManager {
 		time10.setDelay(Duration.millis(450));
 		time10.setCycleCount(Animation.INDEFINITE);
 		KeyFrame key10 = new KeyFrame(Duration.millis(3100),e->{
+			respawnPower(powerList.get(3));
 			powerList.get(3).setY(0);
 			powerList.get(3).refresh();
 			powerList.get(3).setLayoutX(rand_x.nextInt(WIDTH));
