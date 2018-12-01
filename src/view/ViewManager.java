@@ -35,7 +35,7 @@ public class ViewManager {
 	private static final int WIDTH = 1024;
 	private static final int START_X = 100;
 	private static final int START_Y = 150;
-	private static final int radius=10;
+	private static final int radius=15;
 	AnimationTimer gameTimer;
 	private SmallInfoLabel pointsLabel;
 	private int points;
@@ -93,7 +93,7 @@ public class ViewManager {
 		menuButtons=new ArrayList<SpaceRunnerButton>();
 		snakeBody=new ArrayList<CustomCircle>();
 		snakeBody.add(circle);
-		circle.setRadius(radius+5);
+		circle.setRadius(radius);
 		firstTime = false;
 		powerList = new ArrayList<CusRectangle>();
 		obstacleWall = new ArrayList<Rectangle>();
@@ -293,7 +293,7 @@ public class ViewManager {
 	}
 	private void createSnakeBody()
 	{
-		addSnakeBody(new CustomCircle(WIDTH/2, HEIGHT-200, radius+5,scene2));
+		addSnakeBody(new CustomCircle(WIDTH/2, HEIGHT-200, radius,scene2));
 	}
 	private void addSnakeBody(CustomCircle q)
 	{	

@@ -107,7 +107,6 @@ public class CusRectangle extends Rectangle {
 	        label.setMinSize(125, 125);
 	        label.setMaxSize(125,125);
 	        label.setPrefSize(125, 125);
-	        label.setStyle("-fx-shape:M150 0 L75 200 L225 200 Z;");
 	        label.setWrapText(true);
 	        label.setFont(new Font(100)); 
 	        Scene scene = new Scene(new Group(label));
