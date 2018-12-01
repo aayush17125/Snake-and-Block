@@ -50,6 +50,8 @@ public class ViewManager {
 	private CustomCircle circle=new CustomCircle(WIDTH/2, HEIGHT-200, radius,scene2);
     private Random rand_x = new Random();
 	private MediaPlayer mediaPlayer;
+	private MediaPlayer bomb;
+	private MediaPlayer current;
     private ArrayList <CusRectangle> powerList;
     private ArrayList<SpaceRunnerButton> pauseList=new ArrayList<SpaceRunnerButton>();
 	private static final int KEYBOARD_MOVEMENT_DELTA = 12;
@@ -195,6 +197,18 @@ public class ViewManager {
 		mediaPlayer = new MediaPlayer(new Media(res.toString()));
 		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 		mediaPlayer.play();
+	}
+	public void playBomb() {
+		URL rest = getClass().getResource("Bomb.mp3");
+		bomb = new MediaPlayer(new Media(rest.toString()));
+		bomb.setCycleCount(1);
+		bomb.play();
+	}
+	public void playCurrent() {
+		URL rest = getClass().getResource("Current.mp3");
+		current = new MediaPlayer(new Media(rest.toString()));
+		current.setCycleCount(1);
+		current.play();
 	}
 	public Stage getMainStage()
 	{
@@ -732,6 +746,7 @@ public class ViewManager {
 							powerList.get(i).hit();
 							powerList.get(i).setVisible(false);
 							if (powerList.get(i).getType()==1) {
+								playCurrent();
 								for (int j=0;j<powerList.size();j++) {
 									if (powerList.get(j).getType()==2) {
 										powerList.get(j).setVisible(false);
@@ -751,6 +766,7 @@ public class ViewManager {
 								System.out.println("BHENCHOD MERI FUNCTIONALITY TERA BAAP DAALEGA :'( ");
 							}
 							else if (powerList.get(i).getType()==4) {
+								playBomb();
 								for (int j=0;j<6;j++) {
 									numberRectangle rect = (numberRectangle) obstacleWall.get(j);
 									rect.hit();
