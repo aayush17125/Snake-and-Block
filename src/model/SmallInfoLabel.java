@@ -36,6 +36,9 @@ public class SmallInfoLabel extends Label {
         setText(text);
 
     }
+    /**
+     * sets the font on label
+     */
     private void setLabelFont()
     {   try {
 

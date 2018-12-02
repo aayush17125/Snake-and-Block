@@ -15,8 +15,17 @@ import javafx.scene.text.Font;
  *
  */
 public class SpaceRunnerButton extends Button{
+	/**
+	 * Path to the font used 
+	 */
 	private final String FONT_PATH="src/model/resources/kenvector_future.ttf";
+	/**
+	 * css for button pressed
+	 */
 	private final String Butpress="-fx-background-color:transparent;-fx-background-image:url('/model/resources/yellow_button01.png');";
+	/**
+	 * css for button not pressed
+	 */
 	private final String but="-fx-background-color:transparent;-fx-background-image:url('/model/resources/yellow_button00.png');";
 	/**
 	 * Constructor is used to set the text on the button,set font,width,height,style and event listeners
@@ -32,7 +41,9 @@ public class SpaceRunnerButton extends Button{
 		initialiseButtonListeners();
 		
 	}
-	
+	/**
+	 * set the font of the button
+	 */
 	private void setButtonFont()
 	{
 		try {
@@ -43,7 +54,9 @@ public class SpaceRunnerButton extends Button{
 		}
 		
 	}
-	
+	/**
+	 * Set the transition and animation in button
+	 */
 	private void setButtonPressedStyle()
 	{
 		setStyle(Butpress);
@@ -51,7 +64,9 @@ public class SpaceRunnerButton extends Button{
 //		setLayoutY(getLayoutY()+4);
 		
 	}
-	
+	/**
+	 * Set the transition and animation in button
+	 */
 	private void setButtonReleasedStyle()
 	{
 		setStyle(but);
@@ -59,7 +74,9 @@ public class SpaceRunnerButton extends Button{
 //		setLayoutY(getLayoutY()-4);
 		
 	}
-
+	/**
+	 * Set the event handlers
+	 */
 	private void initialiseButtonListeners() {
 		setOnMousePressed(new EventHandler<MouseEvent>() {
 
