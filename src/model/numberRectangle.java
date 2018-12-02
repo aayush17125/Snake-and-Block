@@ -15,11 +15,23 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 import java.util.Random;
-
+/**
+ * This class is used to make custom rectangle for the bricks
+ * THis class extends rectangle class
+ * @author Akhil and aayush
+ *
+ */
 public class numberRectangle extends Rectangle {
     private int num=0;
     private boolean done;
-
+    /**
+     * It initialises the rectangle super class and customise it's stroke and set number on top of it
+     * @param x X coordinate of the rectangle
+     * @param y Y coordinate of the rectangle
+     * @param width Width of the rectangle required
+     * @param height Height of the rectangle
+     * @param number Number which is needed on that brick
+     */
     public numberRectangle(float x, float y, float width, float height, int number)
     {
 
@@ -33,25 +45,43 @@ public class numberRectangle extends Rectangle {
         setFill(new ImagePattern(textToImage(Integer.toString(number))));
 
     }
+    /**
+     * It returns the point on that brick
+     * @return the point needed to break that block
+     */
     public int getNum()
     {
         return num;
     }
+    /**
+     * It is used to set the number of that brick
+     * @param number the num which the user wishes on the brick
+     */
     public void setNum(int number)
     {
         num=number;
         setFill(new ImagePattern(textToImage(Integer.toString(num))));
     }
+    /**
+     * Called when the block hits the snake
+     */
     public void hit()
     {
         done=true;
     }
+    /**
+     * It reinitializes the various param of the rectangle that are required in every cycle
+     */
     public void refresh()
     {
         done=false;
         setVisible(true);
 
     }
+    /**
+     * Gives the status whether the block is hitted or not
+     * @return true or false denoting whether it is hit or not
+     */
     public boolean isHit()
     {
         return done;
