@@ -9,9 +9,21 @@ import java.util.ArrayList;
 public class Game implements Serializable {
 	
 	private static final long serialVersionUID = 7244301249917304921L;
+	/**
+	 * Keeps track of the score of the game
+	 */
 	private int score;
+	/**
+	 * Keeps track of the length of the snake
+	 */
 	private int snakeLen;
+	/**
+	 * {@link ArrayList} which keeps track of the position of all obstacleWalls and powers
+	 */
 	private ArrayList<Double> posY;
+	/**
+	 * ArrayList which keeps track of the value of obstacle walls, value of tokens and powerType
+	 */
 	private ArrayList<Integer> blockVal;
 	/**
 	 * This constructor initialize the value of score 
