@@ -428,7 +428,7 @@ public class ViewManager {
 				}
 				else if (points>400) {
 					DELL = 6;
-					wallPointHandler = 25;
+					wallPointHandler = 30;
 				}
 				pointsLabel.setText("POINTS:0"+Integer.toString(points));			
 		}
@@ -793,7 +793,6 @@ public class ViewManager {
 				}
 				try {
 					if (snakeBody.get(0).intersects(obstacleWall.get(6).getBoundsInParent())) {
-	//					System.out.println("HN BSDK");
 					}
 				}catch (Exception e) {
 					// TODO: handle exception
@@ -801,7 +800,6 @@ public class ViewManager {
 				for (int i=0;i<powerList.size();i++) {
 					try {
 						if (snakeBody.get(0).intersects(powerList.get(i).getBoundsInParent()) && (!(powerList.get(i).isHit()))) {
-							System.out.println("coll");
 							powerList.get(i).hit();
 							powerList.get(i).setVisible(false);
 							if (powerList.get(i).getType()==1) {
@@ -835,7 +833,6 @@ public class ViewManager {
 					}catch (Exception e) {
 						// TODO: handle exception
 						stop();
-						System.out.println(e.getStackTrace());
 					}
 				}
 				if(System.currentTimeMillis()-createdMillis<=5000){
