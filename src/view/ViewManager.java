@@ -1319,18 +1319,14 @@ public class ViewManager {
 //		System.out.println(dist+" hello");
 		double dist=obstacleWall.get(6).getX()-snakeBody.get(0).getCenterX();
 //		System.out.println(dist+" "+obstacleWall.get(6).getY()+" "+snakeBody.get(0).getCenterY());
-		if(obstacleWall.get(6).getY()>=500 ) {
-		if(dist<0 && dist>-15 )
+		if(dist>0)
 		{
-			
-		return 1;	
+			return 1;//left ja skte h
 		}
-		else if(dist>0 && dist<15)
+		else
 		{
-		return 2;	
+			return 2;// right
 		}
-	}
-		return 0;
 	}
 	/**
 	 * Set all the animation and call various other objects
@@ -1456,19 +1452,36 @@ public class ViewManager {
             @Override
             public void handle(KeyEvent event) {
             	int moveres=shouldMove();
-                if(event.getCode()==KeyCode.RIGHT) {
-                    if (snakeBody.get(0).getCenterX() < WIDTH-10 && (snakeBody.get(0).getCenterX()+KEYBOARD_MOVEMENT_DELTA<obstacleWall.get(6).getX())) {
-                    	
-						snakeBody.get(0).setCenterX(snakeBody.get(0).getCenterX() + KEYBOARD_MOVEMENT_DELTA);
-					}
-					
-                }
-                if(event.getCode()==KeyCode.LEFT){
-					if (snakeBody.get(0).getCenterX() > 10 && (snakeBody.get(0).getCenterX()-KEYBOARD_MOVEMENT_DELTA>obstacleWall.get(6).getX())) {
-						snakeBody.get(0).setCenterX(snakeBody.get(0).getCenterX() - KEYBOARD_MOVEMENT_DELTA);
-					}
-                    
-                }
+//                if(event.getCode()==KeyCode.RIGHT) {
+//                    if (snakeBody.get(0).getCenterX() < WIDTH-10 && (snakeBody.get(0).getCenterX()+KEYBOARD_MOVEMENT_DELTA<obstacleWall.get(6).getX())) {
+//                    	if(obstacleWall.get(6).getY()<=500)
+//						snakeBody.get(0).setCenterX(snakeBody.get(0).getCenterX() + KEYBOARD_MOVEMENT_DELTA);
+//					}
+//					
+//                }
+//                if(event.getCode()==KeyCode.LEFT){
+//					if (snakeBody.get(0).getCenterX() > 10 && (snakeBody.get(0).getCenterX()-KEYBOARD_MOVEMENT_DELTA>obstacleWall.get(6).getX())) {
+//						if(obstacleWall.get(6).getY()<=500)
+//						snakeBody.get(0).setCenterX(snakeBody.get(0).getCenterX() - KEYBOARD_MOVEMENT_DELTA);
+//					}
+//                    
+//                }
+            	  if(event.getCode()==KeyCode.RIGHT) {
+                      if (snakeBody.get(0).getCenterX() < WIDTH-10 ) {
+//                    	  if((snakeBody.get(0).getCenterX()+KEYBOARD_MOVEMENT_DELTA)<obstacleWall.get(6).getX()) {
+                    	  if (!snakeBody.get(0).intersects(obstacleWall.get(6).getBoundsInParent()) || shouldMove()==2) {
+                     snakeBody.get(0).setCenterX(snakeBody.get(0).getCenterX() + KEYBOARD_MOVEMENT_DELTA);}
+  					}
+  					
+                  }
+                  if(event.getCode()==KeyCode.LEFT){
+  					if (snakeBody.get(0).getCenterX() > 10 ) {
+//  						if((snakeBody.get(0).getCenterX()-KEYBOARD_MOVEMENT_DELTA)>obstacleWall.get(6).getX()) {
+  						if (!snakeBody.get(0).intersects(obstacleWall.get(6).getBoundsInParent())|| shouldMove()==1) {
+  						snakeBody.get(0).setCenterX(snakeBody.get(0).getCenterX() - KEYBOARD_MOVEMENT_DELTA);}
+  					}
+                      
+                  }
                 if(event.getCode()==KeyCode.P) {System.out.println("helloworl");
                 	savepng(scene2);
                 }
