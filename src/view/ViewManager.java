@@ -208,15 +208,15 @@ public class ViewManager {
 	}
 	private void respawnPower(CusRectangle block) {
 		int t = rand_x.nextInt(110);
-		if (t<70) {
+		if (t<80) {
 			block.setType(2);
 			block.setLength(randomNum(10));
 		}
-		else if (t<=85) {
+		else if (t<=90) {
 			block.setType(1);
 			block.setFill(new ImagePattern(img1));
 		}
-		else if (t<=95) {
+		else if (t<=100) {
 			block.setType(3);
 			block.setFill(new ImagePattern(img3));
 		}
@@ -576,10 +576,18 @@ public class ViewManager {
 		time0.setDelay(Duration.millis(450));
 		time0.setCycleCount(Animation.INDEFINITE);
 		KeyFrame key0 = new KeyFrame(Duration.millis(20),e->{
+			int random_i=0;
 			for (int i=0;i<6;i++) {
 				obstacleWall.get(i).setY(obstacleWall.get(i).getY()+DELL);
 				if (obstacleWall.get(i).getY()>=HEIGHT) {
+					if (i==0) {
+						random_i = rand_x.nextInt(5);
+					}
 					obstacleWall.get(i).setY(-200);
+					((numberRectangle) obstacleWall.get(random_i)).setNum(rand_x.nextInt(snakeBody.size()));
+					if (((numberRectangle) obstacleWall.get(random_i)).getNum()==0) {
+						((numberRectangle) obstacleWall.get(random_i)).setNum(1);
+					}
 					numberRectangle temp = (numberRectangle) obstacleWall.get(i);
 					temp.setNum(randomNum(wallPointHandler));
 					temp.refresh();
@@ -587,7 +595,6 @@ public class ViewManager {
 			}
 		});
 		time0.getKeyFrames().add(key0);
-
 		time1.setCycleCount(Animation.INDEFINITE);
 		KeyFrame key1 = new KeyFrame(Duration.millis(20),e->{
 			obstacleWall.get(6).setY(obstacleWall.get(6).getY()+DELL);
@@ -603,32 +610,35 @@ public class ViewManager {
 		});
 		time1.getKeyFrames().add(key1);
 
-
 		time2.setDelay(Duration.millis(20));
 		time2.setCycleCount(Animation.INDEFINITE);
 		KeyFrame key2 = new KeyFrame(Duration.millis(20),e->{
-			for (int i=0;i<powerList.size();i++) {
-				powerList.get(i).setCenterY(powerList.get(i).getCenterY()+DELL);
-				if (powerList.get(i).getType()==2) {
-					if (powerList.get(i).getCenterY()>=HEIGHT-500 && magnetActivated) {
-						double diff = powerList.get(i).getCenterX()-snakeBody.get(0).getCenterX();
-						if (diff<50 && diff>-50) {
-							powerList.get(i).setCenterX(snakeBody.get(0).getCenterX());
-						}
-						if (diff>0) {
-							powerList.get(i).setCenterX(powerList.get(i).getCenterX()-5);
-						}
-						else {
-							powerList.get(i).setCenterX(powerList.get(i).getCenterX()+5);
+			try {
+				for (int i=0;i<powerList.size();i++) {
+					if (powerList.get(i).getType()==2) {
+						if (powerList.get(i).getCenterY()>=HEIGHT-500 && magnetActivated) {
+							double diff = powerList.get(i).getCenterX()-snakeBody.get(0).getCenterX();
+							if (diff<50 && diff>-50) {
+								powerList.get(i).setCenterX(snakeBody.get(0).getCenterX());
+							}
+							if (diff>0) {
+								powerList.get(i).setCenterX(powerList.get(i).getCenterX()-5);
+							}
+							else {
+								powerList.get(i).setCenterX(powerList.get(i).getCenterX()+5);
+							}
 						}
 					}
+					powerList.get(i).setCenterY(powerList.get(i).getCenterY()+DELL);
+					if (powerList.get(i).getCenterY()>=HEIGHT) {
+						respawnPower(powerList.get(i));
+						powerList.get(i).setCenterY(-200);
+						powerList.get(i).refresh();
+						powerList.get(i).setCenterX(rand_x.nextInt(WIDTH));
+					}
 				}
-				if (powerList.get(i).getCenterY()>=HEIGHT) {
-					respawnPower(powerList.get(i));
-					powerList.get(i).setCenterY(-200);
-					powerList.get(i).refresh();
-					powerList.get(i).setCenterX(rand_x.nextInt(WIDTH));
-				}
+			}catch (Exception qwe) {
+				// TODO: handle exception
 			}
 		});
 		time2.getKeyFrames().add(key2);
@@ -697,10 +707,18 @@ public class ViewManager {
 		time0.setDelay(Duration.millis(450));
 		time0.setCycleCount(Animation.INDEFINITE);
 		KeyFrame key0 = new KeyFrame(Duration.millis(20),e->{
+			int random_i=0;
 			for (int i=0;i<6;i++) {
 				obstacleWall.get(i).setY(obstacleWall.get(i).getY()+DELL);
 				if (obstacleWall.get(i).getY()>=HEIGHT) {
+					if (i==0) {
+						random_i = rand_x.nextInt(5);
+					}
 					obstacleWall.get(i).setY(-200);
+					((numberRectangle) obstacleWall.get(random_i)).setNum(rand_x.nextInt(snakeBody.size()));
+					if (((numberRectangle) obstacleWall.get(random_i)).getNum()==0) {
+						((numberRectangle) obstacleWall.get(random_i)).setNum(1);
+					}
 					numberRectangle temp = (numberRectangle) obstacleWall.get(i);
 					temp.setNum(randomNum(wallPointHandler));
 					temp.refresh();
@@ -708,7 +726,6 @@ public class ViewManager {
 			}
 		});
 		time0.getKeyFrames().add(key0);
-
 		time1.setCycleCount(Animation.INDEFINITE);
 		KeyFrame key1 = new KeyFrame(Duration.millis(20),e->{
 			obstacleWall.get(6).setY(obstacleWall.get(6).getY()+DELL);
@@ -723,33 +740,36 @@ public class ViewManager {
 			}
 		});
 		time1.getKeyFrames().add(key1);
-
-
+		
 		time2.setDelay(Duration.millis(20));
 		time2.setCycleCount(Animation.INDEFINITE);
 		KeyFrame key2 = new KeyFrame(Duration.millis(20),e->{
-			for (int i=0;i<powerList.size();i++) {
-				if (powerList.get(i).getType()==2) {
-					if (powerList.get(i).getCenterY()>=HEIGHT-500 && magnetActivated) {
-						double diff = powerList.get(i).getCenterX()-snakeBody.get(0).getCenterX();
-						if (diff<50 && diff>-50) {
-							powerList.get(i).setCenterX(snakeBody.get(0).getCenterX());
-						}
-						if (diff>0) {
-							powerList.get(i).setCenterX(powerList.get(i).getCenterX()-5);
-						}
-						else {
-							powerList.get(i).setCenterX(powerList.get(i).getCenterX()+5);
+			try {
+				for (int i=0;i<powerList.size();i++) {
+					if (powerList.get(i).getType()==2) {
+						if (powerList.get(i).getCenterY()>=HEIGHT-500 && magnetActivated) {
+							double diff = powerList.get(i).getCenterX()-snakeBody.get(0).getCenterX();
+							if (diff<50 && diff>-50) {
+								powerList.get(i).setCenterX(snakeBody.get(0).getCenterX());
+							}
+							if (diff>0) {
+								powerList.get(i).setCenterX(powerList.get(i).getCenterX()-5);
+							}
+							else {
+								powerList.get(i).setCenterX(powerList.get(i).getCenterX()+5);
+							}
 						}
 					}
+					powerList.get(i).setCenterY(powerList.get(i).getCenterY()+DELL);
+					if (powerList.get(i).getCenterY()>=HEIGHT) {
+						respawnPower(powerList.get(i));
+						powerList.get(i).setCenterY(-200);
+						powerList.get(i).refresh();
+						powerList.get(i).setCenterX(rand_x.nextInt(WIDTH));
+					}
 				}
-				powerList.get(i).setCenterY(powerList.get(i).getCenterY()+DELL);
-				if (powerList.get(i).getCenterY()>=HEIGHT) {
-					respawnPower(powerList.get(i));
-					powerList.get(i).setCenterY(-200);
-					powerList.get(i).refresh();
-					powerList.get(i).setCenterX(rand_x.nextInt(WIDTH));
-				}
+			}catch (Exception qwer) {
+				// TODO: handle exception
 			}
 		});
 		time2.getKeyFrames().add(key2);
