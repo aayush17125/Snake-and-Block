@@ -1,7 +1,10 @@
 package view;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -9,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 import javax.imageio.ImageIO;
-
 import backend.Game;
 import backend.Leaderboard;
 import javafx.animation.*;
@@ -43,10 +45,11 @@ import model.*;
  *
  */
 public class ViewManager {
+
 	private static final int HEIGHT = 720;
 	private static final int WIDTH = 1024;
 	private static final int START_X = 100;
-	private static final int START_Y = 150;
+	private static final int START_Y = 160;
 	private double DELL = 4.6 ;
 	private int wallPointHandler;
 	private static final int radius=15;
@@ -92,21 +95,21 @@ public class ViewManager {
 	private Image img3;
 	private Image img4;
 	private ListView leaderboard = new ListView();
-	private InfoLabel Help_label=new InfoLabel("1.Use mouse to control the snake\n2.Get through all the obstacles\n3.You can save the game also");
+	private InfoLabel Help_label=new InfoLabel("1.Use arrow keys to control the snake\n2.Get through all the obstacles\n3.You can save the game from pause menu\n4. Press P to save a screen shot");
 	private InfoLabel Credit_Label=new InfoLabel("Akhil Jarodia(2017130)\nAayush Gupta(2017125)");
 	private InfoLabel Main_Label=new InfoLabel("----------->\nHey there\nPress the play button to play\n<--------");
 	private SpaceRunnerButton pauseButton=new SpaceRunnerButton("PAUSE");
 	private Leaderboard l = new Leaderboard();
-	private SpaceRunnerButton resumeMain=new SpaceRunnerButton("RESUME");
+	private SpaceRunnerButton resumeMain= new SpaceRunnerButton("RESUME");
 //	Date startDate;
 	long createdMillis;
 	long magnetmillis;
 	long blastmillis;
 	ImageView blast=new ImageView("view/resources/blast.gif");
-	Game scoregame=new Game();
 	/**
 	 * It initialises all the GUI component of the game,it's database and all the event listeners
 	 */
+	static Game scoregame=new Game();
 	public ViewManager()
 	{
 		menuButtons=new ArrayList<SpaceRunnerButton>();
@@ -172,7 +175,6 @@ public class ViewManager {
 		pauseButton.setLayoutY(0);
 		r2.getChildren().add(pauseButton);
 		r2.getChildren().add(pointsLabel);
-//		points = 0;
 		createSnakeBody();
         createSnakeBody();
         createSnakeBody();
@@ -183,16 +185,17 @@ public class ViewManager {
         createSnakeBody();	
         refreshLeaderboard();
         this.mainPane.getChildren().add(resumeMain);
-        resumeMain.setLayoutX(WIDTH-300);
+        resumeMain.setLayoutX(START_X);
+        resumeMain.setLayoutY(START_Y-100);
         this.snakeBody.get(0).setImage();
-       addblast();
+        addblast();
        
 	}
 
 	private void addblast() {
 		// TODO Auto-generated method stub
-		 blast.setFitHeight(80);
-	        blast.setFitWidth(100);
+		 blast.setFitHeight(100);
+	        blast.setFitWidth(WIDTH/6);
 	        r2.getChildren().add(blast);
 	        blast.setVisible(false);
 	}
@@ -207,6 +210,16 @@ public class ViewManager {
 		{
 			leaderboard.getItems().add(x);
 		}
+	}
+	public static void serialize() throws IOException {
+		ObjectOutputStream out = null;
+		try {
+			out = new ObjectOutputStream(new FileOutputStream("score.txt"));
+			out.writeObject(scoregame.getScore());
+		}finally {
+			out.close();
+		}
+
 	}
 	private CusRectangle powerGenerator() {
 		CusRectangle block= new CusRectangle(1, 0, 0);
@@ -477,7 +490,7 @@ public class ViewManager {
 					DELL = 6;
 					wallPointHandler = 30;
 				}
-				pointsLabel.setText("POINTS:0"+Integer.toString(scoregame.getScore()));			
+				pointsLabel.setText("POINTS:"+Integer.toString(scoregame.getScore()));			
 		}
 	}
 	private int randomNum(int q) {
@@ -607,7 +620,7 @@ public class ViewManager {
         createSnakeBody();
         createSnakeBody();
 //        points=0;
-        pointsLabel.setText("POINTS:0"+Integer.toString(scoregame.getScore()));
+        pointsLabel.setText("POINTS:"+Integer.toString(scoregame.getScore()));
 		initialiseButtonListeners();
         refreshLeaderboard();
 		paused = true;
@@ -874,8 +887,8 @@ public class ViewManager {
 					try {
 						if (snakeBody.get(0).intersects(obstacleWall.get(i).getBoundsInParent())){
 							removeSnakeBody(obstacleWall.get(i));
-							blast.setLayoutX(snakeBody.get(0).getCenterX()-radius-radius);
-							blast.setLayoutY(snakeBody.get(0).getCenterY()-200);
+							blast.setLayoutX(obstacleWall.get(i).getX());
+							blast.setLayoutY(obstacleWall.get(i).getY());
 							
 						}
 						
@@ -920,7 +933,8 @@ public class ViewManager {
 									blastmillis=System.currentTimeMillis();
 									scoregame.setScore(scoregame.getScore()+rect.getNum());
 //									points += rect.getNum();
-									pointsLabel.setText("POINTS:"+Integer.toString(rect.getNum()));
+									scoregame.setScore(scoregame.getScore()+rect.getNum());
+									pointsLabel.setText("POINTS:"+Integer.toString(scoregame.getScore()));
 								}
 								
 							}
@@ -941,7 +955,7 @@ public class ViewManager {
 				}
 				if(System.currentTimeMillis()-blastmillis<5000)
 				{
-					blast.setLayoutY(blast.getLayoutY()+7);
+					blast.setLayoutY(blast.getLayoutY()+DELL-0.5);
 				}
 				else
 				{
@@ -1040,4 +1054,3 @@ public class ViewManager {
 	
 	}
 	
-
