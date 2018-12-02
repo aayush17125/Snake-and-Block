@@ -42,7 +42,8 @@ public class ViewManager {
 	private static final int WIDTH = 1024;
 	private static final int START_X = 100;
 	private static final int START_Y = 150;
-	private static final double DELL = 4.6 ;
+	private double DELL = 4.6 ;
+	private int wallPointHandler;
 	private static final int radius=15;
 	AnimationTimer gameTimer;
 	private SmallInfoLabel pointsLabel;
@@ -117,7 +118,7 @@ public class ViewManager {
 		time1 = new Timeline();
 		time2 = new Timeline();
 		snakeMov = new Timeline();
-//		timeSnake = new Tim
+		wallPointHandler = 20;
 		mainStage =new Stage();
 		mainStage.setScene(mainScene);
 		paused = true;
@@ -398,7 +399,6 @@ public class ViewManager {
 				}
 			}
 			
-//			for (int i = 0; i < ((numberRectangle) rectangle).getNum(); i++){
 				if (snakeBody.size()==1 && !(gameover)) {
 					System.out.println("Game Over");
 					gameover = true;
@@ -415,13 +415,22 @@ public class ViewManager {
 					stopMovement();
 					mediaPlayer.stop();
 					mainStage.setScene(mainScene);
-//					break;
-				}
-				
+				}				
 				removeLastSnake();
 				points++;
+				if (points>=100) {
+					DELL = 5;
+					wallPointHandler = 22;
+				}
+				else if (points>=250) {
+					DELL = 5.5;
+					wallPointHandler = 25;
+				}
+				else if (points>400) {
+					DELL = 6;
+					wallPointHandler = 25;
+				}
 				pointsLabel.setText("POINTS:0"+Integer.toString(points));			
-//			}
 		}
 	}
 	private int randomNum(int q) {
@@ -553,7 +562,7 @@ public class ViewManager {
 				if (obstacleWall.get(i).getY()>=HEIGHT) {
 					obstacleWall.get(i).setY(-200);
 					numberRectangle temp = (numberRectangle) obstacleWall.get(i);
-					temp.setNum(randomNum(20));
+					temp.setNum(randomNum(wallPointHandler));
 					temp.refresh();
 				}
 			}
@@ -674,7 +683,7 @@ public class ViewManager {
 				if (obstacleWall.get(i).getY()>=HEIGHT) {
 					obstacleWall.get(i).setY(-200);
 					numberRectangle temp = (numberRectangle) obstacleWall.get(i);
-					temp.setNum(randomNum(20));
+					temp.setNum(randomNum(wallPointHandler));
 					temp.refresh();
 				}
 			}
