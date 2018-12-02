@@ -45,23 +45,73 @@ import model.*;
  *
  */
 public class ViewManager {
-
+	/**
+	 * Height of scene
+	 */
 	private static final int HEIGHT = 720;
+	/**
+	 * Width of scene
+	 */
 	private static final int WIDTH = 1024;
+	/**
+	 * Starting point of snake x
+	 */
 	private static final int START_X = 100;
+	/**
+	 * start point of snake y
+	 */
 	private static final int START_Y = 160;
+	/**
+	 * Keyboard delta used for changing snake speed
+	 */
 	private double DELL = 4.6 ;
+	/**
+	 * handles the wall points 
+	 */
 	private int wallPointHandler;
+	/**
+	 * Defines the radius of snake
+	 */
 	private static final int radius=15;
+	/**
+	 * AnimationTimer object used for animations
+	 */
 	AnimationTimer gameTimer;
+	/**
+	 * Label for score
+	 */
 	private SmallInfoLabel pointsLabel;
+	/**
+	 * local variable for storing game score
+	 */
 	private int points;
+	/**
+	 * checks whether game is over or not
+	 */
 	private boolean gameover; 
+	/**
+	 * Main menu pane
+	 */
 	private AnchorPane mainPane;
+	/**
+	 * Pause menu pane
+	 */
 	private AnchorPane pausePane=new AnchorPane();
+	/**
+	 * Pause Scene used for making pause screen
+	 */
 	private Scene pauseScene=new Scene(pausePane,WIDTH,HEIGHT);
+	/**
+	 * Main menu scene
+	 */
 	private Scene mainScene;
+	/**
+	 * stage where scene are played
+	 */
 	private Stage mainStage;
+	/**
+	 * list where menuButtons are stored
+	 */
 	private ArrayList<SpaceRunnerButton> menuButtons;
 	private ArrayList<Rectangle> obstacleWall ;
 	private Group r = new Group();
@@ -106,10 +156,11 @@ public class ViewManager {
 	long magnetmillis;
 	long blastmillis;
 	ImageView blast=new ImageView("view/resources/blast.gif");
+	
+	static Game scoregame=new Game();
 	/**
 	 * It initialises all the GUI component of the game,it's database and all the event listeners
 	 */
-	static Game scoregame=new Game();
 	public ViewManager()
 	{
 		menuButtons=new ArrayList<SpaceRunnerButton>();
@@ -724,11 +775,11 @@ public class ViewManager {
 		if(dist<0 && dist>-15 )
 		{
 			
-		return 2;	
+		return 1;	
 		}
 		else if(dist>0 && dist<15)
 		{
-		return 1;	
+		return 2;	
 		}
 	}
 		return 0;
