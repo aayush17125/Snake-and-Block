@@ -6,15 +6,9 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
-
 import javax.imageio.ImageIO;
-
-import com.sun.jndi.cosnaming.CNNameParser;
-
 import backend.Leaderboard;
 import javafx.animation.*;
 import javafx.embed.swing.SwingFXUtils;
@@ -37,7 +31,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
