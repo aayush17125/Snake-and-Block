@@ -1,6 +1,12 @@
 package model;
 
 
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -90,5 +96,6 @@ public class CusRectangle extends Circle {
 	        scene.snapshot(img);
 	        return img ;
 	    }
+	 
 
 }
