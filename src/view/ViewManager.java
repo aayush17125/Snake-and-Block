@@ -1,10 +1,7 @@
 package view;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -12,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 import javax.imageio.ImageIO;
+
 import backend.Game;
 import backend.Leaderboard;
 import javafx.animation.*;
@@ -40,12 +38,11 @@ import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import model.*;
 
-public class ViewManager implements Serializable{
-	private static final long serialVersionUID = 1L;
+public class ViewManager {
 	private static final int HEIGHT = 720;
 	private static final int WIDTH = 1024;
 	private static final int START_X = 100;
-	private static final int START_Y = 160;
+	private static final int START_Y = 150;
 	private double DELL = 4.6 ;
 	private int wallPointHandler;
 	private static final int radius=15;
@@ -91,12 +88,12 @@ public class ViewManager implements Serializable{
 	private Image img3;
 	private Image img4;
 	private ListView leaderboard = new ListView();
-	private InfoLabel Help_label=new InfoLabel("1.Use arrow keys to control the snake\n2.Get through all the obstacles\n3.You can save the game from pause menu\n4. Press P to save a screen shot");
+	private InfoLabel Help_label=new InfoLabel("1.Use mouse to control the snake\n2.Get through all the obstacles\n3.You can save the game also");
 	private InfoLabel Credit_Label=new InfoLabel("Akhil Jarodia(2017130)\nAayush Gupta(2017125)");
 	private InfoLabel Main_Label=new InfoLabel("----------->\nHey there\nPress the play button to play\n<--------");
 	private SpaceRunnerButton pauseButton=new SpaceRunnerButton("PAUSE");
 	private Leaderboard l = new Leaderboard();
-	private SpaceRunnerButton resumeMain= new SpaceRunnerButton("RESUME");
+	private SpaceRunnerButton resumeMain=new SpaceRunnerButton("RESUME");
 //	Date startDate;
 	long createdMillis;
 	long magnetmillis;
@@ -179,8 +176,7 @@ public class ViewManager implements Serializable{
         createSnakeBody();	
         refreshLeaderboard();
         this.mainPane.getChildren().add(resumeMain);
-        resumeMain.setLayoutX(START_X);
-        resumeMain.setLayoutY(START_Y-100);
+        resumeMain.setLayoutX(WIDTH-300);
         this.snakeBody.get(0).setImage();
        addblast();
        
@@ -204,16 +200,6 @@ public class ViewManager implements Serializable{
 		{
 			leaderboard.getItems().add(x);
 		}
-	}
-	public static void serialize() throws IOException {
-		ObjectOutputStream out = null;
-		try {
-			out = new ObjectOutputStream(new FileOutputStream("score.txt"));
-//			out.writeObject(scoregame.getScore());
-		}finally {
-			out.close();
-		}
-
 	}
 	private CusRectangle powerGenerator() {
 		CusRectangle block= new CusRectangle(1, 0, 0);
