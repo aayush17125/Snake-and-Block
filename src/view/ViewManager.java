@@ -467,7 +467,7 @@ public class ViewManager implements Serializable{
 					DELL = 6;
 					wallPointHandler = 30;
 				}
-				pointsLabel.setText("POINTS:0"+Integer.toString(scoregame.getScore()));			
+				pointsLabel.setText("POINTS:"+Integer.toString(scoregame.getScore()));			
 		}
 	}
 	private int randomNum(int q) {
@@ -597,7 +597,7 @@ public class ViewManager implements Serializable{
         createSnakeBody();
         createSnakeBody();
 //        points=0;
-        pointsLabel.setText("POINTS:0"+Integer.toString(scoregame.getScore()));
+        pointsLabel.setText("POINTS:"+Integer.toString(scoregame.getScore()));
 		initialiseButtonListeners();
         refreshLeaderboard();
 		paused = true;
@@ -910,7 +910,8 @@ public class ViewManager implements Serializable{
 									blastmillis=System.currentTimeMillis();
 									scoregame.setScore(scoregame.getScore()+rect.getNum());
 //									points += rect.getNum();
-									pointsLabel.setText("POINTS:"+Integer.toString(rect.getNum()));
+									scoregame.setScore(scoregame.getScore()+rect.getNum());
+									pointsLabel.setText("POINTS:"+Integer.toString(scoregame.getScore()));
 								}
 								
 							}
