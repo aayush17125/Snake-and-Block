@@ -69,6 +69,7 @@ public class ViewManager {
 	private Timeline time2;
 	private Timeline snakeMov;
 	private boolean paused;
+	private boolean magnetActivated;
 	private boolean firstTime;
 	private CustomRectangle ss;
 	private CusRectangle ui;
@@ -88,6 +89,7 @@ public class ViewManager {
 	private SpaceRunnerButton resumeMain=new SpaceRunnerButton("RESUME");
 //	Date startDate;
 	long createdMillis;
+	long magnetmillis;
 	public ViewManager()
 	{
 		menuButtons=new ArrayList<SpaceRunnerButton>();
@@ -662,7 +664,6 @@ public class ViewManager {
 				obstacleWall.get(6).setHeight(h);
 				obstacleWall.get(6).setX(rand_x.nextInt(WIDTH));
 			}
-			
 		});
 		time1.getKeyFrames().add(key1);
 
@@ -673,6 +674,19 @@ public class ViewManager {
 			for (int i=0;i<powerList.size();i++) {
 				powerList.get(i).setCenterY(powerList.get(i).getCenterY()+DELL);
 				if (powerList.get(i).getCenterY()>=HEIGHT) {
+					if (powerList.get(i).getType()==2) {
+						if (powerList.get(i).getCenterY()>=HEIGHT-500 && magnetActivated) {
+							double diff = powerList.get(i).getCenterX()-snakeBody.get(0).getCenterX();
+							if (diff>=0) {
+								System.out.println(diff+" diff"+" "+powerList.get(i).getCenterX());
+								powerList.get(i).setCenterX(powerList.get(i).getCenterX()+50);
+							}
+							else {
+								System.out.println(diff+" diff"+" "+powerList.get(i).getCenterX());
+								powerList.get(i).setCenterX(powerList.get(i).getCenterX()-50);
+							}
+						}
+					}
 					respawnPower(powerList.get(i));
 					powerList.get(i).setCenterY(-200);
 					powerList.get(i).refresh();
@@ -777,14 +791,16 @@ public class ViewManager {
 							powerList.get(i).setVisible(false);
 							if (powerList.get(i).getType()==1) {
 								playCurrent();
-								for (int j=0;j<powerList.size();j++) {
-									if (powerList.get(j).getType()==2) {
-										powerList.get(j).setVisible(false);
-										for (int k=0;k<powerList.get(j).getLength();k++) {
-											createSnakeBody();
-										}
-									}
-								}
+//								for (int j=0;j<powerList.size();j++) {
+//									if (powerList.get(j).getType()==2) {
+//										powerList.get(j).setVisible(false);
+//										for (int k=0;k<powerList.get(j).getLength();k++) {
+//											createSnakeBody();
+//										}
+//									}
+//								}
+								magnetActivated = true;	
+								magnetmillis = System.currentTimeMillis();
 							}
 							else if (powerList.get(i).getType()==2) {
 								playCoin();
@@ -794,7 +810,7 @@ public class ViewManager {
 								powerList.get(i).setVisible(false);
 							}
 							else if (powerList.get(i).getType()==3) {
-//								startDate = new Date();	
+//								startDate = new Date();
 								createdMillis = System.currentTimeMillis();
 							}
 							else if (powerList.get(i).getType()==4) {
@@ -816,19 +832,13 @@ public class ViewManager {
 						System.out.println(e.getStackTrace());
 					}
 				}
-				if(System.currentTimeMillis()-createdMillis<=5000)
-				{
-					for(int i=0;i<6;i++)
-						{
+				if(System.currentTimeMillis()-createdMillis<=5000){
+					for(int i=0;i<6;i++){
 						((numberRectangle)obstacleWall.get(i)).hit();
-						}
+					}
 				}
-//				if(((new Date()).getTime()-startDate.getTime())<5000)
-//				{
-//					for(int i=0;i<obstacleWall.size();i++)
-//					{
-//						((numberRectangle)(obstacleWall.get(i))).hit();
-//					}
+//				if(System.currentTimeMillis()-magnetmillis>5000){
+//					magnetActivated=false;
 //				}
 			}
 		};

@@ -17,7 +17,8 @@ import static java.lang.Math.*;
 public class CustomCircle extends Circle {
     private final static int KEYBOARD_MOVEMENT_DELTA=5;
 	private int point=1;
-    public CustomCircle(float width, float height, float radius, Scene scene) {
+	
+	public CustomCircle(float width, float height, float radius, Scene scene) {
         setCenterX(width);
         setCenterY(height);
         setRadius(radius);
