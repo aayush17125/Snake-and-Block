@@ -3,6 +3,7 @@ package view;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Random;
 
 import com.sun.jndi.cosnaming.CNNameParser;
@@ -85,6 +86,8 @@ public class ViewManager {
 	private SpaceRunnerButton pauseButton=new SpaceRunnerButton("PAUSE");
 	private Leaderboard l = new Leaderboard();
 	private SpaceRunnerButton resumeMain=new SpaceRunnerButton("RESUME");
+//	Date startDate;
+	long createdMillis;
 	public ViewManager()
 	{
 		menuButtons=new ArrayList<SpaceRunnerButton>();
@@ -791,7 +794,8 @@ public class ViewManager {
 								powerList.get(i).setVisible(false);
 							}
 							else if (powerList.get(i).getType()==3) {
-								System.out.println("BHENCHOD MERI FUNCTIONALITY TERA BAAP DAALEGA :'( ");
+//								startDate = new Date();	
+								createdMillis = System.currentTimeMillis();
 							}
 							else if (powerList.get(i).getType()==4) {
 								playBomb();
@@ -812,7 +816,20 @@ public class ViewManager {
 						System.out.println(e.getStackTrace());
 					}
 				}
-
+				if(System.currentTimeMillis()-createdMillis<=5000)
+				{
+					for(int i=0;i<6;i++)
+						{
+						((numberRectangle)obstacleWall.get(i)).hit();
+						}
+				}
+//				if(((new Date()).getTime()-startDate.getTime())<5000)
+//				{
+//					for(int i=0;i<obstacleWall.size();i++)
+//					{
+//						((numberRectangle)(obstacleWall.get(i))).hit();
+//					}
+//				}
 			}
 		};
 		gameTimer.start();
