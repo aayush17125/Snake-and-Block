@@ -216,6 +216,7 @@ public class ViewManager {
 		try {
 			out = new ObjectOutputStream(new FileOutputStream("score.txt"));
 			out.writeObject(scoregame.getScore());
+//			out.writeObject((Object)firstTime);
 		}finally {
 			out.close();
 		}
@@ -286,6 +287,7 @@ public class ViewManager {
 	public void playMusic(){
 		URL res = getClass().getResource("Song.mp3");
 		mediaPlayer = new MediaPlayer(new Media(res.toString()));
+		mediaPlayer.setVolume(0.8);
 		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 		mediaPlayer.play();
 	}
@@ -322,6 +324,7 @@ public class ViewManager {
 	public void playbusted() {
 		URL rest = getClass().getResource("Busted.mp3");
 		busted = new MediaPlayer(new Media(rest.toString()));
+		busted.setVolume(1);
 		busted.setCycleCount(1);
 		busted.play();
 	}
@@ -432,6 +435,7 @@ public class ViewManager {
 		time0.play();
 		time1.play();
 		time2.play();
+		snakeMov.play();
 	}
 	private void pauseMovement(){
 		time0.pause();
@@ -889,7 +893,7 @@ public class ViewManager {
 						if (snakeBody.get(0).intersects(obstacleWall.get(i).getBoundsInParent())){
 							removeSnakeBody(obstacleWall.get(i));
 							blast.setLayoutX(obstacleWall.get(i).getX());
-							blast.setLayoutY(obstacleWall.get(i).getY());
+							blast.setLayoutY(obstacleWall.get(i).getY()-100);
 							
 						}
 						
@@ -956,7 +960,7 @@ public class ViewManager {
 				}
 				if(System.currentTimeMillis()-blastmillis<5000)
 				{
-					blast.setLayoutY(blast.getLayoutY()+DELL-0.5);
+					blast.setLayoutY(blast.getLayoutY()+DELL);
 				}
 				else
 				{
@@ -1007,6 +1011,13 @@ public class ViewManager {
 				mainStage.setScene(mainScene);
 				stopMovement();
 				mediaPlayer.stop();
+				try {
+					serialize();
+					System.out.println("Serialized");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		pauseList.get(1).setOnMouseReleased(new EventHandler<MouseEvent>() {
