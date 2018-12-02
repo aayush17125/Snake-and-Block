@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import backend.Game;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import model.CusRectangle;
 import model.numberRectangle;
 import view.ViewManager;
@@ -47,8 +48,10 @@ public class Main extends Application {
 		try {
 			manager=new ViewManager();
 			primaryStage= manager.getMainStage();
+			primaryStage.initStyle(StageStyle.UNDECORATED);
 			primaryStage.show();
-			primaryStage.setResizable(false);
+			
+//			primaryStage.setResizable(false);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
