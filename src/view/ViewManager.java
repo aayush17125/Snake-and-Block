@@ -95,6 +95,8 @@ public class ViewManager {
 //	Date startDate;
 	long createdMillis;
 	long magnetmillis;
+	long blastmillis;
+	ImageView blast=new ImageView("view/resources/blast.gif");
 	public ViewManager()
 	{
 		menuButtons=new ArrayList<SpaceRunnerButton>();
@@ -173,7 +175,16 @@ public class ViewManager {
         this.mainPane.getChildren().add(resumeMain);
         resumeMain.setLayoutX(WIDTH-300);
         this.snakeBody.get(0).setImage();
-        
+       addblast();
+       
+	}
+
+	private void addblast() {
+		// TODO Auto-generated method stub
+		 blast.setFitHeight(80);
+	        blast.setFitWidth(100);
+	        r2.getChildren().add(blast);
+	        blast.setVisible(false);
 	}
 
 	private void refreshLeaderboard() {
@@ -808,7 +819,12 @@ public class ViewManager {
 					try {
 						if (snakeBody.get(0).intersects(obstacleWall.get(i).getBoundsInParent())){
 							removeSnakeBody(obstacleWall.get(i));
+							blast.setLayoutX(snakeBody.get(0).getCenterX()-radius-radius);
+							blast.setLayoutY(snakeBody.get(0).getCenterY()-200);
+							blast.setVisible(true);
+							blastmillis=System.currentTimeMillis();
 						}
+						
 					}catch (Exception e) {
 						stop();
 					}
@@ -864,6 +880,14 @@ public class ViewManager {
 				}
 				if (System.currentTimeMillis()-magnetmillis>5000) {
 					magnetActivated=false;
+				}
+				if(System.currentTimeMillis()-blastmillis<5000)
+				{
+					blast.setLayoutY(blast.getLayoutY()+7);
+				}
+				else
+				{
+					blast.setVisible(false);
 				}
 			}
 		};
