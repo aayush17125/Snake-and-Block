@@ -1,8 +1,11 @@
 package view;
 
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 
@@ -397,7 +400,10 @@ public class ViewManager {
 					alert.setHeaderText("Game Over");
 					alert.setContentText("Score :"+points);
 					alert.show();
-					l.addScore(points);
+					DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+					Date date = new Date();
+					String dtfin=dateFormat.format(date);
+					l.addScore(points+"   |"+dtfin);
 					refreshLeaderboard();
 					stopMovement();
 					mediaPlayer.stop();
@@ -592,7 +598,7 @@ public class ViewManager {
 	private int shouldMove()
 	{
 		double dist=Math.sqrt((Math.pow(obstacleWall.get(6).getX()-snakeBody.get(0).getCenterX(), 2))+(Math.pow(obstacleWall.get(6).getY()-snakeBody.get(0).getCenterY(), 2)));
-		System.out.println(dist+" hello");
+//		System.out.println(dist+" hello");
 		if(dist<100 )
 		{
 			if(obstacleWall.get(6).getX()>snakeBody.get(0).getCenterX())
@@ -730,14 +736,16 @@ public class ViewManager {
 		scene2.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
+            	int moveres=shouldMove();
                 if(event.getCode()==KeyCode.RIGHT) {
-                    if (snakeBody.get(0).getCenterX() < WIDTH-10) {
+                    if (snakeBody.get(0).getCenterX() < WIDTH-10 && moveres!=1) {
+                    	
 						snakeBody.get(0).setCenterX(snakeBody.get(0).getCenterX() + KEYBOARD_MOVEMENT_DELTA);
 					}
 					
                 }
                 if(event.getCode()==KeyCode.LEFT){
-					if (snakeBody.get(0).getCenterX() > 10) {
+					if (snakeBody.get(0).getCenterX() > 10 && moveres!=2) {
 						snakeBody.get(0).setCenterX(snakeBody.get(0).getCenterX() - KEYBOARD_MOVEMENT_DELTA);
 					}
                     
@@ -823,13 +831,7 @@ public class ViewManager {
 						((numberRectangle)obstacleWall.get(i)).hit();
 						}
 				}
-//				if(((new Date()).getTime()-startDate.getTime())<5000)
-//				{
-//					for(int i=0;i<obstacleWall.size();i++)
-//					{
-//						((numberRectangle)(obstacleWall.get(i))).hit();
-//					}
-//				}
+
 			}
 		};
 		gameTimer.start();
