@@ -839,11 +839,12 @@ public class ViewManager {
 			
 				if (snakeBody.size()==1 && !(gameover)) {
 					System.out.println("Game Over");
+					resumeMain.setVisible(false);
 					gameover = true;
 					Alert alert = new Alert(AlertType.ERROR);
 					alert.setTitle("Alert!");
 					alert.setHeaderText("BUSTED!");
-					alert.setContentText("Score :"+scoregame.getScore());
+					alert.setContentText("Score :"+(scoregame.getScore()+1));
 					alert.show();
 					DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 					Date date = new Date();
@@ -1658,6 +1659,8 @@ public class ViewManager {
 					scoregame.setPosY(position);
 					serialize();
 					System.out.println("Serialized");
+					resumeMain.setVisible(true);
+
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -1702,6 +1705,8 @@ public class ViewManager {
 					scoregame.setBlockVal(obstaclePoint);
 					scoregame.setPosY(position);
 					serialize();
+					resumeMain.setVisible(true);
+
 					System.out.println("Serialized");
 				} catch (IOException e) {
 					// TODO Auto-generated catch block

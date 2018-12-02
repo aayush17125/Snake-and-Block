@@ -27,7 +27,7 @@ public class Main extends Application {
 	private static ViewManager manager;
 	/**
 	 * Serializes after force shutdown
-	 * @param input a game object
+	 * @param game input a game object
 	 */
 	public static void serialize(Game game) throws IOException {
 		ObjectOutputStream out = null;
