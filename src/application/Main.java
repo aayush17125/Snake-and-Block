@@ -15,7 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 /**
  * The main class of the game.This will call the other classes to generate the game elements
- * @author Akhil and aayush
+ * @author Akhil and Aayush
  * @version 1.0
  *
  */
