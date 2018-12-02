@@ -875,6 +875,14 @@ public class ViewManager {
 					DELL = 6;
 					wallPointHandler = 30;
 				}
+				else if (scoregame.getScore()>750) {
+					DELL = 6.5;
+					wallPointHandler = 35;
+				}
+				else if (scoregame.getScore()>1000) {
+					DELL = 7.5;
+					wallPointHandler = 40;
+				}
 				pointsLabel.setText("POINTS:"+Integer.toString(scoregame.getScore()));			
 		}
 	}
