@@ -7,7 +7,10 @@ import java.util.ArrayList;
  * @version 1.0	
  * */
 public class Game implements Serializable {
-	
+	/**
+	 * Keeps track of the leaderBoard
+	 */
+	private ArrayList<String> leaderBoard;
 	private static final long serialVersionUID = 7244301249917304921L;
 	/**
 	 * Keeps track of the score of the game
@@ -35,6 +38,20 @@ public class Game implements Serializable {
 		posY = new ArrayList<Double>();
 		blockVal = new ArrayList<Integer>();
 		snakeLen = 0;
+	}
+	/**
+	 * 
+	 * @return the leaderboard {@link ArrayList}
+	 */
+	public ArrayList<String> getLeaderBoard() {
+		return leaderBoard;
+	}
+	/**
+	 * Sets the {@link Leaderboard}
+	 * @param leaderBoard
+	 */
+	public void setLeaderBoard(ArrayList<String> leaderBoard) {
+		this.leaderBoard = leaderBoard;
 	}
 	/**
 	 * this function is a getter of size of snakeBody

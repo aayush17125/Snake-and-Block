@@ -2,6 +2,7 @@ package view;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -261,7 +262,7 @@ public class ViewManager {
 	/**
 	 * Backend for leaderboard
 	 */
-	private Leaderboard l = new Leaderboard();
+	private Leaderboard l;
 	/**
 	 * resume button on main menu
 	 */
@@ -280,14 +281,18 @@ public class ViewManager {
 	 */
 	long blastmillis;
 	/**
-	 * Variable for sserializing
+	 * Variable for serializing
 	 */
 	
 	ArrayList<Double> position;
 	/**
-	 * Variable for sserializing
+	 * Variable for serializing
 	 */
 	ArrayList<Integer> obstaclePoint;
+	/**
+	 * Variable for serializing
+	 */
+	ArrayList<String> leaderboardSerial; 
 	/**
 	 * Blast of block photo
 	 */
@@ -322,6 +327,7 @@ public class ViewManager {
 	public ViewManager()
 	{
 		position = new ArrayList<Double>();
+		leaderboardSerial = new ArrayList<String>();
 		obstaclePoint = new ArrayList<Integer>();
 		menuButtons=new ArrayList<SpaceRunnerButton>();
 		snakeBody=new ArrayList<CustomCircle>();
@@ -345,6 +351,13 @@ public class ViewManager {
 		time2 = new Timeline();
 		snakeMov = new Timeline();
 		wallPointHandler = 20;
+		try {
+			l = deserializeLeaderboard();
+		}catch (Exception e) {
+			// TODO: handle exception
+			l = new Leaderboard();
+		}
+		
 		mainStage =new Stage();
 		mainStage.setScene(mainScene);
 		paused = true;
@@ -438,6 +451,42 @@ public class ViewManager {
 		}finally {
 			out.close();
 		}
+	}
+	/**
+	 * 
+	 */
+	public static void serializeLeaderBoard() throws IOException {
+		ObjectOutputStream out = null;
+		try { 
+			out = new ObjectOutputStream(new FileOutputStream("leaderBoard.txt"));
+			out.writeObject(scoregame);
+			System.out.println("LEADERBOARD SERIALIZED");
+		}finally {
+			out.close();
+		}
+	}
+	/**
+	 * Deserializes the leaderboard
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
+	 * @throws ClassNotFoundException 
+	 */
+	public static Leaderboard deserializeLeaderboard() throws FileNotFoundException, IOException, ClassNotFoundException {
+		ObjectInputStream in=null;
+		Game g1 = null;
+		Leaderboard l = new Leaderboard();
+		ArrayList<String> str;
+		try {
+			in = new ObjectInputStream(new FileInputStream("leaderBoard.txt"));
+			g1 = (Game) in.readObject();
+			str = g1.getLeaderBoard();
+			for (int i=0;i<str.size();i++) {
+				l.addScore(str.get(i));
+			}
+		}finally {
+			in.close();
+		}
+		return l;
 	}
 	/**
 	 * Deserializes the game
@@ -773,8 +822,9 @@ public class ViewManager {
 	/**
 	 * used to remove the snake body part
 	 * @param rectangle the brik to which it is collided
+	 * @throws IOException 
 	 */
-	private void removeSnakeBody(Rectangle rectangle){
+	private void removeSnakeBody(Rectangle rectangle) throws IOException{
 		if(snakeBody.size()>0 && !((numberRectangle) rectangle).isHit()) {
 			((numberRectangle)rectangle).setNum(((numberRectangle)rectangle).getNum()-1);
 			if (((numberRectangle)rectangle).getNum()<=0) {
@@ -804,6 +854,11 @@ public class ViewManager {
 					mediaPlayer.stop();
 					playbusted();
 					mainStage.setScene(mainScene);
+					for (int i=0;i<l.getScore().size();i++) {
+						leaderboardSerial.add(l.getScore().get(i));
+					}
+					scoregame.setLeaderBoard(leaderboardSerial);
+					serializeLeaderBoard();
 				}				
 				removeLastSnake();scoregame.addScore();
 //				points++;
