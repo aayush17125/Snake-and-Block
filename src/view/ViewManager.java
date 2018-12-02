@@ -209,6 +209,7 @@ public class ViewManager implements Serializable{
 		try {
 			out = new ObjectOutputStream(new FileOutputStream("score.txt"));
 			out.writeObject(scoregame.getScore());
+//			out.writeObject((Object)firstTime);
 		}finally {
 			out.close();
 		}
@@ -408,6 +409,7 @@ public class ViewManager implements Serializable{
 		time0.play();
 		time1.play();
 		time2.play();
+		snakeMov.play();
 	}
 	private void pauseMovement(){
 		time0.pause();
@@ -982,6 +984,13 @@ public class ViewManager implements Serializable{
 				mainStage.setScene(mainScene);
 				stopMovement();
 				mediaPlayer.stop();
+				try {
+					serialize();
+					System.out.println("Serialized");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		pauseList.get(1).setOnMouseReleased(new EventHandler<MouseEvent>() {
