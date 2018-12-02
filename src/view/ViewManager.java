@@ -66,6 +66,7 @@ public class ViewManager {
 	private MediaPlayer bomb;
 	private MediaPlayer coin;
 	private MediaPlayer current;
+	private MediaPlayer busted;
     private ArrayList <CusRectangle> powerList;
     private ArrayList<SpaceRunnerButton> pauseList=new ArrayList<SpaceRunnerButton>();
 	private static final int KEYBOARD_MOVEMENT_DELTA = 20;
@@ -272,6 +273,12 @@ public class ViewManager {
 		current.setCycleCount(1);
 		current.play();
 	}
+	public void playbusted() {
+		URL rest = getClass().getResource("Busted.mp3");
+		busted = new MediaPlayer(new Media(rest.toString()));
+		busted.setCycleCount(1);
+		busted.play();
+	}
 	public Stage getMainStage()
 	{
 		return mainStage;
@@ -404,7 +411,7 @@ public class ViewManager {
 					gameover = true;
 					Alert alert = new Alert(AlertType.ERROR);
 					alert.setTitle("Alert!");
-					alert.setHeaderText("Game Over");
+					alert.setHeaderText("BUSTED!");
 					alert.setContentText("Score :"+points);
 					alert.show();
 					DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -414,6 +421,7 @@ public class ViewManager {
 					refreshLeaderboard();
 					stopMovement();
 					mediaPlayer.stop();
+					playbusted();
 					mainStage.setScene(mainScene);
 				}				
 				removeLastSnake();
