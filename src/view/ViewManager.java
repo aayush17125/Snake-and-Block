@@ -287,6 +287,7 @@ public class ViewManager {
 	public void playMusic(){
 		URL res = getClass().getResource("Song.mp3");
 		mediaPlayer = new MediaPlayer(new Media(res.toString()));
+		mediaPlayer.setVolume(0.8);
 		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 		mediaPlayer.play();
 	}
@@ -323,6 +324,7 @@ public class ViewManager {
 	public void playbusted() {
 		URL rest = getClass().getResource("Busted.mp3");
 		busted = new MediaPlayer(new Media(rest.toString()));
+		busted.setVolume(1);
 		busted.setCycleCount(1);
 		busted.play();
 	}
@@ -890,7 +892,7 @@ public class ViewManager {
 						if (snakeBody.get(0).intersects(obstacleWall.get(i).getBoundsInParent())){
 							removeSnakeBody(obstacleWall.get(i));
 							blast.setLayoutX(obstacleWall.get(i).getX());
-							blast.setLayoutY(obstacleWall.get(i).getY());
+							blast.setLayoutY(obstacleWall.get(i).getY()-100);
 							
 						}
 						
@@ -957,7 +959,7 @@ public class ViewManager {
 				}
 				if(System.currentTimeMillis()-blastmillis<5000)
 				{
-					blast.setLayoutY(blast.getLayoutY()+DELL-0.5);
+					blast.setLayoutY(blast.getLayoutY()+DELL);
 				}
 				else
 				{
