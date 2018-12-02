@@ -116,37 +116,133 @@ public class ViewManager {
 	 * list where menuButtons are stored
 	 */
 	private ArrayList<SpaceRunnerButton> menuButtons;
+	/**
+	 * List containg all the walls,bricks
+	 */
 	private ArrayList<Rectangle> obstacleWall ;
+	/**
+	 * Group containing the elements of game
+	 */
 	private Group r = new Group();
+	/**
+	 * Group containing the elements of game
+	 */
 	private Group r2 = new Group();
+	/**
+	 * Scene used in the gamePlay
+	 */
 	private Scene scene2 = new Scene(r2,WIDTH,HEIGHT);
+	/**
+	 * ArrayList storing the snakeBody
+	 */
 	private ArrayList<CustomCircle> snakeBody;
+	/**
+	 * The head of the snake
+	 */
 	private CustomCircle circle=new CustomCircle(WIDTH/2, HEIGHT-200, radius,scene2);
-    private Random rand_x = new Random();
+	/**
+	 * Random number generator
+	 */
+	private Random rand_x = new Random();
+	/**
+	 * media player for playing sounds
+	 */
 	private MediaPlayer mediaPlayer;
+	/**
+	 * for playing bomb sounds
+	 */
 	private MediaPlayer bomb;
+	/**
+	 * for playing coin sounds
+	 */
 	private MediaPlayer coin;
+	/**
+	 * FOr playing magnet sound
+	 */
 	private MediaPlayer current;
+	/**
+	 * for burst sound
+	 */
 	private MediaPlayer busted;
+	/**
+	 * arraylist containing all the powers
+	 */
     private ArrayList <CusRectangle> powerList;
+    /**
+     * arraylist containing all the buttons in pause menu
+     */
     private ArrayList<SpaceRunnerButton> pauseList=new ArrayList<SpaceRunnerButton>();
-	private static final int KEYBOARD_MOVEMENT_DELTA = 20;
+    /**
+     * It defines the speed at which snake will turn left right
+     */
+    private static final int KEYBOARD_MOVEMENT_DELTA = 20;
+    /**
+     * Used for animation
+     */
 	private Timeline time0;
+	/**
+     * Used for animation
+     */
 	private Timeline time1;
+	/**
+     * Used for animation
+     */
 	private Timeline time2;
+	/**
+     * Used for animation
+     */
 	private Timeline snakeMov;
+	/**
+	 * states whether game is paused or not
+	 */
 	private boolean paused;
+	/**
+	 * states whether magnet is active or not
+	 */
 	private boolean magnetActivated;
+	/**
+	 * states whether game is played first time or not
+	 */
 	private boolean firstTime;
+	/**
+	 * defines the powerups
+	 */
 	private CustomRectangle ss;
+	/**
+	 * defines the powerups
+	 */
 	private CusRectangle ui;
+	/**
+	 * defines the powerups
+	 */
 	private CusRectangle ud;
+	/**
+	 * defines the powerups
+	 */
 	private CusRectangle ub;
+	/**
+	 * defines the powerups
+	 */
 	private CusRectangle uc;
+	/**
+	 * Background images for various things
+	 */
 	private Image img1;
+	/**
+	 * Background images for various things
+	 */
 	private Image img2;
+	/**
+	 * Background images for various things
+	 */
 	private Image img3;
+	/**
+	 * Background images for various things
+	 */
 	private Image img4;
+	/**
+	 * List view javafx 
+	 */
 	private ListView leaderboard = new ListView();
 	private InfoLabel Help_label=new InfoLabel("1.Use arrow keys to control the snake\n2.Get through all the obstacles\n3.You can save the game from pause menu\n4. Press P to save a screen shot");
 	private InfoLabel Credit_Label=new InfoLabel("Akhil Jarodia(2017130)\nAayush Gupta(2017125)");
