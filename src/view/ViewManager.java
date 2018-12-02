@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 import javax.imageio.ImageIO;
+
+import backend.Game;
 import backend.Leaderboard;
 import javafx.animation.*;
 import javafx.embed.swing.SwingFXUtils;
@@ -97,6 +99,7 @@ public class ViewManager {
 	long magnetmillis;
 	long blastmillis;
 	ImageView blast=new ImageView("view/resources/blast.gif");
+	Game scoregame=new Game();
 	public ViewManager()
 	{
 		menuButtons=new ArrayList<SpaceRunnerButton>();
@@ -162,7 +165,7 @@ public class ViewManager {
 		pauseButton.setLayoutY(0);
 		r2.getChildren().add(pauseButton);
 		r2.getChildren().add(pointsLabel);
-		points = 0;
+//		points = 0;
 		createSnakeBody();
         createSnakeBody();
         createSnakeBody();
@@ -410,6 +413,8 @@ public class ViewManager {
 			((numberRectangle)rectangle).setNum(((numberRectangle)rectangle).getNum()-1);
 			if (((numberRectangle)rectangle).getNum()<=0) {
 				rectangle.setVisible(false);
+				blast.setVisible(true);
+				blastmillis=System.currentTimeMillis();
 				((numberRectangle) rectangle).hit();
 				for (int j=0;j<6;j++) {
 					((numberRectangle)obstacleWall.get(j)).hit();
@@ -422,33 +427,33 @@ public class ViewManager {
 					Alert alert = new Alert(AlertType.ERROR);
 					alert.setTitle("Alert!");
 					alert.setHeaderText("BUSTED!");
-					alert.setContentText("Score :"+points);
+					alert.setContentText("Score :"+scoregame.getScore());
 					alert.show();
 					DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 					Date date = new Date();
 					String dtfin=dateFormat.format(date);
-					l.addScore(points+"   |"+dtfin);
+					l.addScore(scoregame.getScore()+"   |"+dtfin);
 					refreshLeaderboard();
 					stopMovement();
 					mediaPlayer.stop();
 					playbusted();
 					mainStage.setScene(mainScene);
 				}				
-				removeLastSnake();
-				points++;
-				if (points>=100) {
+				removeLastSnake();scoregame.addScore();
+//				points++;
+				if (scoregame.getScore()>=100) {
 					DELL = 5;
 					wallPointHandler = 22;
 				}
-				else if (points>=250) {
+				else if (scoregame.getScore()>=250) {
 					DELL = 5.5;
 					wallPointHandler = 25;
 				}
-				else if (points>400) {
+				else if (scoregame.getScore()>400) {
 					DELL = 6;
 					wallPointHandler = 30;
 				}
-				pointsLabel.setText("POINTS:0"+Integer.toString(points));			
+				pointsLabel.setText("POINTS:0"+Integer.toString(scoregame.getScore()));			
 		}
 	}
 	private int randomNum(int q) {
@@ -487,7 +492,7 @@ public class ViewManager {
         time2 = new Timeline();
         snakeMov = new Timeline();
 		scene2.setFill(Color.BLACK);
-		points = 0;
+		scoregame=new Game();
 		int[] num = new int[7];
 		int q=0;
 		for (int i=0;i<r2.getChildren().size();i++) {
@@ -577,8 +582,8 @@ public class ViewManager {
         createSnakeBody();
         createSnakeBody();
         createSnakeBody();
-        points=0;
-        pointsLabel.setText("POINTS:0"+Integer.toString(points));
+//        points=0;
+        pointsLabel.setText("POINTS:0"+Integer.toString(scoregame.getScore()));
 		initialiseButtonListeners();
         refreshLeaderboard();
 		paused = true;
@@ -831,6 +836,12 @@ public class ViewManager {
 				paused = true;
 			}
 		});
+		resumeMain.setOnMouseReleased(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				System.out.println("after serialize :");
+			}
+		});
 		
 		gameTimer=new AnimationTimer() {
 			@Override
@@ -841,8 +852,7 @@ public class ViewManager {
 							removeSnakeBody(obstacleWall.get(i));
 							blast.setLayoutX(snakeBody.get(0).getCenterX()-radius-radius);
 							blast.setLayoutY(snakeBody.get(0).getCenterY()-200);
-							blast.setVisible(true);
-							blastmillis=System.currentTimeMillis();
+							
 						}
 						
 					}catch (Exception e) {
@@ -881,8 +891,12 @@ public class ViewManager {
 									numberRectangle rect = (numberRectangle) obstacleWall.get(j);
 									rect.hit();
 									rect.setVisible(false);
-									points += rect.getNum();
-									pointsLabel.setText("POINTS:"+Integer.toString(points));
+									blast.setVisible(true);
+									
+									blastmillis=System.currentTimeMillis();
+									scoregame.setScore(scoregame.getScore()+rect.getNum());
+//									points += rect.getNum();
+									pointsLabel.setText("POINTS:"+Integer.toString(rect.getNum()));
 								}
 								
 							}
