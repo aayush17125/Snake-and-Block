@@ -13,6 +13,10 @@ import javafx.scene.layout.BorderPane;
  */
 
 public class Main extends Application {
+	/**
+	 * Everything works in {@link ViewManager}. This is an instance of {@link ViewManager}.
+	 */
+	private ViewManager manager;
 	@Override
 	/**
 	 * This method is override of start method in Application class.
@@ -20,7 +24,7 @@ public class Main extends Application {
 	 */
 	public void start(Stage primaryStage) {
 		try {
-			ViewManager manager=new ViewManager();
+			manager=new ViewManager();
 			primaryStage= manager.getMainStage();
 			primaryStage.show();
 			primaryStage.setResizable(false);
