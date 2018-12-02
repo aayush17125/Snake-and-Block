@@ -47,6 +47,7 @@ public class ViewManager {
 	AnimationTimer gameTimer;
 	private SmallInfoLabel pointsLabel;
 	private int points;
+	private boolean gameover; 
 	private AnchorPane mainPane;
 	private AnchorPane pausePane=new AnchorPane();
 	private Scene pauseScene=new Scene(pausePane,WIDTH,HEIGHT);
@@ -100,6 +101,7 @@ public class ViewManager {
 		snakeBody.add(circle);
 		circle.setRadius(radius);
 		firstTime = false;
+		gameover = false;
 		powerList = new ArrayList<CusRectangle>();
 		obstacleWall = new ArrayList<Rectangle>();
 		mainPane=new AnchorPane();
@@ -153,7 +155,6 @@ public class ViewManager {
 		powerList.add(uc);
 		powerList.add(ud);
 		r2.getChildren().addAll(ui,ub,uc,ud);
-//		pauseButton=new SpaceRunnerButton("PAUSE");
 		pauseButton.setLayoutX(200);
 		pauseButton.setLayoutY(0);
 		r2.getChildren().add(pauseButton);
@@ -175,7 +176,6 @@ public class ViewManager {
 	}
 
 	private void refreshLeaderboard() {
-		// TODO Auto-generated method stub
 //		leaderboard=new ListView();
 		for(int i=0;i<l.getScore().size();i++)
 		{
@@ -389,14 +389,19 @@ public class ViewManager {
 	}
 	private void removeSnakeBody(Rectangle rectangle){
 		if(snakeBody.size()>0 && !((numberRectangle) rectangle).isHit()) {
-			((numberRectangle) rectangle).hit();
-			for (int j=0;j<6;j++) {
-				((numberRectangle)obstacleWall.get(j)).hit();
+			((numberRectangle)rectangle).setNum(((numberRectangle)rectangle).getNum()-1);
+			if (((numberRectangle)rectangle).getNum()<=0) {
+				rectangle.setVisible(false);
+				((numberRectangle) rectangle).hit();
+				for (int j=0;j<6;j++) {
+					((numberRectangle)obstacleWall.get(j)).hit();
+				}
 			}
-			rectangle.setVisible(false);
-			for (int i = 0; i < ((numberRectangle) rectangle).getNum(); i++){
-				if (snakeBody.size()==1 || snakeBody.size()<=0) {
+			
+//			for (int i = 0; i < ((numberRectangle) rectangle).getNum(); i++){
+				if (snakeBody.size()==1 && !(gameover)) {
 					System.out.println("Game Over");
+					gameover = true;
 					Alert alert = new Alert(AlertType.ERROR);
 					alert.setTitle("Alert!");
 					alert.setHeaderText("Game Over");
@@ -410,13 +415,13 @@ public class ViewManager {
 					stopMovement();
 					mediaPlayer.stop();
 					mainStage.setScene(mainScene);
-					break;
+//					break;
 				}
 				
 				removeLastSnake();
 				points++;
 				pointsLabel.setText("POINTS:0"+Integer.toString(points));			
-			}
+//			}
 		}
 	}
 	private int randomNum(int q) {
@@ -437,6 +442,11 @@ public class ViewManager {
 		}
 	}
 	private void restart() {
+		gameover = false;
+		time0 = new Timeline();
+        time1 = new Timeline();
+        time2 = new Timeline();
+        snakeMov = new Timeline();
 		scene2.setFill(Color.BLACK);
 		points = 0;
 		int[] num = new int[7];
@@ -481,14 +491,14 @@ public class ViewManager {
 		ub=powerGenerator();
 		uc =powerGenerator();
 		ud=powerGenerator();
-	    ui.setLayoutX(rand_x.nextInt(WIDTH));
-		ui.setLayoutY(-300);
-		ub.setLayoutX(rand_x.nextInt(WIDTH));
-		ub.setLayoutY(-500);
-		uc.setLayoutX(rand_x.nextInt(WIDTH));
-		uc.setLayoutY(-700);
-		ud.setLayoutX(rand_x.nextInt(WIDTH));
-		ud.setLayoutY(-800);
+		ui.setCenterX(rand_x.nextInt(WIDTH));
+		ui.setCenterY(0);
+		ub.setCenterX(rand_x.nextInt(WIDTH));
+		ub.setCenterY(-500);
+		uc.setCenterX(rand_x.nextInt(WIDTH));
+		uc.setCenterY(-600);
+		ud.setCenterX(rand_x.nextInt(WIDTH));
+		ud.setCenterY(-700);
 		RotateTransition rt = new RotateTransition(Duration.millis(3000), ui);
 		ui.setRotationAxis(Rotate.Y_AXIS);
 		rt.setByAngle(360);
@@ -528,7 +538,6 @@ public class ViewManager {
         createSnakeBody();
         createSnakeBody();
         createSnakeBody();
-        l.addScore(6);
         points=0;
         pointsLabel.setText("POINTS:0"+Integer.toString(points));
 		initialiseButtonListeners();
@@ -563,7 +572,6 @@ public class ViewManager {
 				obstacleWall.get(6).setHeight(h);
 				obstacleWall.get(6).setX(rand_x.nextInt(WIDTH));
 			}
-			
 		});
 		time1.getKeyFrames().add(key1);
 
@@ -573,6 +581,20 @@ public class ViewManager {
 		KeyFrame key2 = new KeyFrame(Duration.millis(20),e->{
 			for (int i=0;i<powerList.size();i++) {
 				powerList.get(i).setCenterY(powerList.get(i).getCenterY()+DELL);
+				if (powerList.get(i).getType()==2) {
+					if (powerList.get(i).getCenterY()>=HEIGHT-500 && magnetActivated) {
+						double diff = powerList.get(i).getCenterX()-snakeBody.get(0).getCenterX();
+						if (diff<50 && diff>-50) {
+							powerList.get(i).setCenterX(snakeBody.get(0).getCenterX());
+						}
+						if (diff>0) {
+							powerList.get(i).setCenterX(powerList.get(i).getCenterX()-5);
+						}
+						else {
+							powerList.get(i).setCenterX(powerList.get(i).getCenterX()+5);
+						}
+					}
+				}
 				if (powerList.get(i).getCenterY()>=HEIGHT) {
 					respawnPower(powerList.get(i));
 					powerList.get(i).setCenterY(-200);
@@ -616,6 +638,7 @@ public class ViewManager {
 		return 0;
 	}
 	private void start() {
+		gameover = false;
 		paused = false;
 		mainStage.setScene(scene2);
 		RotateTransition rt = new RotateTransition(Duration.millis(3000), ui);
@@ -678,21 +701,22 @@ public class ViewManager {
 		time2.setCycleCount(Animation.INDEFINITE);
 		KeyFrame key2 = new KeyFrame(Duration.millis(20),e->{
 			for (int i=0;i<powerList.size();i++) {
-				powerList.get(i).setCenterY(powerList.get(i).getCenterY()+DELL);
-				if (powerList.get(i).getCenterY()>=HEIGHT) {
-					if (powerList.get(i).getType()==2) {
-						if (powerList.get(i).getCenterY()>=HEIGHT-500 && magnetActivated) {
-							double diff = powerList.get(i).getCenterX()-snakeBody.get(0).getCenterX();
-							if (diff>=0) {
-								System.out.println(diff+" diff"+" "+powerList.get(i).getCenterX());
-								powerList.get(i).setCenterX(powerList.get(i).getCenterX()+50);
-							}
-							else {
-								System.out.println(diff+" diff"+" "+powerList.get(i).getCenterX());
-								powerList.get(i).setCenterX(powerList.get(i).getCenterX()-50);
-							}
+				if (powerList.get(i).getType()==2) {
+					if (powerList.get(i).getCenterY()>=HEIGHT-500 && magnetActivated) {
+						double diff = powerList.get(i).getCenterX()-snakeBody.get(0).getCenterX();
+						if (diff<50 && diff>-50) {
+							powerList.get(i).setCenterX(snakeBody.get(0).getCenterX());
+						}
+						if (diff>0) {
+							powerList.get(i).setCenterX(powerList.get(i).getCenterX()-5);
+						}
+						else {
+							powerList.get(i).setCenterX(powerList.get(i).getCenterX()+5);
 						}
 					}
+				}
+				powerList.get(i).setCenterY(powerList.get(i).getCenterY()+DELL);
+				if (powerList.get(i).getCenterY()>=HEIGHT) {
 					respawnPower(powerList.get(i));
 					powerList.get(i).setCenterY(-200);
 					powerList.get(i).refresh();
@@ -717,36 +741,6 @@ public class ViewManager {
 		startMovement();
 	}
 	private void initialiseButtonListeners() {
-//		scene2.setOnMouseMoved(new EventHandler<MouseEvent>() {
-//			@Override
-//			public void handle(MouseEvent event) {
-//				ArrayList<Double> prev = new ArrayList<Double>();
-//				try {if(shouldMove()==0) {
-//					snakeBody.get(0).setCenterX(event.getX());
-//					
-//				}
-//				else
-//				{
-//					if(shouldMove()==1 && event.getX()-snakeBody.get(0).getCenterX()<0)
-//					{
-//						snakeBody.get(0).setCenterX(event.getX());
-//					}
-//					else if(shouldMove()==2 && event.getX()-snakeBody.get(0).getCenterX()>0)
-//					{
-//						snakeBody.get(0).setCenterX(event.getX());
-//					}
-//				}
-//				for (int i=0;i<snakeBody.size()-1;i++) {
-//					prev.add(snakeBody.get(i).getCenterX());
-//				}
-//				for (int i=1;i<snakeBody.size();i++) {
-//					snakeBody.get(i).setCenterX(prev.get(i-1));
-//				}
-//				}catch (Exception e) {
-//					// TODO: handle exception
-//				}
-//			}
-//		});
 		scene2.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
@@ -788,8 +782,12 @@ public class ViewManager {
 						stop();
 					}
 				}
-				if (snakeBody.get(0).intersects(obstacleWall.get(6).getBoundsInParent())) {
-//					System.out.println("HN BSDK");
+				try {
+					if (snakeBody.get(0).intersects(obstacleWall.get(6).getBoundsInParent())) {
+	//					System.out.println("HN BSDK");
+					}
+				}catch (Exception e) {
+					// TODO: handle exception
 				}
 				for (int i=0;i<powerList.size();i++) {
 					try {
@@ -799,14 +797,6 @@ public class ViewManager {
 							powerList.get(i).setVisible(false);
 							if (powerList.get(i).getType()==1) {
 								playCurrent();
-//								for (int j=0;j<powerList.size();j++) {
-//									if (powerList.get(j).getType()==2) {
-//										powerList.get(j).setVisible(false);
-//										for (int k=0;k<powerList.get(j).getLength();k++) {
-//											createSnakeBody();
-//										}
-//									}
-//								}
 								magnetActivated = true;	
 								magnetmillis = System.currentTimeMillis();
 							}
@@ -818,7 +808,6 @@ public class ViewManager {
 								powerList.get(i).setVisible(false);
 							}
 							else if (powerList.get(i).getType()==3) {
-//								startDate = new Date();
 								createdMillis = System.currentTimeMillis();
 							}
 							else if (powerList.get(i).getType()==4) {
@@ -844,6 +833,9 @@ public class ViewManager {
 					for(int i=0;i<6;i++){
 						((numberRectangle)obstacleWall.get(i)).hit();
 					}
+				}
+				if (System.currentTimeMillis()-magnetmillis>5000) {
+					magnetActivated=false;
 				}
 			}
 		};
