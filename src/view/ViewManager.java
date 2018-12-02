@@ -944,20 +944,21 @@ public class ViewManager {
 	}
 	private int shouldMove()
 	{
-		double dist=Math.sqrt((Math.pow(obstacleWall.get(6).getX()-snakeBody.get(0).getCenterX(), 2))+(Math.pow(obstacleWall.get(6).getY()-snakeBody.get(0).getCenterY(), 2)));
+//		double dist=Math.sqrt((Math.pow(obstacleWall.get(6).getX()-snakeBody.get(0).getCenterX(), 2))+(Math.pow(obstacleWall.get(6).getY()-snakeBody.get(0).getCenterY(), 2)));
 //		System.out.println(dist+" hello");
-		if(dist<100 )
+		double dist=obstacleWall.get(6).getX()-snakeBody.get(0).getCenterX();
+//		System.out.println(dist+" "+obstacleWall.get(6).getY()+" "+snakeBody.get(0).getCenterY());
+		if(obstacleWall.get(6).getY()>=500 ) {
+		if(dist<0 && dist>-15 )
 		{
-			if(obstacleWall.get(6).getX()>snakeBody.get(0).getCenterX())
-			{
-				return 1;
-			}
-			else
-			{
-				return 2;
-			}
+			
+		return 2;	
 		}
-		
+		else if(dist>0 && dist<15)
+		{
+		return 1;	
+		}
+	}
 		return 0;
 	}
 	private void start() {
