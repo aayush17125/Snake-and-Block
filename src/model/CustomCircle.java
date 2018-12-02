@@ -21,6 +21,13 @@ import static java.lang.Math.*;
 public class CustomCircle extends Circle {
     private final static int KEYBOARD_MOVEMENT_DELTA=5;
 	private int point=1;
+	/*
+	 * sets the length of snake
+	 * @param point sets the length equal to point
+	 */
+	public void setPoint(int point) {
+		this.point = point;
+	}
 	/**
 	 * This constructor initialise the various parameters and call the various required functions
 	 * @param width the X coordinate of the snake
@@ -59,6 +66,15 @@ public class CustomCircle extends Circle {
 	  public void setImage()
 	  {
 		  setFill(new ImagePattern(textToImage(Integer.toString(point))));
+		 
+	  }	    
+	  /**
+	     * It is used to set the label on the snake body denoting the length of snake
+	     * @param t input length
+	     */
+	  public void setImage(int t)
+	  {
+		  setFill(new ImagePattern(textToImage(Integer.toString(t))));
 		 
 	  }
 	  private Image textToImage(String text) {

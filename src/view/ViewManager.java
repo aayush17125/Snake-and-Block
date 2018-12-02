@@ -1,8 +1,11 @@
 package view;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.URL;
@@ -105,6 +108,8 @@ public class ViewManager {
 	long createdMillis;
 	long magnetmillis;
 	long blastmillis;
+	ArrayList<Double> position;
+	ArrayList<Integer> obstaclePoint;
 	ImageView blast=new ImageView("view/resources/blast.gif");
 	/**
 	 * It initialises all the GUI component of the game,it's database and all the event listeners
@@ -112,6 +117,8 @@ public class ViewManager {
 	static Game scoregame=new Game();
 	public ViewManager()
 	{
+		position = new ArrayList<Double>();
+		obstaclePoint = new ArrayList<Integer>();
 		menuButtons=new ArrayList<SpaceRunnerButton>();
 		snakeBody=new ArrayList<CustomCircle>();
 		snakeBody.add(circle);
@@ -213,14 +220,23 @@ public class ViewManager {
 	}
 	public static void serialize() throws IOException {
 		ObjectOutputStream out = null;
-		try {
+		try { 
 			out = new ObjectOutputStream(new FileOutputStream("score.txt"));
-			out.writeObject(scoregame.getScore());
-//			out.writeObject((Object)firstTime);
+			out.writeObject(scoregame);
 		}finally {
 			out.close();
 		}
-
+	}
+	public static Game deserialize() throws IOException,ClassNotFoundException {
+		ObjectInputStream in=null;
+		Game g1 = null;
+		try {
+			in = new ObjectInputStream(new FileInputStream("score.txt"));
+			g1 = (Game) in.readObject();
+		}finally {
+			in.close();
+		}
+		return g1;
 	}
 	private CusRectangle powerGenerator() {
 		CusRectangle block= new CusRectangle(1, 0, 0);
@@ -239,7 +255,24 @@ public class ViewManager {
 			block=new CusRectangle(4,30,36);
 		}
 		return block;
-		
+	}
+	private CusRectangle powerGenerator(int t,int points) {
+		CusRectangle block= new CusRectangle(1, 0, 0);
+//		int t = rand_x.nextInt(110);
+		if (t==1) {
+			block = new CusRectangle(2,30,30);
+			block.setLength(randomNum(points));
+		}
+		else if (t==2) {
+			block = new CusRectangle(1,19,30);
+		}
+		else if (t==3) {
+			block =new CusRectangle(3,30,36);
+		}
+		else if (t==4) {
+			block=new CusRectangle(4,30,36);
+		}
+		return block;
 	}
 	private void respawnPower(CusRectangle block) {
 		int t = rand_x.nextInt(110);
@@ -526,14 +559,15 @@ public class ViewManager {
 			}
 		}
 	}
-	private void restart() {
+	private void resume() throws ClassNotFoundException, IOException {
+		Game des = deserialize();
 		gameover = false;
 		time0 = new Timeline();
         time1 = new Timeline();
         time2 = new Timeline();
         snakeMov = new Timeline();
 		scene2.setFill(Color.BLACK);
-		scoregame=new Game();
+		scoregame.setScore(des.getScore());
 		int[] num = new int[7];
 		int q=0;
 		for (int i=0;i<r2.getChildren().size();i++) {
@@ -547,6 +581,199 @@ public class ViewManager {
 					// TODO: handle exception
 				}
 			}
+		}
+		for (int i=0;i<7;i++) {
+			r2.getChildren().remove(obstacleWall.get(i));
+		}
+		for (int i=0;i<r2.getChildren().size();i++) {
+			if (r2.getChildren().get(i)==circle) {
+				r2.getChildren().remove(i);
+			}
+		}
+		try {
+			for (int i=0;i<snakeBody.size();i++) {
+				r2.getChildren().remove(snakeBody.get(i));
+			}
+			r2.getChildren().remove(ui);
+			r2.getChildren().remove(ub);
+			r2.getChildren().remove(uc);
+			r2.getChildren().remove(ud);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		snakeBody = new ArrayList<CustomCircle>();
+		snakeBody.add(circle);
+		circle.setOpacity(0.7);//
+		r2.getChildren().add(circle);//
+		obstacleWall = new ArrayList<Rectangle>();
+		ui= powerGenerator(des.getBlockVal().get(6),des.getBlockVal().get(7));
+		ub=powerGenerator(des.getBlockVal().get(8),des.getBlockVal().get(9));
+		uc =powerGenerator(des.getBlockVal().get(10),des.getBlockVal().get(11));
+		ud=powerGenerator(des.getBlockVal().get(12),des.getBlockVal().get(13));
+		ui.setCenterX(des.getPosY().get(7));
+		ui.setCenterY(des.getPosY().get(8));
+		ub.setCenterX(des.getPosY().get(9));
+		ub.setCenterY(des.getPosY().get(10));
+		uc.setCenterX(des.getPosY().get(11));
+		uc.setCenterY(des.getPosY().get(12));
+		ud.setCenterX(des.getPosY().get(13));
+		ud.setCenterY(des.getPosY().get(14));
+		RotateTransition rt = new RotateTransition(Duration.millis(3000), ui);
+		ui.setRotationAxis(Rotate.Y_AXIS);
+		rt.setByAngle(360);
+	    rt.setCycleCount(Animation.INDEFINITE);
+	    rt.setAutoReverse(false);
+	    rt.play();
+	    RotateTransition pt = new RotateTransition(Duration.millis(3000), ub);
+	    ub.setRotationAxis(Rotate.Y_AXIS);
+	    pt.setByAngle(360);
+	    pt.setCycleCount(Animation.INDEFINITE);
+	    pt.setAutoReverse(false);
+	    pt.play();
+	    RotateTransition qt = new RotateTransition(Duration.millis(3000), uc);
+	    uc.setRotationAxis(Rotate.Y_AXIS);
+	    qt.setByAngle(360);
+	    qt.setCycleCount(Animation.INDEFINITE);
+	    qt.setAutoReverse(false);
+	    qt.play();
+	    RotateTransition st = new RotateTransition(Duration.millis(3000), ud);
+	    ud.setRotationAxis(Rotate.Y_AXIS);
+	    st.setByAngle(360);
+	    st.setCycleCount(Animation.INDEFINITE);
+	    st.setAutoReverse(false);
+	    st.play();
+		powerList = new ArrayList<CusRectangle>();
+		powerList.add(ui);
+		powerList.add(ub);
+		powerList.add(uc);
+		powerList.add(ud);
+		r2.getChildren().addAll(ui,ub,uc,ud);
+		createObstacleWall();
+		for (int i=0;i<7;i++) {
+			obstacleWall.get(i).setY(des.getPosY().get(i));
+		}
+		for (int i=0;i<6;i++) {
+			((numberRectangle)obstacleWall.get(i)).setNum(des.getBlockVal().get(i));
+		}
+		for (int i=0;i<des.getSnakeLen()-1;i++) {
+			createSnakeBody();
+		}
+//        points=0;
+        pointsLabel.setText("POINTS:"+Integer.toString(scoregame.getScore()));
+		initialiseButtonListeners();
+        refreshLeaderboard();
+		paused = true;
+		mainStage.setScene(scene2);
+		playMusic();
+		time0.setDelay(Duration.millis(450));
+		time0.setCycleCount(Animation.INDEFINITE);
+		KeyFrame key0 = new KeyFrame(Duration.millis(20),e->{
+			int random_i=0;
+			for (int i=0;i<6;i++) {
+				obstacleWall.get(i).setY(obstacleWall.get(i).getY()+DELL);
+				if (obstacleWall.get(i).getY()>=HEIGHT) {
+					if (i==0) {
+						random_i = rand_x.nextInt(5);
+					}
+					obstacleWall.get(i).setY(-200);
+					((numberRectangle) obstacleWall.get(random_i)).setNum(rand_x.nextInt(snakeBody.size()));
+					if (((numberRectangle) obstacleWall.get(random_i)).getNum()==0) {
+						((numberRectangle) obstacleWall.get(random_i)).setNum(1);
+					}
+					numberRectangle temp = (numberRectangle) obstacleWall.get(i);
+					temp.setNum(randomNum(wallPointHandler));
+					temp.refresh();
+				}
+			}
+		});
+		time0.getKeyFrames().add(key0);
+		time1.setCycleCount(Animation.INDEFINITE);
+		KeyFrame key1 = new KeyFrame(Duration.millis(20),e->{
+			obstacleWall.get(6).setY(obstacleWall.get(6).getY()+DELL);
+			if (obstacleWall.get(6).getY()>=HEIGHT) {
+				obstacleWall.get(6).setY(-200);
+				int h = rand_x.nextInt(HEIGHT-300);
+				while (h<200) {
+					h = rand_x.nextInt(HEIGHT-300);
+				}
+				obstacleWall.get(6).setHeight(h);
+				obstacleWall.get(6).setX(rand_x.nextInt(WIDTH));
+			}
+		});
+		time1.getKeyFrames().add(key1);
+
+		time2.setDelay(Duration.millis(20));
+		time2.setCycleCount(Animation.INDEFINITE);
+		KeyFrame key2 = new KeyFrame(Duration.millis(20),e->{
+			try {
+				for (int i=0;i<powerList.size();i++) {
+					if (powerList.get(i).getType()==2) {
+						if (powerList.get(i).getCenterY()>=HEIGHT-500 && magnetActivated) {
+							double diff = powerList.get(i).getCenterX()-snakeBody.get(0).getCenterX();
+							if (diff<50 && diff>-50) {
+								powerList.get(i).setCenterX(snakeBody.get(0).getCenterX());
+							}
+							if (diff>0) {
+								powerList.get(i).setCenterX(powerList.get(i).getCenterX()-5);
+							}
+							else {
+								powerList.get(i).setCenterX(powerList.get(i).getCenterX()+5);
+							}
+						}
+					}
+					powerList.get(i).setCenterY(powerList.get(i).getCenterY()+DELL);
+					if (powerList.get(i).getCenterY()>=HEIGHT) {
+						respawnPower(powerList.get(i));
+						powerList.get(i).setCenterY(-200);
+						powerList.get(i).refresh();
+						powerList.get(i).setCenterX(rand_x.nextInt(WIDTH));
+					}
+				}
+			}catch (Exception qwe) {
+				// TODO: handle exception
+			}
+		});
+		time2.getKeyFrames().add(key2);
+		snakeMov.setCycleCount(Animation.INDEFINITE);
+		KeyFrame kgf = new KeyFrame(Duration.millis(30),e->{
+			ArrayList<Double> prev = new ArrayList<Double>();
+		    for(int j=0;j<snakeBody.size()-1;j++) {
+		    prev.add(snakeBody.get(j).getCenterX());
+		    }
+		    for(int j=1;j<snakeBody.size();j++) {
+		    	snakeBody.get(j).setCenterX(prev.get(j-1));
+		    }
+		});
+		snakeMov.getKeyFrames().add(kgf);
+		snakeMov.play();
+		startMovement();
+		this.snakeBody.get(0).setImage(snakeBody.size());
+		this.snakeBody.get(0).setPoint(snakeBody.size());
+	}
+	private void restart() {
+		gameover = false;
+		time0 = new Timeline();
+        time1 = new Timeline();
+        time2 = new Timeline();
+        snakeMov = new Timeline();
+		scene2.setFill(Color.BLACK);
+		scoregame.setScore(0);
+		int[] num = new int[7];
+		int q=0;
+		for (int i=0;i<r2.getChildren().size();i++) {
+			for (int j=0;j<obstacleWall.size();j++) {
+				try {
+					if (r2.getChildren().get(i)==(obstacleWall.get(j))) {
+						num[q] = i;
+						q++;
+					}
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+			}
+		}
+		for (int i=0;i<snakeBody.size();i++) {
+			r2.getChildren().remove(snakeBody.get(i));
 		}
 		for (int i=0;i<7;i++) {
 			r2.getChildren().remove(obstacleWall.get(i));
@@ -712,7 +939,8 @@ public class ViewManager {
 		snakeMov.getKeyFrames().add(kgf);
 		snakeMov.play();
 		startMovement();
-		
+		this.snakeBody.get(0).setImage(snakeBody.size());
+		this.snakeBody.get(0).setPoint(snakeBody.size());
 	}
 	private int shouldMove()
 	{
@@ -881,6 +1109,12 @@ public class ViewManager {
 			@Override
 			public void handle(MouseEvent event) {
 				System.out.println("after serialize :");
+				try {
+					resume();
+				} catch (ClassNotFoundException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		
@@ -1011,6 +1245,26 @@ public class ViewManager {
 				stopMovement();
 				mediaPlayer.stop();
 				try {
+					position = new ArrayList<Double>();
+					obstaclePoint = new ArrayList<Integer>();
+					for (int i=0;i<7;i++) {
+						position.add(obstacleWall.get(i).getY());
+					}
+					for (int i=0;i<6;i++) {
+						obstaclePoint.add(((numberRectangle)obstacleWall.get(i)).getNum());
+					}
+					for (int i=0;i<4;i++) {
+						obstaclePoint.add(powerList.get(i).getType());
+						obstaclePoint.add(powerList.get(i).getLength());
+
+					}
+					for (int i=0;i<4;i++) {
+						position.add(powerList.get(i).getCenterX());
+						position.add(powerList.get(i).getCenterY());
+					}
+					scoregame.setSnakeLen(snakeBody.size());
+					scoregame.setBlockVal(obstaclePoint);
+					scoregame.setPosY(position);
 					serialize();
 					System.out.println("Serialized");
 				} catch (IOException e) {
@@ -1028,8 +1282,6 @@ public class ViewManager {
 					startMovement();
 					mediaPlayer.play();
 				}
-
-
 			}
 		});
 		pauseList.get(2).setOnMouseReleased(new EventHandler<MouseEvent>() {
@@ -1037,6 +1289,33 @@ public class ViewManager {
 			public void handle(MouseEvent event) {
 				mainStage.setScene(mainScene);
 				stopMovement();
+				try {
+					position = new ArrayList<Double>();
+					obstaclePoint = new ArrayList<Integer>();
+					for (int i=0;i<7;i++) {
+						position.add(obstacleWall.get(i).getY());
+					}
+					for (int i=0;i<6;i++) {
+						obstaclePoint.add(((numberRectangle)obstacleWall.get(i)).getNum());
+					}
+					for (int i=0;i<4;i++) {
+						obstaclePoint.add(powerList.get(i).getType());
+						obstaclePoint.add(powerList.get(i).getLength());
+
+					}
+					for (int i=0;i<4;i++) {
+						position.add(powerList.get(i).getCenterX());
+						position.add(powerList.get(i).getCenterY());
+					}
+					scoregame.setSnakeLen(snakeBody.size());
+					scoregame.setBlockVal(obstaclePoint);
+					scoregame.setPosY(position);
+					serialize();
+					System.out.println("Serialized");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		pauseList.get(0).setOnMouseReleased(new EventHandler<MouseEvent>() {
