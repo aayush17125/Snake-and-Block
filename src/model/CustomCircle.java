@@ -19,7 +19,9 @@ import static java.lang.Math.*;
  *
  */
 public class CustomCircle extends Circle {
-    private final static int KEYBOARD_MOVEMENT_DELTA=5;
+   /**
+    * describe the points of snake
+    */
 	private int point=1;
 	/*
 	 * sets the length of snake
@@ -77,6 +79,11 @@ public class CustomCircle extends Circle {
 		  setFill(new ImagePattern(textToImage(Integer.toString(t))));
 		 
 	  }
+	  /**
+	   * Set the backgound with number on circle
+	   * @param text the number to be set on top
+	   * @return image that is used as a wallpaper
+	   */
 	  private Image textToImage(String text) {
 	      
 	        Label label = new Label(text);

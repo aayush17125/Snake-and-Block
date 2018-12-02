@@ -12,7 +12,13 @@ import javafx.scene.layout.*;
  *
  */
 public class CustomRectangle extends SubScene {
+	/**
+	 * path to the font
+	 */
 	private final String FONT_PATH="src/model/resources/kenvector_future.ttf";
+	/**
+	 * path to the panel background
+	 */
 	private final String PANEL_PATH="model/resources/yellow_panel.png";
 /**
  * This constructor is used to making new object of the class and sets background images and Pane set on the subscene

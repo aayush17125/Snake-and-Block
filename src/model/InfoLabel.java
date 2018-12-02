@@ -14,7 +14,13 @@ import javafx.scene.text.Font;
  *
  */
 public class InfoLabel extends Label{
+	/**
+	 * path to the font
+	 */
 	String path="src/model/resources/kenvector_future.ttf";
+	/**
+	 * path to the background image of label
+	 */
 	String imagepath="src/model/resources/yellow_button13.png";
 	/**
 	 * It initialises the Label superclass and set various params like height width 
@@ -30,6 +36,9 @@ public class InfoLabel extends Label{
 	setLabelFont();
 	setAlignment(Pos.CENTER);
 	}
+	/**
+	 * set the font on the label
+	 */
 	private void setLabelFont() {
 		// TODO Auto-generated method stub
 		try {

@@ -1457,14 +1457,14 @@ public class ViewManager {
             public void handle(KeyEvent event) {
             	int moveres=shouldMove();
                 if(event.getCode()==KeyCode.RIGHT) {
-                    if (snakeBody.get(0).getCenterX() < WIDTH-10 && moveres!=1) {
+                    if (snakeBody.get(0).getCenterX() < WIDTH-10 && (snakeBody.get(0).getCenterX()+KEYBOARD_MOVEMENT_DELTA<obstacleWall.get(6).getX())) {
                     	
 						snakeBody.get(0).setCenterX(snakeBody.get(0).getCenterX() + KEYBOARD_MOVEMENT_DELTA);
 					}
 					
                 }
                 if(event.getCode()==KeyCode.LEFT){
-					if (snakeBody.get(0).getCenterX() > 10 && moveres!=2) {
+					if (snakeBody.get(0).getCenterX() > 10 && (snakeBody.get(0).getCenterX()-KEYBOARD_MOVEMENT_DELTA>obstacleWall.get(6).getX())) {
 						snakeBody.get(0).setCenterX(snakeBody.get(0).getCenterX() - KEYBOARD_MOVEMENT_DELTA);
 					}
                     

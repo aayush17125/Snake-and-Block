@@ -21,6 +21,9 @@ import javafx.scene.text.Font;
  *
  */
 public class CusRectangle extends Circle {
+	/**
+	 * var for strong state of the hit 
+	 */
     boolean done= false;
     /**
      * When the power is hit,it is called
@@ -46,11 +49,29 @@ public class CusRectangle extends Circle {
 	    {
 	        return done;
 	    }
-    Image img1 = new Image("model/resources/bolt_gold.png");
+   /**
+    * Image for magnet
+    */
+	Image img1 = new Image("model/resources/bolt_gold.png");
+	/**
+	    * Image for ball
+	    */
     Image img2 = new Image("model/resources/fruit.png");
+    /**
+     * image for shield
+     */
     Image img3 = new Image("model/resources/shield_gold.png");
+    /**
+     * image for bomb blast
+     */
     Image img4 = new Image("model/resources/nuke.png");
+    /**
+     * defines the type 
+     */
     private int type=0;
+    /**
+     * defines the number of points
+     */
 	private int point=7;
 	/**
 	 * This constructor initialise the circle superclass and calls various other class
@@ -119,7 +140,11 @@ public class CusRectangle extends Circle {
 	    	point = t;
 	    	setFill(new ImagePattern(textToImage(Integer.toString(point))));
 	    }
-	    
+	   /**
+	    * Generates background wallpaper for brick 
+	    * @param text text to set on the brick
+	    * @return image type object that can be set as wallpaper
+	    */
 	  private Image textToImage(String text) {
 	      
 	        Label label = new Label(text);

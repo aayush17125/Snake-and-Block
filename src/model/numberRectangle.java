@@ -86,7 +86,11 @@ public class numberRectangle extends Rectangle {
     {
         return done;
     }
-
+    /**
+     * generates the number on the bricks
+     * @param text the number to be set
+     * @return image that is used as background
+     */
     private Image textToImage(String text) {
         Random rand_x = new Random();
         Label label = new Label(text);
