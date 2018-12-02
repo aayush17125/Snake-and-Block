@@ -844,7 +844,7 @@ public class ViewManager {
 					Alert alert = new Alert(AlertType.ERROR);
 					alert.setTitle("Alert!");
 					alert.setHeaderText("BUSTED!");
-					alert.setContentText("Score :"+scoregame.getScore());
+					alert.setContentText("Score :"+(scoregame.getScore()+1));
 					alert.show();
 					DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 					Date date = new Date();

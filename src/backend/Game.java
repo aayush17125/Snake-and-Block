@@ -48,7 +48,7 @@ public class Game implements Serializable {
 	}
 	/**
 	 * Sets the {@link Leaderboard}
-	 * @param leaderBoard
+	 * @param leaderBoard Function to set it
 	 */
 	public void setLeaderBoard(ArrayList<String> leaderBoard) {
 		this.leaderBoard = leaderBoard;
