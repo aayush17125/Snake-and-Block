@@ -1,7 +1,15 @@
 package application;
 	
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+
+import backend.Game;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import model.CusRectangle;
+import model.numberRectangle;
 import view.ViewManager;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -16,7 +24,20 @@ public class Main extends Application {
 	/**
 	 * Everything works in {@link ViewManager}. This is an instance of {@link ViewManager}.
 	 */
-	private ViewManager manager;
+	private static ViewManager manager;
+	/**
+	 * Serializes after force shutdown
+	 * @param input a game object
+	 */
+	public static void serialize(Game game) throws IOException {
+		ObjectOutputStream out = null;
+		try { 
+			out = new ObjectOutputStream(new FileOutputStream("score.txt"));
+			out.writeObject(game);
+		}finally {
+			out.close();
+		}
+	}
 	@Override
 	/**
 	 * This method is override of start method in Application class.
@@ -32,9 +53,7 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		launch(args);
-		
 	}
 }

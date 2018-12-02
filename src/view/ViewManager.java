@@ -4,10 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -257,8 +255,30 @@ public class ViewManager {
 	ArrayList<Double> position;
 	ArrayList<Integer> obstaclePoint;
 	ImageView blast=new ImageView("view/resources/blast.gif");
-	
+	/**
+	 * Instance of {@link Game}
+	 */
 	static Game scoregame=new Game();
+	/**
+	 * @return return the Game instance
+	 */
+	public static Game getScoregame() {
+		return scoregame;
+	}
+	/**
+	 * 
+	 * @return snake length
+	 */
+	public int getSnakeLen() {
+		// TODO Auto-generated method stub
+		return snakeBody.size();
+	}
+	/**
+	 * @return powerlist of type {@link CusRectangle}
+	 */
+	public ArrayList<CusRectangle> getPowerList() {
+		return powerList;
+	}
 	/**
 	 * It initialises all the GUI component of the game,it's database and all the event listeners
 	 */
