@@ -1,5 +1,7 @@
 package view;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -9,10 +11,13 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 
+import javax.imageio.ImageIO;
+
 import com.sun.jndi.cosnaming.CNNameParser;
 
 import backend.Leaderboard;
 import javafx.animation.*;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
@@ -24,6 +29,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
@@ -431,6 +437,18 @@ public class ViewManager {
 		}
 		return t;
 	}
+	 private void savepng(Scene x) {
+		  File file = new File("chart.png");
+	       
+	        WritableImage img = new WritableImage(1000, 600) ;
+	        x.snapshot(img);
+	        try {
+	            ImageIO.write(SwingFXUtils.fromFXImage(img, null), "png", file);
+	        } catch (IOException e) {
+	            // TODO: handle exception here
+	        }
+	      
+	    }
 	private void removeLastSnake() {
 		for (int i=0;i<r2.getChildren().size();i++) {
 			if (r2.getChildren().get(i)==snakeBody.get(snakeBody.size()-1)) {
@@ -757,6 +775,9 @@ public class ViewManager {
 						snakeBody.get(0).setCenterX(snakeBody.get(0).getCenterX() - KEYBOARD_MOVEMENT_DELTA);
 					}
                     
+                }
+                if(event.getCode()==KeyCode.P) {System.out.println("helloworl");
+                	savepng(scene2);
                 }
             }
         });
