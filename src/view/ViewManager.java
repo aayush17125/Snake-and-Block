@@ -241,23 +241,62 @@ public class ViewManager {
 	 */
 	private Image img4;
 	/**
-	 * List view javafx 
+	 * List view javafx object for displaying scoreboard
 	 */
 	private ListView leaderboard = new ListView();
+	/**
+	 * Label for help direction
+	 */
 	private InfoLabel Help_label=new InfoLabel("1.Use arrow keys to control the snake\n2.Get through all the obstacles\n3.You can save the game from pause menu\n4. Press P to save a screen shot");
+	/**
+	 * Label for credits
+	 */
 	private InfoLabel Credit_Label=new InfoLabel("Akhil Jarodia(2017130)\nAayush Gupta(2017125)");
+	/**
+	 * Label for welcome
+	 */
 	private InfoLabel Main_Label=new InfoLabel("----------->\nHey there\nPress the play button to play\n<--------");
+	/**
+	 * button for pausing in between the game
+	 */
 	private SpaceRunnerButton pauseButton=new SpaceRunnerButton("PAUSE");
+	/**
+	 * Backend for leaderboard
+	 */
 	private Leaderboard l = new Leaderboard();
+	/**
+	 * resume button on main menu
+	 */
 	private SpaceRunnerButton resumeMain= new SpaceRunnerButton("RESUME");
 //	Date startDate;
+	/**
+	 * Variable for storing time for shield
+	 */
 	long createdMillis;
+	/**
+	 * Variable for storing time for magnet
+	 */
 	long magnetmillis;
+	/**
+	 * Variable for storing time for block destroyer
+	 */
 	long blastmillis;
-	ArrayList<Double> position;
-	ArrayList<Integer> obstaclePoint;
-	ImageView blast=new ImageView("view/resources/blast.gif");
+	/**
+	 * Variable for sserializing
+	 */
 	
+	ArrayList<Double> position;
+	/**
+	 * Variable for sserializing
+	 */
+	ArrayList<Integer> obstaclePoint;
+	/**
+	 * Blast of block photo
+	 */
+	ImageView blast=new ImageView("view/resources/blast.gif");
+	/**
+	 * Backend of the game
+	 */
 	static Game scoregame=new Game();
 	/**
 	 * It initialises all the GUI component of the game,it's database and all the event listeners
@@ -345,7 +384,9 @@ public class ViewManager {
         addblast();
        
 	}
-
+	/**
+	 * add blast objects for blast transition
+	 */
 	private void addblast() {
 		// TODO Auto-generated method stub
 		 blast.setFitHeight(100);
@@ -353,7 +394,9 @@ public class ViewManager {
 	        r2.getChildren().add(blast);
 	        blast.setVisible(false);
 	}
-
+	/**
+	 * refreshes the leaderboard
+	 */
 	private void refreshLeaderboard() {
 //		leaderboard=new ListView();
 		for(int i=0;i<l.getScore().size();i++)
@@ -365,6 +408,10 @@ public class ViewManager {
 			leaderboard.getItems().add(x);
 		}
 	}
+	/**
+	 * Serializes the game
+	 * @throws IOException
+	 */
 	public static void serialize() throws IOException {
 		ObjectOutputStream out = null;
 		try { 
@@ -374,6 +421,12 @@ public class ViewManager {
 			out.close();
 		}
 	}
+	/**
+	 * Deserializes the game
+	 * @return game type object whoch is the backend of the game
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	public static Game deserialize() throws IOException,ClassNotFoundException {
 		ObjectInputStream in=null;
 		Game g1 = null;
@@ -385,6 +438,10 @@ public class ViewManager {
 		}
 		return g1;
 	}
+	/**
+	 * Random powerup generator
+	 * @return it return any random power ups/ball 
+	 */
 	private CusRectangle powerGenerator() {
 		CusRectangle block= new CusRectangle(1, 0, 0);
 		int t = rand_x.nextInt(110);
@@ -403,6 +460,12 @@ public class ViewManager {
 		}
 		return block;
 	}
+	/**
+	 * Generates the bricks
+	 * @param t denotes the type of powerup
+	 * @param points point to be set
+	 * @return class of powerups
+	 */
 	private CusRectangle powerGenerator(int t,int points) {
 		CusRectangle block= new CusRectangle(1, 0, 0);
 //		int t = rand_x.nextInt(110);
@@ -421,6 +484,10 @@ public class ViewManager {
 		}
 		return block;
 	}
+	/**
+	 * It respawn every power object/ball
+	 * @param block the object to be respawn
+	 */
 	private void respawnPower(CusRectangle block) {
 		int t = rand_x.nextInt(110);
 		if (t<80) {
@@ -440,6 +507,9 @@ public class ViewManager {
 			block.setFill(new ImagePattern(img4));
 		}
 	}
+	/**
+	 * Creates obstacle wall chain
+	 */
 	private void createObstacleWall(){
 
 		for (int i=0;i<6;i++){
@@ -453,6 +523,9 @@ public class ViewManager {
         obsWall.setFill(Color.WHITE);
         r2.getChildren().add(obsWall);
 	}
+	/**
+	 * Creates pause menu layout
+	 */
 	private void createPauseMenu()
 	{
 		ImageView logo2=new ImageView("view/resources/maxresdefault.jpg");
@@ -516,7 +589,9 @@ public class ViewManager {
 	{
 		return mainStage;
 	}
-	
+	/**
+	 * Creates main menu button slayout
+	 */
 	private void createButtons()
 	{
 		createStartButton();
@@ -527,10 +602,17 @@ public class ViewManager {
 		createMainMenuButton();
 		createPauseMenu();
 	}
+	/**
+	 * Create snake body and increase length also
+	 */
 	private void createSnakeBody()
 	{
 		addSnakeBody(new CustomCircle(WIDTH/2, HEIGHT-200, radius,scene2));
 	}
+	/**
+	 * sets the layout of the new circle to be appending on the snake
+	 * @param q the new bead to be added
+	 */
 	private void addSnakeBody(CustomCircle q)
 	{	
 		if(snakeBody.size()==0)
@@ -549,7 +631,9 @@ public class ViewManager {
 		}
 
 	}
-	
+	/**
+	 * adds game logo on main screen
+	 */
 	private void createlogo()
 	{
 		ImageView logo=new ImageView("view/resources/snake-vs-block.png");
@@ -559,6 +643,10 @@ public class ViewManager {
 		
 		
 	}
+	/**
+	 * position main menu buttons 
+	 * @param button the button to be set
+	 */
 	private void addMenuButton(SpaceRunnerButton button)
 	{
 		button.setLayoutX(START_X);
@@ -566,6 +654,10 @@ public class ViewManager {
 		menuButtons.add(button);
 		mainPane.getChildren().add(button);
 	}
+	/**
+	 * add pause menu button with correct layout
+	 * @param button the button to be added
+	 */
 	private void addPauseButton(SpaceRunnerButton button)
 	{
 		button.setLayoutX(START_X);
@@ -573,6 +665,10 @@ public class ViewManager {
 		pauseList.add(button);
 		pausePane.getChildren().add(button);
 	}
+	/**
+	 * adds main menu button with correct layout
+	 * @param button the button to be added
+	 */
 	private void addMainMenuButton(SpaceRunnerButton button)
 	{
 		button.setLayoutX(0);
@@ -581,54 +677,85 @@ public class ViewManager {
 		button.setPrefWidth(191);
 		r2.getChildren().add(button);
 	}
+	/**
+	 * create new button for main menu
+	 */
 	private void createStartButton()
 	{
 		SpaceRunnerButton startbutton=new SpaceRunnerButton("PLAY");
 		addMenuButton(startbutton);
 	}
+	/**
+	 * create new button for main menu
+	 */
 	private void createScoresButton()
 	{
 		SpaceRunnerButton scorebutton=new SpaceRunnerButton("SCORES");
 		addMenuButton(scorebutton);
 	}
+	/**
+	 * create new button for main menu
+	 */
 	private void createHelpButton()
 	{
 		SpaceRunnerButton helpbutton=new SpaceRunnerButton("HELP");
 		addMenuButton(helpbutton);
 	}
+	/**
+	 * create new button for main menu
+	 */
 	private void createMainMenuButton()
 	{
 		SpaceRunnerButton mainMenubutton=new SpaceRunnerButton("Main Menu");
 		addMainMenuButton(mainMenubutton);
 	}
+	/**
+	 * create new button for main menu
+	 */
 	private void createCreditButton()
 	{
 		SpaceRunnerButton helpbutton=new SpaceRunnerButton("CREDITS");
 		addMenuButton(helpbutton);
 	}
+	/**
+	 * create new button for main menu
+	 */
 	private void createExitButton()
 	{
 		SpaceRunnerButton helpbutton=new SpaceRunnerButton("EXIT");
 		addMenuButton(helpbutton);
 	}
+	/**
+	 * Function stsrting the movement and adding animations
+	 */
 	private void startMovement(){
 		time0.play();
 		time1.play();
 		time2.play();
 		snakeMov.play();
 	}
+	/**
+	 * used to pause the animation
+	 */
 	private void pauseMovement(){
 		time0.pause();
 		time1.pause();
 		time2.pause();
 		snakeMov.pause();
 	}
+	/**
+	 * used to stop the movement
+	 */
 	private void stopMovement(){
 		time0.stop();
 		time1.stop();
 		time2.stop();
 		snakeMov.stop();
 	}
+	/**
+	 * used to remove the snake body part
+	 * @param rectangle the brik to which it is collided
+	 */
 	private void removeSnakeBody(Rectangle rectangle){
 		if(snakeBody.size()>0 && !((numberRectangle) rectangle).isHit()) {
 			((numberRectangle)rectangle).setNum(((numberRectangle)rectangle).getNum()-1);
@@ -677,6 +804,11 @@ public class ViewManager {
 				pointsLabel.setText("POINTS:"+Integer.toString(scoregame.getScore()));			
 		}
 	}
+	/**
+	 * generate random number 
+	 * @param q the value above which you want the random number
+	 * @return random number answer
+	 */
 	private int randomNum(int q) {
 		int t = rand_x.nextInt(q);
 		while(t<=3) {
@@ -684,6 +816,10 @@ public class ViewManager {
 		}
 		return t;
 	}
+	/**
+	 * Used to save screenshots in game
+	 * @param x the scene of which you want to be saved 
+	 */
 	 private void savepng(Scene x) {
 		  File file = new File("chart.png");
 	       
@@ -696,6 +832,9 @@ public class ViewManager {
 	        }
 	      
 	    }
+	 /**
+	  * removes snake body from back
+	  */
 	private void removeLastSnake() {
 		for (int i=0;i<r2.getChildren().size();i++) {
 			if (r2.getChildren().get(i)==snakeBody.get(snakeBody.size()-1)) {
@@ -706,6 +845,11 @@ public class ViewManager {
 			}
 		}
 	}
+	/**
+	 * used to resume the game and deserialise
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 */
 	private void resume() throws ClassNotFoundException, IOException {
 		Game des = deserialize();
 		gameover = false;
@@ -897,6 +1041,9 @@ public class ViewManager {
 		this.snakeBody.get(0).setImage(snakeBody.size());
 		this.snakeBody.get(0).setPoint(snakeBody.size());
 	}
+	/**
+	 * Reinitialise all the objects to restart game
+	 */
 	private void restart() {
 		gameover = false;
 		time0 = new Timeline();
@@ -1089,6 +1236,10 @@ public class ViewManager {
 		this.snakeBody.get(0).setImage(snakeBody.size());
 		this.snakeBody.get(0).setPoint(snakeBody.size());
 	}
+	/**
+	 * FOr wall collision check
+	 * @return
+	 */
 	private int shouldMove()
 	{
 //		double dist=Math.sqrt((Math.pow(obstacleWall.get(6).getX()-snakeBody.get(0).getCenterX(), 2))+(Math.pow(obstacleWall.get(6).getY()-snakeBody.get(0).getCenterY(), 2)));
@@ -1108,6 +1259,9 @@ public class ViewManager {
 	}
 		return 0;
 	}
+	/**
+	 * Set all the animation and call various other objects
+	 */
 	private void start() {
 		gameover = false;
 		paused = false;
@@ -1221,6 +1375,9 @@ public class ViewManager {
 		
 		startMovement();
 	}
+	/**
+	 * This function consist of all the event handler
+	 */
 	private void initialiseButtonListeners() {
 		scene2.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
