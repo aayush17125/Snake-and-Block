@@ -9,12 +9,19 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
-
+/**
+ * Tis class is used to make custom buttons ,adding effects and design to the button 
+ * @author Akhiil and aayush
+ *
+ */
 public class SpaceRunnerButton extends Button{
 	private final String FONT_PATH="src/model/resources/kenvector_future.ttf";
 	private final String Butpress="-fx-background-color:transparent;-fx-background-image:url('/model/resources/yellow_button01.png');";
 	private final String but="-fx-background-color:transparent;-fx-background-image:url('/model/resources/yellow_button00.png');";
-	
+	/**
+	 * Constructor is used to set the text on the button,set font,width,height,style and event listeners
+	 * @param text The text required on the button
+	 */
 	public SpaceRunnerButton(String text)
 	{
 		setText(text);

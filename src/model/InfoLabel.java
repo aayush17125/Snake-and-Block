@@ -8,11 +8,18 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;
-
+/**
+ * This class is used to make custom label used on the main menu scene
+ * @author Akhil an Aayush
+ *
+ */
 public class InfoLabel extends Label{
 	String path="src/model/resources/kenvector_future.ttf";
 	String imagepath="src/model/resources/yellow_button13.png";
-	
+	/**
+	 * It initialises the Label superclass and set various params like height width 
+	 * @param text The required text on that label
+	 */
 	public InfoLabel(String text) {
 		// TODO Auto-generated constructor stub
 	setPrefWidth(600);

@@ -13,10 +13,17 @@ import javafx.scene.text.Font;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-
+/**
+ * Used to make the score box
+ * @author Akhil and aayush 
+ *
+ */
 public class SmallInfoLabel extends Label {
     private final static String FONT_PATH="src/model/resources/kenvector_future.ttf";
-
+    /**
+     * It initializes the class and various properties like width,height,background,font,indent,etc
+     * @param text String which is required on that block
+     */
     public SmallInfoLabel(String text)
     {
         setPrefWidth(200);

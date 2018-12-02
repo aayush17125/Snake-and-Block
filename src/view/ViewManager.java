@@ -39,9 +39,13 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import model.*;
+/**
+ * This class is the main heart of the game.It handles the complete game,event handlers,scenes,etc
+ * @author Akhil and Aayush
+ *
+ */
+public class ViewManager {
 
-public class ViewManager implements Serializable{
-	private static final long serialVersionUID = 1L;
 	private static final int HEIGHT = 720;
 	private static final int WIDTH = 1024;
 	private static final int START_X = 100;
@@ -102,6 +106,9 @@ public class ViewManager implements Serializable{
 	long magnetmillis;
 	long blastmillis;
 	ImageView blast=new ImageView("view/resources/blast.gif");
+	/**
+	 * It initialises all the GUI component of the game,it's database and all the event listeners
+	 */
 	static Game scoregame=new Game();
 	public ViewManager()
 	{
@@ -274,38 +281,55 @@ public class ViewManager implements Serializable{
 		addPauseButton(new SpaceRunnerButton("PLAY"));
 		addPauseButton(new SpaceRunnerButton("EXIT"));
 	}
-
+	/**
+	 * This function is used to play background music in the game
+	 */
 	public void playMusic(){
 		URL res = getClass().getResource("Song.mp3");
 		mediaPlayer = new MediaPlayer(new Media(res.toString()));
 		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 		mediaPlayer.play();
 	}
-	
+	/**
+	 * This function is used to play bomb sound 
+	 */
 	public void playBomb() {
 		URL rest = getClass().getResource("Bomb.mp3");
 		bomb = new MediaPlayer(new Media(rest.toString()));
 		bomb.setCycleCount(1);
 		bomb.play();
 	}
+	/**
+	 * This function is used to play coin sound
+	 */
 	public void playCoin() {
 		URL rest = getClass().getResource("Coin.mp3");
 		coin = new MediaPlayer(new Media(rest.toString()));
 		coin.setCycleCount(1);
 		coin.play();
 	}
+	/**
+	 * This function is used to play music
+	 */
 	public void playCurrent() {
 		URL rest = getClass().getResource("Current.mp3");
 		current = new MediaPlayer(new Media(rest.toString()));
 		current.setCycleCount(1);
 		current.play();
 	}
+	/**
+	 * This function is used to play burst sound
+	 */
 	public void playbusted() {
 		URL rest = getClass().getResource("Busted.mp3");
 		busted = new MediaPlayer(new Media(rest.toString()));
 		busted.setCycleCount(1);
 		busted.play();
 	}
+	/**
+	 * This function return the mainStage of the game to the main class
+	 * @return Stage which you want to display
+	 */
 	public Stage getMainStage()
 	{
 		return mainStage;
