@@ -450,7 +450,7 @@ public class ViewManager {
 	 private void savepng(Scene x) {
 		  File file = new File("chart.png");
 	       
-	        WritableImage img = new WritableImage(1000, 600) ;
+	        WritableImage img = new WritableImage(1000, 1000) ;
 	        x.snapshot(img);
 	        try {
 	            ImageIO.write(SwingFXUtils.fromFXImage(img, null), "png", file);
