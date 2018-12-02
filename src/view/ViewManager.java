@@ -102,7 +102,7 @@ public class ViewManager implements Serializable{
 	long magnetmillis;
 	long blastmillis;
 	ImageView blast=new ImageView("view/resources/blast.gif");
-	Game scoregame=new Game();
+	static Game scoregame=new Game();
 	public ViewManager()
 	{
 		menuButtons=new ArrayList<SpaceRunnerButton>();
@@ -168,7 +168,6 @@ public class ViewManager implements Serializable{
 		pauseButton.setLayoutY(0);
 		r2.getChildren().add(pauseButton);
 		r2.getChildren().add(pointsLabel);
-//		points = 0;
 		createSnakeBody();
         createSnakeBody();
         createSnakeBody();
@@ -182,14 +181,14 @@ public class ViewManager implements Serializable{
         resumeMain.setLayoutX(START_X);
         resumeMain.setLayoutY(START_Y-100);
         this.snakeBody.get(0).setImage();
-       addblast();
+        addblast();
        
 	}
 
 	private void addblast() {
 		// TODO Auto-generated method stub
-		 blast.setFitHeight(80);
-	        blast.setFitWidth(100);
+		 blast.setFitHeight(100);
+	        blast.setFitWidth(WIDTH/6);
 	        r2.getChildren().add(blast);
 	        blast.setVisible(false);
 	}
@@ -209,7 +208,7 @@ public class ViewManager implements Serializable{
 		ObjectOutputStream out = null;
 		try {
 			out = new ObjectOutputStream(new FileOutputStream("score.txt"));
-//			out.writeObject(scoregame.getScore());
+			out.writeObject(scoregame.getScore());
 		}finally {
 			out.close();
 		}
@@ -864,8 +863,8 @@ public class ViewManager implements Serializable{
 					try {
 						if (snakeBody.get(0).intersects(obstacleWall.get(i).getBoundsInParent())){
 							removeSnakeBody(obstacleWall.get(i));
-							blast.setLayoutX(snakeBody.get(0).getCenterX()-radius-radius);
-							blast.setLayoutY(snakeBody.get(0).getCenterY()-200);
+							blast.setLayoutX(obstacleWall.get(i).getX());
+							blast.setLayoutY(obstacleWall.get(i).getY());
 							
 						}
 						
@@ -932,7 +931,7 @@ public class ViewManager implements Serializable{
 				}
 				if(System.currentTimeMillis()-blastmillis<5000)
 				{
-					blast.setLayoutY(blast.getLayoutY()+7);
+					blast.setLayoutY(blast.getLayoutY()+DELL-0.5);
 				}
 				else
 				{

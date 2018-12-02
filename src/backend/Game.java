@@ -1,11 +1,9 @@
 package backend;
 import java.io.Serializable;
 public class Game implements Serializable {
-/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 7244301249917304921L;
-private int score;
+	private int score;
 	public Game() {
 		// TODO Auto-generated constructor stub
 		score=0;
