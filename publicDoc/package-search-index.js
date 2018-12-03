@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"application"},{"l":"backend"},{"l":"model"},{"l":"view"}]
